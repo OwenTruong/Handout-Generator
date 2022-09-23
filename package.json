@@ -1,0 +1,19 @@
+{
+  "name": "qec-note",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "webpack"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.74.0"
+  },
+  "dependencies": {
+    "webpack-cli": "^4.10.0"
+  }
+}
