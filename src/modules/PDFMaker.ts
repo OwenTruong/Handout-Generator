@@ -14,7 +14,7 @@ import fs from 'fs';
 import { ImageProperty } from './classes/ImageProperty';
 import { findFiles } from './functions/findFiles';
 
-// The goal is to make the outside look beautiful and the inside so-so
+
 const drawImage = async function(
   pdfDoc: PDFDocument,
   page: PDFPage, 
