@@ -12,6 +12,7 @@ import fs from 'fs';
 
 
 import { ImageProperty } from './classes/ImageProperty';
+import { findFiles } from './functions/findFiles';
 
 // The goal is to make the outside look beautiful and the inside so-so
 const drawImage = async function(
@@ -39,27 +40,28 @@ const drawImage = async function(
 
 
 export async function pdftest(): Promise<void> {
-  const pdfDoc = await PDFDocument.create();
+  const pdfDoc: PDFDocument = await PDFDocument.create();
   
-  const page = pdfDoc.addPage();
+  const page: PDFPage = pdfDoc.addPage();
   const { width, height } = page.getSize();
 
   const xLen = 200;
   const yLen = 200;
 
-  const pathArr = ["asset1.png", "asset2.png", "asset3.png"];
-  const regex = /\.(png|jpg)$/;
+
+  const pathArr: string[] = findFiles('.')('png');
 
   for (let i = 0; i < 3; ++i) {
-    const format: string | undefined = (pathArr[i].match(regex) ?? [])[1];
-
-    if (format != 'png' && format != 'jpg') throw new Error("Image Format Error");
+    const ext: string = pathArr[i].slice(-4);
+    const format: string = ext.slice(1);
+    
+    if (ext[0] != '.' || (format != 'png' && format != 'jpg')) throw new Error("Wrong Image Extension");
 
     await drawImage(pdfDoc, page, pathArr[i], new ImageProperty(format, 50, height - (i + 1) * (yLen + 50), xLen, yLen));
   }
 
   // Speed of saving is a concern
-  const pdfBytes = await pdfDoc.save();
+  const pdfBytes: Uint8Array = await pdfDoc.save();
 
   fs.writeFileSync('./test.pdf', pdfBytes);
 
@@ -67,3 +69,14 @@ export async function pdftest(): Promise<void> {
 
 
 
+
+
+// class PDFFactory {
+//   name: string;
+
+//   constructor(name: string) {
+//     this.name = name;
+//   }
+
+
+// }
