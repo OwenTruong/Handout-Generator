@@ -5,19 +5,28 @@ import {
   PDFDocument,
   PDFImage,
   PDFPage,
-  StandardFonts } from 'pdf-lib';
+  StandardFonts 
+} from 'pdf-lib';
 
-import fs from "fs";
+import fs from 'fs';
 
 
 class ImageProperty {
+  format: string;
   x: number;
   y: number;
   width: number;
   height: number;
 
 
-  constructor(x: number, y: number, width: number, height: number) {
+  constructor(
+    format: string, 
+    x: number, 
+    y: number, 
+    width: number, 
+    height: number
+  ) {
+    this.format = format;
     this.x = x;
     this.y = y;
     this.width = width;
@@ -26,22 +35,29 @@ class ImageProperty {
 
 }
 
-
+// The goal is to make the outside look beautiful and the inside so-so
 const drawImage = async function(
   pdfDoc: PDFDocument,
   page: PDFPage, 
   path: fs.PathOrFileDescriptor,
 
+  // TODO: Should I use object destructuring or class or type?
   // is there a way to give this object a name so I can just pass it directly into page.drawImage?
-  { type, x, y, width, height }:
-    { type: string, x: number, y: number, width: number, height: number }
+  img: ImageProperty
 ): Promise<void> {
   // An unpure function that grabs bytes of an image from fs and add it to a page in a pdf
   const fileBytes: Buffer = fs.readFileSync(path);
 
-  const image: PDFImage = await (type == 'png' ? pdfDoc.embedPng(fileBytes) : pdfDoc.embedJpg(fileBytes));
+  const image: PDFImage = await (img.format == 'png' ? pdfDoc.embedPng(fileBytes) : pdfDoc.embedJpg(fileBytes));
 
-  page.drawImage(image, { x, y, width, height });
+  const options = {
+    x: img.x,
+    y: img.y,
+    width: img.width,
+    height: img.height,
+  }
+
+  page.drawImage(image, options);
 }
 
 
@@ -54,16 +70,19 @@ export async function pdftest(): Promise<void> {
   const page = pdfDoc.addPage();
   const { width, height } = page.getSize();
 
-  const xLen: number = 200;
-  const yLen: number = 200;
+  const xLen = 200;
+  const yLen = 200;
 
-  const img1: ImageProperty = new ImageProperty(50, height - (yLen + 50), xLen, yLen);
-  const img2: ImageProperty = new ImageProperty(50, height - (yLen + 50) - (yLen + 50), xLen, yLen);
-  const img3: ImageProperty = new ImageProperty(50, height - (yLen + 50) - (yLen + 50) - (yLen + 50), xLen, yLen);
+  const pathArr = ["asset1.png", "asset2.png", "asset3.png"];
+  const regex = /\.(png|jpg)$/;
 
-  drawImage(pdfDoc, page, "asset1.png", Object.assign({ type: 'png' }, img1));
-  drawImage(pdfDoc, page, "asset2.png", Object.assign({ type: 'png' }, img2));
-  drawImage(pdfDoc, page, "asset3.png", Object.assign({ type: 'png' }, img3));
+  for (let i = 0; i < 3; ++i) {
+    const result: string | undefined = (pathArr[i].match(regex) ?? [])[1];
+
+    if (typeof result != 'string') throw new Error("Image Format Error");
+
+    drawImage(pdfDoc, page, pathArr[i], new ImageProperty(result, 50, height - (i + 1) * (yLen + 50), xLen, yLen))
+  }
 
 
   const pdfBytes = await pdfDoc.save();
