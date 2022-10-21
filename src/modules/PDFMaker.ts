@@ -18,9 +18,6 @@ const drawImage = async function(
   pdfDoc: PDFDocument,
   page: PDFPage, 
   path: fs.PathOrFileDescriptor,
-
-  // TODO: Should I use object destructuring or class or type?
-  // is there a way to give this object a name so I can just pass it directly into page.drawImage?
   img: ImageProperty
 ): Promise<void> {
   // An unpure function that grabs bytes of an image from fs and add it to a page in a pdf
@@ -61,9 +58,8 @@ export async function pdftest(): Promise<void> {
     await drawImage(pdfDoc, page, pathArr[i], new ImageProperty(format, 50, height - (i + 1) * (yLen + 50), xLen, yLen));
   }
 
-  console.log('start');
+  // Speed of saving is a concern
   const pdfBytes = await pdfDoc.save();
-  console.log('end');
 
   fs.writeFileSync('./test.pdf', pdfBytes);
 
