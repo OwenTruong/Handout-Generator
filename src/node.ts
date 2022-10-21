@@ -1,6 +1,6 @@
 import * as R from "ramda";
 
-import { pdftest } from "./modules/pdf-maker/PDFMaker";
+import { pdftest } from "./modules/PDFMaker";
 
 console.log(R.add(3, 5));
 

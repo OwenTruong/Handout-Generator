@@ -11,29 +11,7 @@ import {
 import fs from 'fs';
 
 
-class ImageProperty {
-  format: string;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-
-
-  constructor(
-    format: string, 
-    x: number, 
-    y: number, 
-    width: number, 
-    height: number
-  ) {
-    this.format = format;
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
-  }
-
-}
+import { ImageProperty } from './classes/ImageProperty';
 
 // The goal is to make the outside look beautiful and the inside so-so
 const drawImage = async function(
@@ -63,7 +41,6 @@ const drawImage = async function(
 
 
 
-
 export async function pdftest(): Promise<void> {
   const pdfDoc = await PDFDocument.create();
   
@@ -77,18 +54,18 @@ export async function pdftest(): Promise<void> {
   const regex = /\.(png|jpg)$/;
 
   for (let i = 0; i < 3; ++i) {
-    const result: string | undefined = (pathArr[i].match(regex) ?? [])[1];
+    const format: string | undefined = (pathArr[i].match(regex) ?? [])[1];
 
-    if (typeof result != 'string') throw new Error("Image Format Error");
+    if (format != 'png' && format != 'jpg') throw new Error("Image Format Error");
 
-    drawImage(pdfDoc, page, pathArr[i], new ImageProperty(result, 50, height - (i + 1) * (yLen + 50), xLen, yLen))
+    await drawImage(pdfDoc, page, pathArr[i], new ImageProperty(format, 50, height - (i + 1) * (yLen + 50), xLen, yLen));
   }
 
-
+  console.log('start');
   const pdfBytes = await pdfDoc.save();
+  console.log('end');
 
-  const pdf = fs.openSync("./test.pdf", "r+");
-  fs.writeFileSync(pdf, pdfBytes);
+  fs.writeFileSync('./test.pdf', pdfBytes);
 
 }
 
