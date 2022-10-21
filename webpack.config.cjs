@@ -1,7 +1,6 @@
 const path = require('path');
 
-// TODO: I believe I need a tsconfig to use typescript
-//      After that, I need to add ts compiler to webpack.
+
 const nodeConfig = {
   name: "Node",
   mode: process.env.NODE_ENV || 'development',
@@ -18,10 +17,10 @@ const nodeConfig = {
         test: /\.ts$/,
         exclude: /node_modules/,
         use: {
-          loader: 'ts-loader'
+          loader: 'babel-loader',
         }
-      }
-    ]
+      },
+    ],
   },
 
   devtool: false,
