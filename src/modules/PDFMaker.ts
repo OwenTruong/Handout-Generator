@@ -45,6 +45,7 @@ export async function pdftest(): Promise<void> {
   const page: PDFPage = pdfDoc.addPage();
   const { width, height } = page.getSize();
 
+  // TODO: get 3-image default template done
   const xLen = 200;
   const yLen = 200;
 
