@@ -8,7 +8,7 @@ const nodeConfig = {
   entry: './src/node.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js',
+    filename: 'main.cjs',
   },
 
   module: {
