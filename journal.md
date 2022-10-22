@@ -12,6 +12,8 @@
     - Screw trying to mimic traditional oop, just do prototype oop
 
 
-    
-
-
+10/21/22
+- How am I actually going to format my pages?
+  - Leave pdf size as-is (default size). 
+    - Portrait: width x height = 595 x 842 pt
+    - Landscape: width x height = 842 x 595 pt

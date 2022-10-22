@@ -14,6 +14,8 @@ import fs from 'fs';
 import { ImageProperty } from './classes/ImageProperty';
 import { findFiles } from './functions/findFiles';
 
+import { d3_print_portrait } from './defaults';
+
 
 const drawImage = async function(
   pdfDoc: PDFDocument,
@@ -45,20 +47,18 @@ export async function pdftest(): Promise<void> {
   const page: PDFPage = pdfDoc.addPage();
   const { width, height } = page.getSize();
 
-  // TODO: get 3-image default template done
-  const xLen = 200;
-  const yLen = 200;
-
-
+  const imagesArr = d3_print_portrait.images.type1;
   const pathArr: string[] = findFiles('.')('png');
 
+  // TODO: We have outsourced our template info to defaults.ts, now we have to remove this ugly for loop too
   for (let i = 0; i < 3; ++i) {
     const ext: string = pathArr[i].slice(-4);
     const format: string = ext.slice(1);
+    const imgObj = imagesArr[i];
     
     if (ext[0] != '.' || (format != 'png' && format != 'jpg')) throw new Error("Wrong Image Extension");
 
-    await drawImage(pdfDoc, page, pathArr[i], new ImageProperty(format, 50, height - (i + 1) * (yLen + 50), xLen, yLen));
+    await drawImage(pdfDoc, page, pathArr[i], new ImageProperty(format, imgObj.x, imgObj.y, imgObj.width, imgObj.height));
   }
 
   // Speed of saving is a concern
