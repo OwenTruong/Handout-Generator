@@ -21,11 +21,11 @@ import { d3_print_portrait } from './defaults';
 
 // TODO: We are finally there... how should we create our PDF class?
 export async function pdftest(): Promise<void> {
+  // Get PDF Document
   const pdfDoc: PDFDocument = await PDFDocument.create();
-  
   const page: PDFPage = pdfDoc.addPage();
-  const { width, height } = page.getSize();
 
+  // Add Images to PDF
   const images: ImageT[] = d3_print_portrait.images.type1;
   const paths: string[] = findFiles('.')(['png', 'jpg']);
   await ImageC.drawImages(pdfDoc, page, images, paths);
@@ -33,20 +33,7 @@ export async function pdftest(): Promise<void> {
   // Speed of saving is a concern
   const pdfBytes: Uint8Array = await pdfDoc.save();
 
+  // Write PDF to test.pdf
   fs.writeFileSync('./test.pdf', pdfBytes);
 
 }
-
-
-
-
-
-// class PDFFactory {
-//   name: string;
-
-//   constructor(name: string) {
-//     this.name = name;
-//   }
-
-
-// }
