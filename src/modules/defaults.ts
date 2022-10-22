@@ -34,7 +34,7 @@ export const d3_print_portrait = {
         "height": 180
       },
       { // [(y1 - [y3 + height]) / 2] + [y3 + height]
-        // (y1)/2 + [y3 + height]/2
+        // (y1)/2 + [y3 + height]/2 = [y1 + y3 + height] / 2
         "x": 50,
         "y": 331,
         "width": 240,
