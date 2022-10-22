@@ -19,12 +19,6 @@ import { d3_print_portrait } from './defaults';
 
 
 
-// TODO: How do I make imagesArr look clean?...
-const drawImages = async function(pdfDoc: PDFDocument, page: PDFPage, pathArr: string[], ) {
-
-}
-
-
 
 
 
@@ -35,8 +29,9 @@ export async function pdftest(): Promise<void> {
   const page: PDFPage = pdfDoc.addPage();
   const { width, height } = page.getSize();
 
+  // TODO: Any way to shorten this?
   const images: ImageT[] = d3_print_portrait.images.type1;
-  const paths: string[] = findFiles('.')('png').concat( findFiles('.')('jpg') );
+  const paths: string[] = findFiles('.')(['png', 'jpg']);
   await ImageC.drawImages(pdfDoc, page, images, paths);
 
   // Speed of saving is a concern
