@@ -20,4 +20,6 @@
 
 10/22/22
 - It is so difficult to use typescript. I have to really balance readability and dynamics.
-- Oh another note, make sure to take into account when the template and the number of actual images do not match
+- Oh another note, make sure to take into account when the template and the number of actual images do not match.
+- I refactored a lot of things and moved a bunch of functions in PDF.ts to classes, functions and types folder.
+- Now it is time to think about what I am going to expose for my PDF class.
