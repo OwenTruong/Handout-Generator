@@ -49,9 +49,10 @@ export class ImageC {
 
   static async drawImages(
     pdfDoc: PDFDocument, 
-    page: PDFPage, 
+    page: PDFPage, // TODO: change page to pages?
     images: ImageT[], 
     paths: string[]) {
+      // Heads up that the amount of images to pages and images per page might not match
       for (let i = 0; i < 3; ++i) {
         const img = new ImageC(images[i].x, images[i].y, images[i].width, images[i].height);
         await img.drawImage(pdfDoc, page, paths[i]);

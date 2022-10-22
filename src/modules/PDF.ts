@@ -21,6 +21,7 @@ import { d3_print_portrait } from './defaults';
 
 // TODO: We are finally there... how should we create our PDF class?
 export async function pdftest(): Promise<void> {
+  const pdf = new PDF();
   // Get PDF Document
   const pdfDoc: PDFDocument = await PDFDocument.create();
   const page: PDFPage = pdfDoc.addPage();
@@ -36,4 +37,24 @@ export async function pdftest(): Promise<void> {
   // Write PDF to test.pdf
   fs.writeFileSync('./test.pdf', pdfBytes);
 
+}
+
+
+class PDF {
+  pdfDoc!: PDFDocument;
+  pdfBytes!: Uint8Array;
+
+  async init() {
+    this.pdfDoc = await PDFDocument.create();
+  }
+
+  async save() {
+    if (!this.pdfDoc) console.error('Need to call init()');
+    this.pdfBytes = await this.pdfDoc.save();
+  }
+
+  writeFile(path: string) {
+    if (!this.pdfBytes) console.error('Unable save uninitialized pdf bytes');
+    fs.writeFileSync(path, this.pdfBytes);
+  }
 }
