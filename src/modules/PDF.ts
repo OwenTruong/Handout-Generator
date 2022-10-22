@@ -18,6 +18,13 @@ import { d3_print_portrait } from './defaults';
 
 
 
+// TODO: How do I make imagesArr look clean?...
+const drawImages = async function(pdfDoc: PDFDocument, page: PDFPage, pathArr: string[], imagesArr) {
+
+}
+
+
+
 
 
 
@@ -31,15 +38,21 @@ export async function pdftest(): Promise<void> {
   const pathArr: string[] = findFiles('.')('png');
 
   // TODO: We have outsourced our template info to defaults.ts, now we have to remove this ugly for loop too
-  for (let i = 0; i < 3; ++i) {
-    const ext: string = pathArr[i].slice(-4);
+
+  pathArr.forEach(async (path, i) => {
+    // path, i, imagesArr, pdfDoc, page
+    const ext: string = path.slice(-4);
     const format: string = ext.slice(1);
-    
+    const image = imagesArr[i];
+
     if (ext[0] != '.' || (format != 'png' && format != 'jpg')) throw new Error("Wrong Image Extension");
 
-    const img = new ImageC(format, imagesArr[i].x, imagesArr[i].y, imagesArr[i].width, imagesArr[i].height);
-    await img.drawImage(pdfDoc, page, pathArr[i]);
-  }
+    const img = new ImageC(format, image.x, image.y, image.width, image.height);
+    await img.drawImage(pdfDoc, page, path);
+    console.log("Inside");
+  });
+
+  console.log("Outside");
 
   // Speed of saving is a concern
   const pdfBytes: Uint8Array = await pdfDoc.save();
