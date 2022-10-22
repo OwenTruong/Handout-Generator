@@ -1,11 +1,13 @@
 import { readdirSync } from 'fs';
 
-export function findFiles(path: string): (format: string) => string[] {
-  return (format: string): string[] => {
+// Uses fs to check if a certain file extension exists in a folder.
+// Returns a string[] of path to the files
+export function findFiles(path: string): (extension: string) => string[] {
+  return (extension: string): string[] => {
     const files: string[] = readdirSync(path);
 
     return files.filter(
-      (str: string): boolean => str.slice(-4) == '.' + format
+      (str: string): boolean => str.slice(-4) == '.' + extension
     );
   }
 }

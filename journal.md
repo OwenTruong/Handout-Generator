@@ -17,3 +17,7 @@
   - Leave pdf size as-is (default size). 
     - Portrait: width x height = 595 x 842 pt
     - Landscape: width x height = 842 x 595 pt
+
+10/22/22
+- It is so difficult to use typescript. I have to really balance readability and dynamics.
+- Oh another note, make sure to take into account when the template and the number of actual images do not match

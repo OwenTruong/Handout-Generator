@@ -3,7 +3,6 @@ import { PDFDocument, PDFPage, PDFImage } from "pdf-lib";
 import fs from 'fs';
 
 export class ImageC {
-  format: string;
   x: number;
   y: number;
   width: number;
@@ -11,13 +10,11 @@ export class ImageC {
 
 
   constructor(
-    format: string, 
     x: number, 
     y: number, 
     width: number, 
     height: number
   ) {
-    this.format = format;
     this.x = x;
     this.y = y;
     this.width = width;
@@ -30,10 +27,11 @@ export class ImageC {
     page: PDFPage, 
     path: fs.PathOrFileDescriptor
   ): Promise<void> {
+    // TODO: Replace this hardcoded format with const format = getFileExts
+    const format = 'png';
     // An unpure function that grabs bytes of an image from fs and add it to a page in a pdf
     const fileBytes: Buffer = fs.readFileSync(path);
-  
-    const image: PDFImage = await (this.format == 'png' ? pdfDoc.embedPng(fileBytes) : pdfDoc.embedJpg(fileBytes));
+    const image: PDFImage = await (format == 'png' ? pdfDoc.embedPng(fileBytes) : pdfDoc.embedJpg(fileBytes));
   
     const options = {
       x: this.x,
