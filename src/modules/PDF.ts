@@ -83,15 +83,12 @@ export class PDF {
       const pageTemp: { lines: LineT[], images: ImageT[] } = pages[pnum % pages.length];
       const newPage = this.#pdfDoc.addPage();
 
+      // TODO: Check if my refactor created any bug for this section of the code
       // Add Image to PDF
       const imgTmps: ImageT[] = pageTemp.images;
-      // If the amount of img files are less than the amount of images in a page template:
-      const files: string[] = filePaths.length >= imgTmps.length ? 
-                    filePaths.splice(0, imgTmps.length) : 
-                    filePaths.splice(0, filePaths.length);
-      // TODO: Make embedding images look slick
-      const embed: (filePaths: string[]) => Promise<void> = this.embedImgsToPage.bind(this, newPage, imgTmps);
-      await embed(files);
+      await this.embedImgsToPage(newPage, imgTmps,
+        filePaths.splice( 0, Math.min( filePaths.length, imgTmps.length ) )
+      );
 
       pnum++;
     }
