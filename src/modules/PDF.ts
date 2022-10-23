@@ -26,12 +26,8 @@ export async function pdftest(): Promise<void> {
   const pdf: PDF = new PDF();
   await pdf.init(d3_print_portrait);
 
-  // pdf.embedImgsToPage(1);
   await pdf.createPDF('./test.pdf');
-
-  // TODO: pdf.save() and pdf.writeFile() is not working
-  await pdf.save();
-  pdf.writeFile('./test.pdf');
+  pdf.write('./test.pdf');
 }
 
 
@@ -49,30 +45,24 @@ class PDF {
     this.#created = false;
   }
 
-  async save(): Promise<void> {
+  async #save(): Promise<void> {
     if (!this.#pdfDoc) console.error('Need to call init first');
     this.#pdfBytes = await this.#pdfDoc.save();
   }
 
-  writeFile(path: string): void {
-    if (!this.#pdfBytes) console.error('Need to call save() first');
-    
-    // I am sure that this.#pdfBytes is not null
+  write(path: string): void {
+    this.#save();
     fs.writeFileSync(path, this.#pdfBytes!);
   }
 
   // Embed a certain amount of images to a page given a template for a page
   async embedImgsToPage(page: PDFPage, files: string[], imgTmps: ImageT[]): Promise<void> {
-    // const imgTmps: ImageT[] = this.#template.pages[1].images;
-
-    // TODO: Modify the condition and core to accept files.length < imgTmps.length
-    // Check if template length is equivalent to paths length
-    if (imgTmps.length != files.length) {
-      console.error('Too many or too few image for a page.');
+    if (imgTmps.length < files.length) {
+      console.error('Too much image for a page.');
       return;
     }
 
-    for (let i = 0; i < imgTmps.length; ++i) {
+    for (let i = 0; i < files.length; ++i) {
       const image = new ImageC(imgTmps[i].x, imgTmps[i].y, imgTmps[i].width, imgTmps[i].height);
       image.drawImage(this.#pdfDoc, page, files[i]);
     }
@@ -81,11 +71,8 @@ class PDF {
   async createPDF(dstPath: string) {
     // First images, then lines, then date and page #
 
-    // TODO: dynamically assign a page
-
     // Error Checking
     if (!this.#pdfDoc) console.error('Need to call init first before creating pdf');
-    if (!this.#pdfBytes) console.error('Need to call save() first');
     if (this.#created == true) {
       console.error('PDF created already. To create a new one, please call init() before creating pdf');
       return;
@@ -103,21 +90,17 @@ class PDF {
 
     // A while loop that adds everything to pages
     while (true) {
-      // Condition
-      // fileNames is empty
       if (fileNames.length == 0) break;
+
       const pageTemp: { lines: LineT[], images: ImageT[] } = pages[pnum % pages.length];
       const imgTmps: ImageT[] = pageTemp.images;
       const files: string[] = fileNames.length >= imgTmps.length ? 
         fileNames.splice(0, imgTmps.length) : fileNames.splice(0, fileNames.length);
-      
       const newPage = this.#pdfDoc.addPage();
 
       this.embedImgsToPage(newPage, files, imgTmps);
     }
 
-    await this.save();
-    this.writeFile(dstPath);
     this.#created = true;
   }
 
