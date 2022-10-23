@@ -3,9 +3,7 @@
 // import * as R from "ramda";
 import { 
   PDFDocument,
-  PDFImage,
   PDFPage,
-  StandardFonts 
 } from 'pdf-lib';
 
 import fs from 'fs';
@@ -18,21 +16,11 @@ import { TemplateT } from './types/TemplateT';
 import { LineT } from './types/LineT';
 import { ImageT } from './types/ImageT';
 
-import { d3_print_portrait } from './defaults';
 
-
-
-export async function pdftest(): Promise<void> {
-  const pdf: PDF = new PDF();
-  await pdf.init(d3_print_portrait);
-
-  await pdf.createPDF('./test.pdf');
-  pdf.write('./test.pdf');
-}
 
 
 // Pretty useless class, one use disposable...
-class PDF {
+export class PDF {
   #pdfDoc!: PDFDocument;
   #template!: TemplateT;
   #pdfBytes: Uint8Array | null = null;
@@ -50,8 +38,8 @@ class PDF {
     this.#pdfBytes = await this.#pdfDoc.save();
   }
 
-  write(path: string): void {
-    this.#save();
+  async write(path: string): Promise<void> {
+    await this.#save();
     fs.writeFileSync(path, this.#pdfBytes!);
   }
 
@@ -68,8 +56,12 @@ class PDF {
     }
   }
 
+
+
+
   async createPDF(dstPath: string) {
-    // First images, then lines, then date and page #
+    // TODO: First images, then lines, then date and page #
+    // TODO: Check if it works with a multi-paged template
 
     // Error Checking
     if (!this.#pdfDoc) console.error('Need to call init first before creating pdf');
@@ -78,27 +70,27 @@ class PDF {
       return;
     }
 
-    // TODO: Check the amount of page templates. 
-    // If there are two page templates, page 1, 3, 5 and etc. should follow page 1 template, and page 2, 4, 6 and etc. should follow page 2 template
-    // Assign each page a page template and images that matches the image that should be on the page template
-      // If the amount of images available is less than the amount specified by the page template, skip making the lines and the images after the last image is used
-
-
     const fileNames: string[] = findFiles('.')(['png', 'jpg']);
     const pages: { lines: LineT[], images: ImageT[] }[]  = this.#template.pages;
-    let pnum: number = 0;
 
     // A while loop that adds everything to pages
+    let pnum: number = 0;
     while (true) {
       if (fileNames.length == 0) break;
 
+      // pageTemplate -> If template = 2, page 1, 3, 5 and etc follow temp1 and page 2, 4, 6 and etc follow temp2
       const pageTemp: { lines: LineT[], images: ImageT[] } = pages[pnum % pages.length];
-      const imgTmps: ImageT[] = pageTemp.images;
-      const files: string[] = fileNames.length >= imgTmps.length ? 
-        fileNames.splice(0, imgTmps.length) : fileNames.splice(0, fileNames.length);
       const newPage = this.#pdfDoc.addPage();
 
-      this.embedImgsToPage(newPage, files, imgTmps);
+      // Add Image to PDF
+      const imgTmps: ImageT[] = pageTemp.images;
+      // If the amount of img files are less than the amount of images in a page template:
+      const files: string[] = fileNames.length >= imgTmps.length ? 
+                    fileNames.splice(0, imgTmps.length) : 
+                    fileNames.splice(0, fileNames.length);
+      await this.embedImgsToPage(newPage, files, imgTmps);
+
+      pnum++;
     }
 
     this.#created = true;

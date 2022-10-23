@@ -1,8 +1,14 @@
 import * as R from "ramda";
 
-import { pdftest } from "./modules/PDF";
+import { d3_print_portrait } from "./modules/defaults";
+import { PDF } from "./modules/PDF";
 
-console.log(R.add(3, 5));
 
-pdftest();
+async function test() {
+  const pdf = new PDF();
+  await pdf.init(d3_print_portrait);
+  await pdf.createPDF('./test.pdf');
+  await pdf.write('./test.pdf');
+}
 
+test();
