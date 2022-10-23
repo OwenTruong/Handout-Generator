@@ -47,5 +47,59 @@ export const d3_print_portrait = {
       ],
     }
   ]
+}
 
+export const testD = {
+  "name": "test",
+
+  "pages": [
+    {
+      "lines": [],
+
+      "images": [
+        {
+          "x": 50,
+          "y": 582,
+          "width": 240,
+          "height": 180
+        },
+        {
+          "x": 50,
+          "y": 331,
+          "width": 240,
+          "height": 180
+        },
+        {
+          "x": 50,
+          "y": 80,
+          "width": 240,
+          "height": 180
+        }
+      ],
+    },
+    {
+      "lines": [],
+
+      "images": [
+        {
+          "x": 300,
+          "y": 582,
+          "width": 240,
+          "height": 180
+        },
+        {
+          "x": 300,
+          "y": 331,
+          "width": 240,
+          "height": 180
+        },
+        {
+          "x": 300,
+          "y": 80,
+          "width": 240,
+          "height": 180
+        }
+      ],
+    }
+  ]
 }

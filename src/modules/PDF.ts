@@ -10,7 +10,8 @@ import fs from 'fs';
 
 
 import { ImageC } from './classes/ImageC';
-import { findFiles } from './functions/findFiles';
+
+import { getFilePaths } from './functions/getFilePaths';
 
 import { TemplateT } from './types/TemplateT';
 import { LineT } from './types/LineT';
@@ -52,16 +53,15 @@ export class PDF {
 
     for (let i = 0; i < files.length; ++i) {
       const image = new ImageC(imgTmps[i].x, imgTmps[i].y, imgTmps[i].width, imgTmps[i].height);
-      image.drawImage(this.#pdfDoc, page, files[i]);
+      await image.drawImage(this.#pdfDoc, page, files[i]);
     }
   }
 
 
 
 
-  async createPDF(dstPath: string) {
+  async createPDF(dstPath: string, imgsPath: string) {
     // TODO: First images, then lines, then date and page #
-    // TODO: Check if it works with a multi-paged template
 
     // Error Checking
     if (!this.#pdfDoc) console.error('Need to call init first before creating pdf');
@@ -70,7 +70,7 @@ export class PDF {
       return;
     }
 
-    const fileNames: string[] = findFiles('.')(['png', 'jpg']);
+    const fileNames: string[] = getFilePaths(imgsPath)(['png', 'jpg']);
     const pages: { lines: LineT[], images: ImageT[] }[]  = this.#template.pages;
 
     // A while loop that adds everything to pages
