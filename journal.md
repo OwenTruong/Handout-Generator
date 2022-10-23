@@ -32,4 +32,8 @@
 
 10/23/22
 -  Typescript has been annoying. It is meant to make you feel more secured about the "rightness" of your code, but it has only slowed down my speed due to my fear of writing bad code. The irony.
+- I finally got pdf kinda knocked out. I wanted to set up nodejs debugger with webpack and typescript, but realized how much of a pain that was.
+- Next I have to confirm if createPDF works with multi-paged templates.
+  - Also, we should start thinking about how I can refactor it so I don't rely on fs outside of nodejs (browser side)
+- Then I create lines...
 
