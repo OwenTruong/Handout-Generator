@@ -63,7 +63,7 @@ class PDF {
   async embedImgsToPage(page: PDFPage): Promise<void> {
     // TODO: the amount of images to add to a page should not be determined by the amount of files in a folder
     const paths: string[] = findFiles('.')(['png', 'jpg']);
-    const imgTmps: ImageT[] = this.#template.images.type1;
+    const imgTmps: ImageT[] = this.#template.pages[1].images; // TODO: dynamically assign template page
 
     // Check if template length is equivalent to paths length
     if (imgTmps.length != paths.length) {
