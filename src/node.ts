@@ -14,4 +14,4 @@ async function test(dstPDF: string, imgsPath: string) {
   await pdf.write(dstPDF);
 }
 
-test('./test.pdf', './imgs/');
+test('./test.pdf', './imgs');

@@ -45,15 +45,16 @@ export class PDF {
   }
 
   // Embed a certain amount of images to a page given a template for a page
-  async embedImgsToPage(page: PDFPage, files: string[], imgTmps: ImageT[]): Promise<void> {
-    if (imgTmps.length < files.length) {
+  async embedImgsToPage(page: PDFPage, imgTmps: ImageT[], filePaths: string[]): Promise<void> {
+
+    if (imgTmps.length < filePaths.length) {
       console.error('Too much image for a page.');
       return;
     }
 
-    for (let i = 0; i < files.length; ++i) {
+    for (let i = 0; i < filePaths.length; ++i) {
       const image = new ImageC(imgTmps[i].x, imgTmps[i].y, imgTmps[i].width, imgTmps[i].height);
-      await image.drawImage(this.#pdfDoc, page, files[i]);
+      await image.drawImage(this.#pdfDoc, page, filePaths[i]);
     }
   }
 
@@ -70,13 +71,13 @@ export class PDF {
       return;
     }
 
-    const fileNames: string[] = getFilePaths(imgsPath)(['png', 'jpg']);
+    const filePaths: string[] = getFilePaths(imgsPath)(['png', 'jpg']);
     const pages: { lines: LineT[], images: ImageT[] }[]  = this.#template.pages;
 
     // A while loop that adds everything to pages
     let pnum: number = 0;
     while (true) {
-      if (fileNames.length == 0) break;
+      if (filePaths.length == 0) break;
 
       // pageTemplate -> If template = 2, page 1, 3, 5 and etc follow temp1 and page 2, 4, 6 and etc follow temp2
       const pageTemp: { lines: LineT[], images: ImageT[] } = pages[pnum % pages.length];
@@ -85,10 +86,12 @@ export class PDF {
       // Add Image to PDF
       const imgTmps: ImageT[] = pageTemp.images;
       // If the amount of img files are less than the amount of images in a page template:
-      const files: string[] = fileNames.length >= imgTmps.length ? 
-                    fileNames.splice(0, imgTmps.length) : 
-                    fileNames.splice(0, fileNames.length);
-      await this.embedImgsToPage(newPage, files, imgTmps);
+      const files: string[] = filePaths.length >= imgTmps.length ? 
+                    filePaths.splice(0, imgTmps.length) : 
+                    filePaths.splice(0, filePaths.length);
+      // TODO: Make embedding images look slick
+      const embed: (filePaths: string[]) => Promise<void> = this.embedImgsToPage.bind(this, newPage, imgTmps);
+      await embed(files);
 
       pnum++;
     }
