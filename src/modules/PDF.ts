@@ -21,22 +21,13 @@ import { d3_print_portrait } from './defaults';
 
 // TODO: We are finally there... how should we create our PDF class?
 export async function pdftest(): Promise<void> {
-  const pdf = new PDF();
-  // Get PDF Document
-  const pdfDoc: PDFDocument = await PDFDocument.create();
-  const page: PDFPage = pdfDoc.addPage();
+  const pdf: PDF = new PDF();
+  await pdf.init();
 
-  // Add Images to PDF
-  const images: ImageT[] = d3_print_portrait.images.type1;
-  const paths: string[] = findFiles('.')(['png', 'jpg']);
-  // await ImageC.drawImages(pdfDoc, page, images, paths);
+  pdf.embedImgToPage(d3_print_portrait.images.type1, 1);
 
-  // Speed of saving is a concern
-  const pdfBytes: Uint8Array = await pdfDoc.save();
-
-  // Write PDF to test.pdf
-  fs.writeFileSync('./test.pdf', pdfBytes);
-
+  await pdf.save();
+  pdf.writeFile('./test.pdf');
 }
 
 
@@ -60,12 +51,30 @@ class PDF {
   }
 
   // TODO: Finish embedImg
-  async embedImgs(template: ImageT[], pageN: number): Promise<void> {
-    // Check if we have already modified the images on this page yet
-    // Check if template length is equivalent to paths length
+  // Embed a certain amount of images to a page given a template for a page
+  async embedImgToPage(template: ImageT[], pageN: number): Promise<void> {
+    // TODO: the amount of images to add to a page should not be determined by the amount of files in a folder
     const paths: string[] = findFiles('.')(['png', 'jpg']);
+
+    // Check if we have already modified the images on this page yet
+    if (this.#imgAdded == true) {
+      console.error('Image already embedded');
+      return;
+    }
+    // Check if template length is equivalent to paths length
+    if (template.length != paths.length) {
+      console.error('Too many or too few image for a page');
+      return;
+    }
+
+    // TODO: Allow dynamic assignment of page
     const page: PDFPage = this.#pdfDoc.addPage();
-    // await ImageC.drawImages(this.pdfDoc, page, template, paths);
+
+    for (let i = 0; i < template.length; ++i) {
+      const image = new ImageC(template[i].x, template[i].y, template[i].width, template[i].height);
+      image.drawImage(this.#pdfDoc, page, paths[i]);
+    }
+    this.#imgAdded = true;
   }
 
 

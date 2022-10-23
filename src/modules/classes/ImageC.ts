@@ -26,6 +26,7 @@ export class ImageC {
 
   // A method that grabs bytes of an image with fs and add it to a page in a pdf
   // drawImage belongs in ImageC.prototype
+  // TODO: Should I move it to PDF class?
   async drawImage(
     pdfDoc: PDFDocument,
     page: PDFPage, 
