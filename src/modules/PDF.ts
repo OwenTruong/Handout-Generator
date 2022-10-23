@@ -15,13 +15,13 @@ import { ImageC } from './classes/ImageC';
 import { findFiles } from './functions/findFiles';
 
 import { TemplateT } from './types/TemplateT';
+import { LineT } from './types/LineT';
 import { ImageT } from './types/ImageT';
 
 import { d3_print_portrait } from './defaults';
 
 
 
-// TODO: We are finally there... how should we create our PDF class?
 export async function pdftest(): Promise<void> {
   const pdf: PDF = new PDF();
   await pdf.init(d3_print_portrait);
@@ -49,7 +49,7 @@ class PDF {
   }
 
   async save(): Promise<void> {
-    if (!this.#pdfDoc) console.error('Need to call init() first');
+    if (!this.#pdfDoc) console.error('Need to call init first');
     this.#pdfBytes = await this.#pdfDoc.save();
   }
 
@@ -60,22 +60,19 @@ class PDF {
     fs.writeFileSync(path, this.#pdfBytes!);
   }
 
-  // TODO: Finish embedImg
   // Embed a certain amount of images to a page given a template for a page
-  async embedImgsToPage(page: PDFPage): Promise<void> {
-    // TODO: the amount of images to add to a page should not be determined by the amount of files in a folder
-    const paths: string[] = findFiles('.')(['png', 'jpg']);
-    const imgTmps: ImageT[] = this.#template.pages[1].images; // TODO: dynamically assign template page
+  async embedImgsToPage(page: PDFPage, files: string[], imgTmps: ImageT[]): Promise<void> {
+    // const imgTmps: ImageT[] = this.#template.pages[1].images;
 
     // Check if template length is equivalent to paths length
-    if (imgTmps.length != paths.length) {
-      console.error('Too many or too few image for a page');
+    if (imgTmps.length != files.length) {
+      console.error('Too many or too few image for a page.');
       return;
     }
 
     for (let i = 0; i < imgTmps.length; ++i) {
       const image = new ImageC(imgTmps[i].x, imgTmps[i].y, imgTmps[i].width, imgTmps[i].height);
-      image.drawImage(this.#pdfDoc, page, paths[i]);
+      image.drawImage(this.#pdfDoc, page, files[i]);
     }
   }
 
@@ -84,7 +81,9 @@ class PDF {
 
     // TODO: dynamically assign a page
 
-    // Check if we have already modified images onto a pdf before
+    // Error Checking
+    if (!this.#pdfDoc) console.error('Need to call init first');
+    if (!this.#pdfBytes) console.error('Need to call save() first');
     if (this.#created == true) {
       console.error('PDF created already. To create a new one, please call init()');
       return;
@@ -95,6 +94,21 @@ class PDF {
     // Assign each page a page template and images that matches the image that should be on the page template
       // If the amount of images available is less than the amount specified by the page template, skip making the lines and the images after the last image is used
 
+
+    const fileNames: string[] = findFiles('.')(['png', 'jpg']);
+    const pages: { lines: LineT[], images: ImageT[] }[]  = this.#template.pages;
+    let pnum: number = 0;
+
+    // A while loop that adds everything to pages
+    while (true) {
+      // Condition
+      // fileNames is empty
+      if (fileNames.length == 0) break;
+      const pageTemp: { lines: LineT[], images: ImageT[] } = pages[pnum % pages.length];
+      const imgTmp: ImageT[] = pageTemp.images;
+
+      fileNames.shift();
+    }
 
     await this.save();
     this.writeFile(dstPath);
