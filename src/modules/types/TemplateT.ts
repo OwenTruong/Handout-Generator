@@ -3,7 +3,7 @@ import { ImageT } from './ImageT';
 
 export type TemplateT = {
   name: string,
-  page: {
+  pages: {
     lines: LineT[],
     images: ImageT[],
   }[],

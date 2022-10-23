@@ -28,3 +28,8 @@
 - I have decided to dump everything in createPDF() for now as I have no idea on how exactly I should continue progressing.
   - I really need to plan ahead instead of what I am doing right now where I build from ground up the smaller helper functions first instead of the big "controller" functions first.
   
+
+
+10/23/22
+-  Typescript has been annoying. It is meant to make you feel more secured about the "rightness" of your code, but it has only slowed down my speed due to my fear of writing bad code. The irony.
+

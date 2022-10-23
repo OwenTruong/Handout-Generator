@@ -12,8 +12,10 @@ import fs from 'fs';
 
 
 import { ImageC } from './classes/ImageC';
-import { ImageT } from './types/ImageT';
 import { findFiles } from './functions/findFiles';
+
+import { TemplateT } from './types/TemplateT';
+import { ImageT } from './types/ImageT';
 
 import { d3_print_portrait } from './defaults';
 
@@ -35,11 +37,11 @@ export async function pdftest(): Promise<void> {
 // Pretty useless class, one use disposable...
 class PDF {
   #pdfDoc!: PDFDocument;
-  #template!: any;
+  #template!: TemplateT;
   #pdfBytes: Uint8Array | null = null;
   #created = false;
 
-  async init(template: Object): Promise<void> {
+  async init(template: TemplateT): Promise<void> {
     this.#pdfDoc = await PDFDocument.create();
     this.#template = template;
     this.#pdfBytes = null;
