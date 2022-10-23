@@ -29,7 +29,7 @@ export async function pdftest(): Promise<void> {
   // Add Images to PDF
   const images: ImageT[] = d3_print_portrait.images.type1;
   const paths: string[] = findFiles('.')(['png', 'jpg']);
-  await ImageC.drawImages(pdfDoc, page, images, paths);
+  // await ImageC.drawImages(pdfDoc, page, images, paths);
 
   // Speed of saving is a concern
   const pdfBytes: Uint8Array = await pdfDoc.save();
@@ -41,20 +41,32 @@ export async function pdftest(): Promise<void> {
 
 
 class PDF {
-  pdfDoc!: PDFDocument;
-  pdfBytes!: Uint8Array;
+  #pdfDoc!: PDFDocument;
+  #pdfBytes!: Uint8Array;
+  #imgAdded = false;
 
-  async init() {
-    this.pdfDoc = await PDFDocument.create();
+  async init(): Promise<void> {
+    this.#pdfDoc = await PDFDocument.create();
   }
 
-  async save() {
-    if (!this.pdfDoc) console.error('Need to call init()');
-    this.pdfBytes = await this.pdfDoc.save();
+  async save(): Promise<void> {
+    if (!this.#pdfDoc) console.error('Need to call init() first');
+    this.#pdfBytes = await this.#pdfDoc.save();
   }
 
-  writeFile(path: string) {
-    if (!this.pdfBytes) console.error('Unable save uninitialized pdf bytes');
-    fs.writeFileSync(path, this.pdfBytes);
+  writeFile(path: string): void {
+    if (!this.#pdfBytes) console.error('Need to call save() first');
+    fs.writeFileSync(path, this.#pdfBytes);
   }
+
+  // TODO: Finish embedImg
+  async embedImgs(template: ImageT[], pageN: number): Promise<void> {
+    // Check if we have already modified the images on this page yet
+    // Check if template length is equivalent to paths length
+    const paths: string[] = findFiles('.')(['png', 'jpg']);
+    const page: PDFPage = this.#pdfDoc.addPage();
+    // await ImageC.drawImages(this.pdfDoc, page, template, paths);
+  }
+
+
 }
