@@ -26,7 +26,6 @@ export class ImageC {
 
   // A method that grabs bytes of an image with fs and add it to a page in a pdf
   // drawImage belongs in ImageC.prototype
-  // TODO: Should I move it to PDF class?
   async drawImage(
     pdfDoc: PDFDocument,
     page: PDFPage, 
@@ -35,6 +34,7 @@ export class ImageC {
     const ext: string = getFileExt(path);
     if (ext != 'png' && ext != 'jpg') throw new Error('IMAGE FILE EXTENSION ERROR');
 
+    // TODO: Best way to remove fs.readFileSync from this code
     const fileBytes: Buffer = fs.readFileSync(path);
     const image: PDFImage = await (ext == 'png' ? pdfDoc.embedPng(fileBytes) : pdfDoc.embedJpg(fileBytes));
   

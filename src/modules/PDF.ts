@@ -1,13 +1,14 @@
 // TODO: Get the basic implementations down and then refactor it into a prototype class.
 
+// TODO: Remove fs from PDF.ts and Image.ts
 // import * as R from "ramda";
 import { 
   PDFDocument,
   PDFPage,
 } from 'pdf-lib';
 
-import fs from 'fs';
-
+// TODO: A big problem, how am I suppose to specify import of writeFileSync and browser equivalent conditionally?
+// Why don't I just purge all of these fs operations from PDF completely... like have PDF accept image bytes and searching files can be outsourced too.
 
 import { ImageC } from './classes/ImageC';
 
@@ -39,13 +40,12 @@ export class PDF {
     this.#pdfBytes = await this.#pdfDoc.save();
   }
 
-  async write(path: string): Promise<void> {
-    await this.#save();
-    fs.writeFileSync(path, this.#pdfBytes!);
+  async getPDFBytes(): Promise<Uint8Array> {
+    return this.#pdfBytes!;
   }
 
   // Embed a certain amount of images to a page given a template for a page
-  async embedImgsToPage(page: PDFPage, imgTmps: ImageT[], filePaths: string[]): Promise<void> {
+  async #embedImgsToPage(page: PDFPage, imgTmps: ImageT[], filePaths: string[]): Promise<void> {
 
     if (imgTmps.length < filePaths.length) {
       console.error('Too much image for a page.');
@@ -61,34 +61,34 @@ export class PDF {
 
 
 
-  async createPDF(dstPath: string, imgsPath: string) {
+  async createPDF(dstPath: string, imgsPath: string): Promise<void> {
     // TODO: First images, then lines, then date and page #
 
     // Error Checking
-    if (!this.#pdfDoc) console.error('Need to call init first before creating pdf');
-    if (this.#created == true) {
-      console.error('PDF created already. To create a new one, please call init() before creating pdf');
-      return;
-    }
+    if (!this.#pdfDoc) 
+      return console.error('Need to call init first before creating pdf');
+    if (this.#created == true) 
+      return console.error('PDF created already. To create a new one, please call init() before creating pdf');
 
     const filePaths: string[] = getFilePaths(imgsPath)(['png', 'jpg']);
     const pages: { lines: LineT[], images: ImageT[] }[]  = this.#template.pages;
 
-    // A while loop that adds everything to pages
-    let pnum: number = 0;
-    while (true) {
-      if (filePaths.length == 0) break;
 
+
+    let pnum: number = 0;
+    while (filePaths.length != 0) {
       // pageTemplate -> If template = 2, page 1, 3, 5 and etc follow temp1 and page 2, 4, 6 and etc follow temp2
       const pageTemp: { lines: LineT[], images: ImageT[] } = pages[pnum % pages.length];
-      const newPage = this.#pdfDoc.addPage();
+      const page = this.#pdfDoc.addPage();
 
-      // TODO: Check if my refactor created any bug for this section of the code
+
       // Add Image to PDF
       const imgTmps: ImageT[] = pageTemp.images;
-      await this.embedImgsToPage(newPage, imgTmps,
+      await this.#embedImgsToPage(page, imgTmps,
         filePaths.splice( 0, Math.min( filePaths.length, imgTmps.length ) )
       );
+
+      
 
       pnum++;
     }
