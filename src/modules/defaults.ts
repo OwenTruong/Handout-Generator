@@ -25,8 +25,8 @@ export const d3_print_portrait = {
     ]
   },
 
-  "images": {
-    "type1": [
+  "images": [
+    [
       {
         "x": 50,
         "y": 582,
@@ -47,5 +47,5 @@ export const d3_print_portrait = {
         "height": 180
       }
     ]
-  }
+  ]
 }

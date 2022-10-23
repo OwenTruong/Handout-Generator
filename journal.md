@@ -23,3 +23,8 @@
 - Oh another note, make sure to take into account when the template and the number of actual images do not match.
 - I refactored a lot of things and moved a bunch of functions in PDF.ts to classes, functions and types folder.
 - Now it is time to think about what I am going to expose for my PDF class.
+
+- PDF class is fairly limiting. It is essentially a disposable..
+- I have decided to dump everything in createPDF() for now as I have no idea on how exactly I should continue progressing.
+  - I really need to plan ahead instead of what I am doing right now where I build from ground up the smaller helper functions first instead of the big "controller" functions first.
+  
