@@ -1,7 +1,5 @@
 import { PDFDocument, PDFPage, PDFImage } from "pdf-lib";
 
-import fs from 'fs';
-
 import { OpaqueEnv } from "../classes/OpaqueEnv";
 
 import { getFileExt } from "../functions/files/getFileExt";
@@ -38,6 +36,7 @@ export class ImageC {
 
     // need a better one than null...
     const fileBytes: Buffer | null = OpaqueEnv.readFile(path);
+    // TODO FUTURE: Delete this if condition once browser is implemented
     if (!fileBytes) throw new Error("(Temporary) Wrong environment: Browser not available yet");
     const image: PDFImage = await (ext == 'png' ? pdfDoc.embedPng(fileBytes) : pdfDoc.embedJpg(fileBytes));
   

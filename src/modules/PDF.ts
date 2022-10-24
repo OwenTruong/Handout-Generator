@@ -7,15 +7,10 @@ import {
   PDFPage,
 } from 'pdf-lib';
 
-// TODO: A big problem, how am I suppose to specify import of writeFileSync and browser equivalent conditionally?
-// Why don't I just purge all of these fs operations from PDF completely... like have PDF accept image bytes and searching files can be outsourced too.
 
-import fs from 'fs';
 
 import { OpaqueEnv } from "./classes/OpaqueEnv";
 import { ImageC } from "./classes/ImageC";
-
-import { getFilePaths } from "./functions/files/getFilePaths";
 
 import { TemplateT } from "./types/TemplateT";
 import { LineT } from "./types/LineT";
@@ -39,14 +34,14 @@ export class PDF {
   }
 
   async #save(): Promise<void> {
-    if (!this.#pdfDoc) return console.error('Need to call init first');
+    if (!this.#pdfDoc) throw new Error('Need to call init first');
     this.#pdfBytes = await this.#pdfDoc.save();
   }
 
   async writePDF(path: string): Promise<void> {
-    this.#save();
-    if (!this.#pdfBytes) return;
-    OpaqueEnv.writeFile('./test.pdf', this.#pdfBytes!);
+    await this.#save();
+    if (!this.#pdfBytes) throw new Error('Need to call init first');
+    OpaqueEnv.writeFile('./test.pdf', this.#pdfBytes);
   }
 
   // Embed a certain amount of images to a page given a template for a page
@@ -75,7 +70,8 @@ export class PDF {
     if (this.#created == true) 
       return console.error('PDF created already. To create a new one, please call init() before creating pdf');
 
-    const filePaths: string[] = getFilePaths(imgsPath)(['png', 'jpg']);
+    // TODO FUTURE: How are we even going to get file paths and if there are file paths in browser implementation...
+    const filePaths: string[] = OpaqueEnv.getFilePaths(imgsPath)(['png', 'jpg']);
     const pages: { lines: LineT[], images: ImageT[] }[]  = this.#template.pages;
 
 
