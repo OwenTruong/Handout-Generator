@@ -40,3 +40,7 @@
 - It is a pain to make my code both nodejs and browser friendly. That is why I created a class that will handle that... OpaqueEnv...
 
 - I might want to explore resolve.alias to make imports look more slick.
+
+10/24/22
+- Maybe type files should be used as a guide in PDF.ts, then we can implement all the variables in their respective class.
+

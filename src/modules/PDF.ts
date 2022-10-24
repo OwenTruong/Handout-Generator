@@ -1,6 +1,5 @@
 // TODO: Get the basic implementations down and then refactor it into a prototype class.
 
-// TODO: Remove fs from PDF.ts and Image.ts
 // import * as R from "ramda";
 import { 
   PDFDocument,
@@ -15,6 +14,8 @@ import { ImageC } from "@/classes/ImageC";
 import { TemplateT } from "@/types/TemplateT";
 import { LineT } from "@/types/LineT";
 import { ImageT } from "@/types/ImageT";
+
+// import { integrityCheck } from "@/functions/integrityCheck";
 
 
 
@@ -56,7 +57,14 @@ export class PDF {
       const image = new ImageC(imgTmps[i].x, imgTmps[i].y, imgTmps[i].width, imgTmps[i].height);
       await image.drawImage(this.#pdfDoc, page, filePaths[i]);
     }
+
   }
+
+  async #embedLinesToPage(page: PDFPage, lineTmps: LineT[]): Promise<void> {
+
+  }
+
+
 
 
 
@@ -88,6 +96,9 @@ export class PDF {
       await this.#embedImgsToPage(page, imgTmps,
         filePaths.splice( 0, Math.min( filePaths.length, imgTmps.length ) )
       );
+
+      // TODO: Add lines to template and do what you need to do here too
+      const lineTmps: LineT[] = pageTemp.lines;
 
       
 
