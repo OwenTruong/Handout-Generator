@@ -8,7 +8,7 @@ const nodeConfig = {
   entry: './src/node.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'main.cjs',
+    filename: 'main.js',
   },
 
   module: {
@@ -26,7 +26,10 @@ const nodeConfig = {
   devtool: false,
 
   resolve: {
-    extensions: ['.ts', '.js']
+    alias: {
+      '@': path.resolve(__dirname, 'src/modules'),
+    },
+    extensions: ['.ts', '.js'],
   },
 
   // yessss this works

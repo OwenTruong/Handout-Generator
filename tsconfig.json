@@ -11,6 +11,12 @@
 
     "strict": true,                                      
 
-    "skipLibCheck": true
+    "skipLibCheck": true,
+
+    "baseUrl": "src/modules",
+
+    "paths": { 
+      "@/*": ["*"]
+    }
   }
 }

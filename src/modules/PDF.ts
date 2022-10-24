@@ -9,12 +9,12 @@ import {
 
 
 
-import { OpaqueEnv } from "./classes/OpaqueEnv";
-import { ImageC } from "./classes/ImageC";
+import { OpaqueEnv } from "@/classes/OpaqueEnv";
+import { ImageC } from "@/classes/ImageC";
 
-import { TemplateT } from "./types/TemplateT";
-import { LineT } from "./types/LineT";
-import { ImageT } from "./types/ImageT";
+import { TemplateT } from "@/types/TemplateT";
+import { LineT } from "@/types/LineT";
+import { ImageT } from "@/types/ImageT";
 
 
 

@@ -1,9 +1,9 @@
 import { PDFDocument, PDFPage, PDFImage } from "pdf-lib";
 
-import { OpaqueEnv } from "../classes/OpaqueEnv";
+import { OpaqueEnv } from "@/classes/OpaqueEnv";
 
-import { getFileExt } from "../functions/files/getFileExt";
-import { ImageT } from '../types/ImageT';
+import { getFileExt } from "@/functions/files/getFileExt";
+import { ImageT } from '@/types/ImageT';
 
 export class ImageC {
   x: number;
