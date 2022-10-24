@@ -2,7 +2,9 @@ import { PDFDocument, PDFPage, PDFImage } from "pdf-lib";
 
 import fs from 'fs';
 
-import { getFileExt } from "../functions/getFileExt";
+import { OpaqueEnv } from "../classes/OpaqueEnv";
+
+import { getFileExt } from "../functions/files/getFileExt";
 import { ImageT } from '../types/ImageT';
 
 export class ImageC {
@@ -34,8 +36,9 @@ export class ImageC {
     const ext: string = getFileExt(path);
     if (ext != 'png' && ext != 'jpg') throw new Error('IMAGE FILE EXTENSION ERROR');
 
-    // TODO: Best way to remove fs.readFileSync from this code
-    const fileBytes: Buffer = fs.readFileSync(path);
+    // need a better one than null...
+    const fileBytes: Buffer | null = OpaqueEnv.readFile(path);
+    if (!fileBytes) throw new Error("(Temporary) Wrong environment: Browser not available yet");
     const image: PDFImage = await (ext == 'png' ? pdfDoc.embedPng(fileBytes) : pdfDoc.embedJpg(fileBytes));
   
     // We could pass ImageC directly but there is no guarantee I would not be changing ImageC in the future

@@ -27,7 +27,12 @@ const nodeConfig = {
 
   resolve: {
     extensions: ['.ts', '.js']
-  }
+  },
+
+  // yessss this works
+  // externals: {
+  //   fs: 'fs'
+  // }
 };
 
 module.exports = nodeConfig

@@ -10,13 +10,16 @@ import {
 // TODO: A big problem, how am I suppose to specify import of writeFileSync and browser equivalent conditionally?
 // Why don't I just purge all of these fs operations from PDF completely... like have PDF accept image bytes and searching files can be outsourced too.
 
-import { ImageC } from './classes/ImageC';
+import fs from 'fs';
 
-import { getFilePaths } from './functions/getFilePaths';
+import { OpaqueEnv } from "./classes/OpaqueEnv";
+import { ImageC } from "./classes/ImageC";
 
-import { TemplateT } from './types/TemplateT';
-import { LineT } from './types/LineT';
-import { ImageT } from './types/ImageT';
+import { getFilePaths } from "./functions/files/getFilePaths";
+
+import { TemplateT } from "./types/TemplateT";
+import { LineT } from "./types/LineT";
+import { ImageT } from "./types/ImageT";
 
 
 
@@ -36,12 +39,14 @@ export class PDF {
   }
 
   async #save(): Promise<void> {
-    if (!this.#pdfDoc) console.error('Need to call init first');
+    if (!this.#pdfDoc) return console.error('Need to call init first');
     this.#pdfBytes = await this.#pdfDoc.save();
   }
 
-  async getPDFBytes(): Promise<Uint8Array> {
-    return this.#pdfBytes!;
+  async writePDF(path: string): Promise<void> {
+    this.#save();
+    if (!this.#pdfBytes) return;
+    OpaqueEnv.writeFile('./test.pdf', this.#pdfBytes!);
   }
 
   // Embed a certain amount of images to a page given a template for a page
