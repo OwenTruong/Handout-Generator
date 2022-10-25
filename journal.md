@@ -44,3 +44,6 @@
 10/24/22
 - Maybe type files should be used as a guide in PDF.ts, then we can implement all the variables in their respective class.
 
+10/25/22
+- I believe what I should do is guard against types in the fact that the object assigned a type might NOT contain all the values in the type... and I should absolutely not use the object until I convert it to a class.
+

@@ -7,6 +7,8 @@ import { PDF } from "./modules/PDF";
 import { LineT } from "@/types/LineT"
 
 
+import { integrityCheck } from '@/functions/integrityCheck';
+
 // async function test(dstPDF: string, imgsPath: string) {
 //   // Dynamically pick image folder
 //   const pdf = new PDF();
@@ -24,3 +26,11 @@ import { LineT } from "@/types/LineT"
 //   ...testD.pages[0].lines[0]
 // };
 // integrityCheck(line);
+
+const test: any = testD.pages[0].lines[0];
+
+const line: LineT = test;
+console.log(line.x2);
+
+integrityCheck(line);
+
