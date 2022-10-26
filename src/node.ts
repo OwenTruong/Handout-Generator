@@ -27,6 +27,9 @@ import { integrityCheck } from '@/functions/integrityCheck';
 // };
 // integrityCheck(line);
 
+
+// TODO: Reform classes and types (actually change them to interfaces)
+
 const test: any = testD.pages[0].lines[0];
 
 const line: LineT = test;

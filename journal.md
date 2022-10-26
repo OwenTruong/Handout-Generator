@@ -41,9 +41,29 @@
 
 - I might want to explore resolve.alias to make imports look more slick.
 
+
+
+
+
 10/24/22
 - Maybe type files should be used as a guide in PDF.ts, then we can implement all the variables in their respective class.
 
+
+
+
 10/25/22
 - I believe what I should do is guard against types in the fact that the object assigned a type might NOT contain all the values in the type... and I should absolutely not use the object until I convert it to a class.
+
+
+
+
+
+10/26/22
+- Screw the types, I believe I should treat unknown objects as unknown. We need to implement a way for classes to find out if all the properties of a type exist.
+- A lower class can not import from a higher class. Example, LineC can not import TemplateC or PageC
+
+- We should convert types to interfaces first (actually what is the difference firs to of all).
+  - Then we need to change the classes (we also need to implement a way to check for errors in object and a way to handle it).
+    - Refactor the rest of the codebase
+
 

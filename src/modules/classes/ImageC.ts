@@ -5,7 +5,7 @@ import { OpaqueEnv } from "@/classes/OpaqueEnv";
 import { getFileExt } from "@/functions/files/getFileExt";
 import { ImageT } from '@/types/ImageT';
 
-export class ImageC {
+export class ImageC implements ImageT {
   x: number;
   y: number;
   width: number;

@@ -1,6 +1,6 @@
-import { PDFDocument, PDFPage } from "pdf-lib";
+import { LineT } from "@/types/LineT";
 
-export class LineC {
+export class LineC implements LineT {
   x1: number;
   x2: number;
   y1: number;
