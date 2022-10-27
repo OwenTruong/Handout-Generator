@@ -9,15 +9,15 @@ import { LineT } from "@/types/LineT"
 
 import { integrityCheck } from '@/functions/integrityCheck';
 
-// async function test(dstPDF: string, imgsPath: string) {
-//   // Dynamically pick image folder
-//   const pdf = new PDF();
-//   await pdf.init(testD);
-//   await pdf.createPDF(dstPDF, imgsPath);
-//   await pdf.writePDF('./test.pdf');
-// }
+async function test(dstPDF: string, imgsPath: string) {
+  // Dynamically pick image folder
+  const pdf = new PDF();
+  // await pdf.init(testD);
+  // await pdf.createPDF(dstPDF, imgsPath);
+  // await pdf.writePDF('./test.pdf');
+}
 
-// test('./test.pdf', './imgs');
+test('./test.pdf', './imgs');
 
 
 // TODO: replace class fields with their type as a field
@@ -30,10 +30,10 @@ import { integrityCheck } from '@/functions/integrityCheck';
 
 // TODO: Reform classes and types (actually change them to interfaces)
 
-const test: any = testD.pages[0].lines[0];
+// const test: any = testD.pages[0].lines[0];
 
-const line: LineT = test;
-console.log(line.x2);
+// const line: LineT = test;
+// console.log(line.x2);
 
-integrityCheck(line);
+// integrityCheck(line);
 

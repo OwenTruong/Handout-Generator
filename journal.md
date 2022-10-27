@@ -67,3 +67,5 @@
     - Refactor the rest of the codebase
 
 
+10/27/22
+- I need to research the difference between type alias and interface in TypeScript. Does an interface know when an object is missing some properties? 
