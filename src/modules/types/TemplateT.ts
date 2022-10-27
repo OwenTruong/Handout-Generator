@@ -1,10 +1,6 @@
-import { LineT } from './LineT';
-import { ImageT } from './ImageT';
+import { PageT } from "@/types/PageT";
 
 export type TemplateT = {
   name: string,
-  pages: {
-    lines: LineT[],
-    images: ImageT[],
-  }[],
+  pages: PageT[],
 }
