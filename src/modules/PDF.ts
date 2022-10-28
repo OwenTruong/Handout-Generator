@@ -9,13 +9,17 @@ import {
 
 
 import { OpaqueEnv } from "@/classes/OpaqueEnv";
-import { ImageC } from "@/classes/ImageC";
 
-import { TemplateT } from "@/types/TemplateT";
-import { LineT } from "@/types/LineT";
-import { ImageT } from "@/types/ImageT";
+// import { TemplateT } from "@/types/TemplateT";
+// import { LineT } from "@/types/LineT";
+// import { ImageT } from "@/types/ImageT";
 
 // import { integrityCheck } from "@/functions/integrityCheck";
+
+import { TemplateC } from "@/classes/TemplateC";
+import { PageC } from "@/classes/PageC";
+import { LineC } from "@/classes/LineC";
+import { ImageC } from "@/classes/ImageC";
 
 
 
@@ -23,13 +27,13 @@ import { ImageT } from "@/types/ImageT";
 // Pretty useless class, one use disposable...
 export class PDF {
   #pdfDoc!: PDFDocument;
-  #template!: TemplateT;
+  #template!: TemplateC;
   #pdfBytes: Uint8Array | null = null;
   #created = false;
 
-  async init(template: TemplateT): Promise<void> {
+  async init(template: any): Promise<void> {
     this.#pdfDoc = await PDFDocument.create();
-    this.#template = template;
+    this.#template = new TemplateC(template);
     this.#pdfBytes = null;
     this.#created = false;
   }
@@ -46,23 +50,17 @@ export class PDF {
   }
 
   // Embed a certain amount of images to a page given a template for a page
-  async #embedImgsToPage(page: PDFPage, imgTmps: ImageT[], filePaths: string[]): Promise<void> {
-
-    if (imgTmps.length < filePaths.length) {
-      console.error('Too much image for a page.');
-      return;
-    }
+  async #embedImgsToPage(page: PDFPage, imgTmps: ImageC[], filePaths: string[]): Promise<void> {
+    if (imgTmps.length < filePaths.length) return console.error('Too many images for a page.');
 
     for (let i = 0; i < filePaths.length; ++i) {
-      const image = new ImageC(imgTmps[i].x, imgTmps[i].y, imgTmps[i].width, imgTmps[i].height);
-      await image.drawImage(this.#pdfDoc, page, filePaths[i]);
+      await imgTmps[i].drawImage(this.#pdfDoc, page, filePaths[i]);
     }
-
   }
 
-  async #embedLinesToPage(page: PDFPage, lineTmps: LineT[]): Promise<void> {
+  // async #embedLinesToPage(page: PDFPage, lineTmps: LineT[]): Promise<void> {
 
-  }
+  // }
 
 
 
@@ -80,25 +78,25 @@ export class PDF {
 
     // TODO FUTURE: How are we even going to get file paths and if there are file paths in browser implementation...
     const filePaths: string[] = OpaqueEnv.getFilePaths(imgsPath)(['png', 'jpg']);
-    const pages: { lines: LineT[], images: ImageT[] }[]  = this.#template.pages;
+    const pagesTemp: PageC[]  = this.#template.pages;
 
 
 
     let pnum: number = 0;
     while (filePaths.length != 0) {
       // pageTemplate -> If template = 2, page 1, 3, 5 and etc follow temp1 and page 2, 4, 6 and etc follow temp2
-      const pageTemp: { lines: LineT[], images: ImageT[] } = pages[pnum % pages.length];
+      const pageTemp: PageC = pagesTemp[pnum % pagesTemp.length];
       const page = this.#pdfDoc.addPage();
 
 
       // Add Image to PDF
-      const imgTmps: ImageT[] = pageTemp.images;
+      const imgTmps: ImageC[] = pageTemp.images;
       await this.#embedImgsToPage(page, imgTmps,
         filePaths.splice( 0, Math.min( filePaths.length, imgTmps.length ) )
       );
 
       // TODO: Add lines to template and do what you need to do here too
-      const lineTmps: LineT[] = pageTemp.lines;
+      // const lineTmps: LineT[] = pageTemp.lines;
 
       
 
