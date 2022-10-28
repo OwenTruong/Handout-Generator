@@ -4,8 +4,6 @@ import * as R from "ramda";
 import { d3_print_portrait, testD } from "./modules/defaults";
 import { PDF } from "./modules/PDF";
 
-import { LineT } from "@/types/LineT"
-
 
 import { integrityCheck } from '@/functions/integrityCheck';
 
@@ -28,7 +26,7 @@ test('./test.pdf', './imgs');
 // integrityCheck(line);
 
 
-// TODO: Reform classes and types (actually change them to interfaces)
+// TODO: DELETE ALL TYPES
 
 // const test: any = testD.pages[0].lines[0];
 

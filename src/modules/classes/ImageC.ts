@@ -3,9 +3,8 @@ import { PDFDocument, PDFPage, PDFImage } from "pdf-lib";
 import { OpaqueEnv } from "@/classes/OpaqueEnv";
 
 import { getFileExt } from "@/functions/files/getFileExt";
-import { ImageT } from '@/types/ImageT';
 
-export class ImageC implements ImageT {
+export class ImageC {
   x: number;
   y: number;
   width: number;
@@ -13,10 +12,7 @@ export class ImageC implements ImageT {
 
 
   constructor(
-    x: number, 
-    y: number, 
-    width: number, 
-    height: number
+    { x, y, width, height }: { x: number, y: number, width: number, height: number }
   ) {
     this.x = x;
     this.y = y;

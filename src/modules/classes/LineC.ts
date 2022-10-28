@@ -1,6 +1,4 @@
-import { LineT } from "@/types/LineT";
-
-export class LineC implements LineT {
+export class LineC {
   x1: number;
   x2: number;
   y1: number;
