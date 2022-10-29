@@ -58,9 +58,11 @@ export class PDF {
     }
   }
 
-  // async #embedLinesToPage(page: PDFPage, lineTmps: LineT[]): Promise<void> {
-
-  // }
+  async #embedLinesToPage(page: PDFPage, lineTmps: LineC[]): Promise<void> {
+    for (let i = 0; i < lineTmps.length; ++i) {
+      lineTmps[i].drawLine(page);
+    }
+  }
 
 
 
@@ -96,7 +98,8 @@ export class PDF {
       );
 
       // TODO: Add lines to template and do what you need to do here too
-      // const lineTmps: LineT[] = pageTemp.lines;
+      const lineTmps: LineC[] = pageTemp.lines;
+      this.#embedLinesToPage(page, lineTmps);
 
       
 

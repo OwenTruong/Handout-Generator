@@ -1,6 +1,7 @@
 // LineC and ImageC are not allowed to import TemplateC
 
 import { PageC } from "@/classes/PageC";
+import { checkData } from "@/functions/checkData";
 
 
 
@@ -10,12 +11,9 @@ export class TemplateC {
   pages: PageC[];
 
   constructor(obj: any) {
-    try {
-      this.name = obj.name;
-      this.pages = obj.pages.map((page: any) => new PageC(page));
-    } catch(error) {
-      throw new Error("\nTemplateC encountered an error\n\n" + error);
-    }
+    if (!checkData(obj.name, obj.pages)) throw new Error('TemplateC Constructor Argument is Invalid');
+    this.name = obj.name;
+    this.pages = obj.pages.map((page: any) => new PageC(page));
   }
 
 }
