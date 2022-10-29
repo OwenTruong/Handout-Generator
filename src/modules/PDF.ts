@@ -70,8 +70,6 @@ export class PDF {
 
 
   async createPDF(dstPath: string, imgsPath: string): Promise<void> {
-    // TODO: First images, then lines, then date and page #
-
     // Error Checking
     if (!this.#pdfDoc) 
       return console.error('Need to call init first before creating pdf');
@@ -88,8 +86,7 @@ export class PDF {
     while (filePaths.length != 0) {
       // pageTemplate -> If template = 2, page 1, 3, 5 and etc follow temp1 and page 2, 4, 6 and etc follow temp2
       const pageTemp: PageC = pagesTemp[pnum % pagesTemp.length];
-      const page = this.#pdfDoc.addPage();
-
+      const page = this.#pdfDoc.addPage(); // size: { width: 595.28, height: 841.89 }
 
       // Add Image to PDF
       const imgTmps: ImageC[] = pageTemp.images;
@@ -97,9 +94,10 @@ export class PDF {
         filePaths.splice( 0, Math.min( filePaths.length, imgTmps.length ) )
       );
 
-      // TODO: Add lines to template and do what you need to do here too
       const lineTmps: LineC[] = pageTemp.lines;
       this.#embedLinesToPage(page, lineTmps);
+
+      // TODO: Add page number
 
       
 
