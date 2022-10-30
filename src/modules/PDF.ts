@@ -58,10 +58,16 @@ export class PDF {
     }
   }
 
-  async #embedLinesToPage(page: PDFPage, lineTmps: LineC[]): Promise<void> {
+  #embedLinesToPage(page: PDFPage, lineTmps: LineC[]): void {
     for (let i = 0; i < lineTmps.length; ++i) {
       lineTmps[i].drawLine(page);
     }
+  }
+
+  #embedPageNumberToPage(page: PDFPage, num: number): void {
+    // TODO: ... Okay, do I need a page number class? I only need one if I want users the ability to select where they want the page number to be at.
+
+    
   }
 
 
@@ -99,6 +105,7 @@ export class PDF {
 
       // TODO: Add page number
 
+      
       
 
       pnum++;
