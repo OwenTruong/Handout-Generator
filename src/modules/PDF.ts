@@ -1,6 +1,4 @@
-// TODO: Get the basic implementations down and then refactor it into a prototype class.
 
-// import * as R from "ramda";
 import { 
   PDFDocument,
   PDFPage,
@@ -25,7 +23,6 @@ import { TextC } from '@/classes/TextC';
 
 
 
-// Pretty useless class, one use disposable...
 export class PDF {
   #pdfDoc!: PDFDocument;
   #template!: TemplateC;
@@ -50,7 +47,7 @@ export class PDF {
     OpaqueEnv.writeFile('./test.pdf', this.#pdfBytes);
   }
 
-  // Embed a certain amount of images to a page given a template for a page
+  // Embed a certain amount of images to a page given a template
   async #embedImgsToPage(page: PDFPage, imgTmps: ImageC[], filePaths: string[]): Promise<void> {
     if (imgTmps.length < filePaths.length) return console.error('Too many images for a page.');
 
@@ -59,6 +56,7 @@ export class PDF {
     }
   }
 
+  // Embed lines to a page given a template
   #embedLinesToPage(page: PDFPage, lineTmps: LineC[]): void {
     for (let i = 0; i < lineTmps.length; ++i) {
       lineTmps[i].drawLine(page);
@@ -66,7 +64,6 @@ export class PDF {
   }
 
   #embedTextToPage(page: PDFPage, textTmp: TextC, text: string): void {
-    // TODO: ... Okay, do I need a page number class? I only need one if I want users the ability to select where they want the page number to be at.
     textTmp.drawText(this.#pdfDoc, page, text);
   }
 
@@ -82,10 +79,9 @@ export class PDF {
     if (this.#created == true) 
       return console.error('PDF created already. To create a new one, please call init() before creating pdf');
 
-    // TODO FUTURE: How are we even going to get file paths and if there are file paths in browser implementation...
+    // TODO FUTURE: How are we even going to get file paths in our browser implementation?
     const filePaths: string[] = OpaqueEnv.getFilePaths(imgsPath)(['png', 'jpg']);
     const pagesTemp: PageC[]  = this.#template.pages;
-
 
 
     let pnum: number = 0;
@@ -93,6 +89,10 @@ export class PDF {
       // pageTemplate -> If template = 2, page 1, 3, 5 and etc follow temp1 and page 2, 4, 6 and etc follow temp2
       const pageTemp: PageC = pagesTemp[pnum % pagesTemp.length];
       const page = this.#pdfDoc.addPage(); // size: { width: 595.28, height: 841.89 }
+
+      // Add Page Number to PDF
+      const PageN: TextC = pageTemp.pageN;
+      this.#embedTextToPage(page, PageN, (pnum + 1).toString());
 
       // Add Image to PDF
       const imgTmps: ImageC[] = pageTemp.images;
@@ -103,13 +103,6 @@ export class PDF {
       // Add Line to PDF
       const lineTmps: LineC[] = pageTemp.lines;
       this.#embedLinesToPage(page, lineTmps);
-
-      // TODO: Add page number
-      const PageN: TextC = pageTemp.pageN;
-      this.#embedTextToPage(page, PageN, (pnum + 1).toString());
-
-      
-      
 
       pnum++;
     }

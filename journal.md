@@ -79,3 +79,7 @@
   - It is more of a question of how much I want to abstract from the outside perspective. Where to do the async call outside or defer it to a method in TextC.
     - I believe it will be in my best interest to give TextC the responsibility.
   - Why don't I just remove the option to choose font family? I feel like I am getting stuck on useless part and giving more choice to a user could be counterproductive.
+
+  11/29 AM
+  - We are finally almost done with NodeJS implementation. Last things we need to do is to write up the other templates, and to refactor some of my codes to its functional equivalent, and we also need to source the error checking to another location. Maybe we should also implement a global state called pdfDoc... since it is used everywhere and it is always the same pdfDoc.
+  - One of the things I am considering is instead of making my HANDOUT-GENERATOR folder look bloated by having both nodejs and browser code mixed together, I should upload my nodejs code as an npm package, and then install my nodejs package from a separate browser project folder.
