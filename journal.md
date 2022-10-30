@@ -71,3 +71,11 @@
 - I need to research the difference between type alias and interface in TypeScript. Does an interface know when an object is missing some properties? 
 - After a short test to find the difference between type alias and interface, I have come to the conclusion that there is no easy way to check for types in runtime. 
   - I will make the decision to only use classes and not types for operations. I am not allowed to rollback on this decision for this project.
+
+
+
+10/30/22
+- It really is a question on how much knowledge and responsibility a component have when it comes to properties and methods. I don't know if I should create the font outside or inside of TextC...
+  - It is more of a question of how much I want to abstract from the outside perspective. Where to do the async call outside or defer it to a method in TextC.
+    - I believe it will be in my best interest to give TextC the responsibility.
+  - Why don't I just remove the option to choose font family? I feel like I am getting stuck on useless part and giving more choice to a user could be counterproductive.

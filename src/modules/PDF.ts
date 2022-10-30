@@ -20,6 +20,7 @@ import { TemplateC } from "@/classes/TemplateC";
 import { PageC } from "@/classes/PageC";
 import { LineC } from "@/classes/LineC";
 import { ImageC } from "@/classes/ImageC";
+import { TextC } from '@/classes/TextC';
 
 
 
@@ -64,10 +65,9 @@ export class PDF {
     }
   }
 
-  #embedPageNumberToPage(page: PDFPage, num: number): void {
+  #embedTextToPage(page: PDFPage, textTmp: TextC, text: string): void {
     // TODO: ... Okay, do I need a page number class? I only need one if I want users the ability to select where they want the page number to be at.
-
-    
+    textTmp.drawText(this.#pdfDoc, page, text);
   }
 
 
@@ -100,10 +100,13 @@ export class PDF {
         filePaths.splice( 0, Math.min( filePaths.length, imgTmps.length ) )
       );
 
+      // Add Line to PDF
       const lineTmps: LineC[] = pageTemp.lines;
       this.#embedLinesToPage(page, lineTmps);
 
       // TODO: Add page number
+      const PageN: TextC = pageTemp.pageN;
+      this.#embedTextToPage(page, PageN, (pnum + 1).toString());
 
       
       

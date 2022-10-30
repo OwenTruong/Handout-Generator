@@ -8,6 +8,11 @@ export const d3_print_portrait = {
 
   "pages": [
     {
+      "pageN": {
+        "x": 550,
+        "y": 30,
+        "size": 12
+      },
       "lines": [
         /* First Image */
         {

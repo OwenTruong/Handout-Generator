@@ -1,38 +1,44 @@
-import { PDFPage, PDFFont, RGB, rgb } from 'pdf-lib';
+import { PDFDocument, PDFPage, StandardFonts, RGB, rgb } from 'pdf-lib';
 
 import { checkData } from "@/functions/checkData";
 import { checkType } from "@/functions/checkType";
 
-// TODO: Figure out the font of TextC in this class.
 
 export class TextC {
   x: number;
   y: number;
   size: number;
-  font: PDFFont;
+  //font: PDFFont | null;
   color: RGB;
   
   constructor(
-    { x, y, size, font, color = rgb(0, 0, 0)}: { x: number, y: number, size: number, font: PDFFont, color: RGB }
+    { x, y, size, color = [0, 0, 0]}: { x: number, y: number, size: number, color: number[] }
   ) {
-    // TODO: Check if checkType actually works with 'StandardFonts' and 'RGB' class
-    if (
-      !checkData(x, y, size, font, color) ||
-      !checkType([x, y, size, font], [ ...Array(3).fill('number'), 'StandardFonts', 'RGB'])
-    ) throw new Error('LineC Constructor Argument is Invalid');
+    if (!checkData(x, y, size, color)) 
+      throw new Error(`TextC Argument Data is Missing: (${x}, ${y}, ${size}, ${color})`);
+
+    if (!checkType([ x, y, size ], [ ...Array(3).fill('number') ]))
+      throw new Error(`TextC Argument Type is Invalid: (${x}, ${y}, ${size}, ${color})`);
+
+    if (!checkType(color, [ 'number', 'number', 'number' ]))
+      throw new Error(`TextC Color Argument is Invalid: (${x}, ${y}, ${size}, ${color})`);
+    
     this.x = x;
     this.y = y;
     this.size = size;
-    this.font = font;
-    this.color = color;
+    this.color = rgb(color[0], color[1], color[2]);
   }
 
-  drawText(page: PDFPage, message: string) {
+  async drawText(pdfDoc: PDFDocument, page: PDFPage, message: string): Promise<void> {
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    if (!font) return console.error('Unexpected error in retrieving Helvetica font in drawText method of TextC');
+
     page.drawText(message, {
       x: this.x,
       y: this.y,
       size: this.size,
-      font: this.font
-    })
+      font,
+      color: this.color,
+    });
   }
 }
