@@ -83,3 +83,7 @@
   11/29 AM
   - We are finally almost done with NodeJS implementation. Last things we need to do is to write up the other templates, and to refactor some of my codes to its functional equivalent, and we also need to source the error checking to another location. Maybe we should also implement a global state called pdfDoc... since it is used everywhere and it is always the same pdfDoc.
   - One of the things I am considering is instead of making my HANDOUT-GENERATOR folder look bloated by having both nodejs and browser code mixed together, I should upload my nodejs code as an npm package, and then install my nodejs package from a separate browser project folder.
+
+
+10/31/22
+- Looks like I am not really "done done". I need to implement textfield, fix some stuff in createPDF and also change things around in defaults because I do not want to manually type everything... less I make changes in the future and make a living hell for myself.

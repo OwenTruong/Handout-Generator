@@ -36,7 +36,8 @@ const d3pl_ln_y = d3pl_img_y - 60;
 
 
 // TODO: Create other templates
-
+// TODO: Convert d3_print_portrait to variables
+// TODO: Create factory functions for image and lines
 // TODO: Create TextfieldC
 
 // Potrait / Landscape
