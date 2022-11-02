@@ -20,9 +20,9 @@ const d3pp_img3_y = d3pp_img1_y + (d3_img_height + 71) + (d3_img_height + 71);
 const d3pp_ln_x1 = 300;
 const d3pp_ln_x2 = 560;
 
-const d3pp_l1_y = d3pp_img1_y + 3;
-const d3pp_l2_y = d3pp_img2_y + 3;
-const d3pp_l3_y = d3pp_img3_y + 3;
+const d3pp_l1_y = d3pp_img1_y + 5;
+const d3pp_l2_y = d3pp_img2_y + 5;
+const d3pp_l3_y = d3pp_img3_y + 5;
 
 
 
@@ -33,7 +33,7 @@ const d3pl_img1_x = 30;
 const d3pl_img2_x = 30 + d3_img_width + 30;
 const d3pl_img3_x = 30 + d3_img_width + 30 + d3_img_width + 30;
 
-const d3pl_img_y = lHeight - 30 - d3_img_height;
+const d3pl_img_y = lHeight - 100 - d3_img_height;
 
 const d3pl_l1_x1 = d3pl_img1_x;
 const d3pl_l2_x1 = d3pl_img2_x;
@@ -43,7 +43,7 @@ const d3pl_l1_x2 = d3pl_img1_x + d3_img_width;
 const d3pl_l2_x2 = d3pl_img2_x + d3_img_width;
 const d3pl_l3_x2 = d3pl_img3_x + d3_img_width;
 
-const d3pl_ln_y = d3pl_img_y - 60;
+const d3pl_ln_y = d3pl_img_y - d3_img_height - 40;
 
 
 // TODO: Create other templates
@@ -100,10 +100,10 @@ export const d3_print_portrait = {
         ...createLineBlock(d3pp_ln_x1, d3pp_ln_x2, d3pp_l3_y, d3pp_l3_y),
       ],
 
-      "images": [
-        createImage(d3pp_img_x, d3pp_img1_y, d3_img_width, d3_img_height),
-        createImage(d3pp_img_x, d3pp_img2_y, d3_img_width, d3_img_height),
+      "images": [ // y-axis of image is reversed because img3_y > img1_y, we want from top y to bottom y
         createImage(d3pp_img_x, d3pp_img3_y, d3_img_width, d3_img_height),
+        createImage(d3pp_img_x, d3pp_img2_y, d3_img_width, d3_img_height),
+        createImage(d3pp_img_x, d3pp_img1_y, d3_img_width, d3_img_height),
       ],
     }
   ]
