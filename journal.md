@@ -87,3 +87,4 @@
 
 10/31/22
 - Looks like I am not really "done done". I need to implement textfield, fix some stuff in createPDF and also change things around in defaults because I do not want to manually type everything... less I make changes in the future and make a living hell for myself.
+- 1 template down regardless.

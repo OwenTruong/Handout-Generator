@@ -7,6 +7,10 @@ const d3_img_width = 240;
 const d3_img_height = 180;
 
 
+
+const d3pp_ln_y1 = 300;
+const d3pp_ln_y2 = 560;
+
 const d3pp_l1_y = 582 + 3;
 const d3pp_l2_y = 331 + 3;
 const d3pp_l3_y = 80 + 3;
@@ -69,114 +73,114 @@ export const d3_print_portrait = {
       "lines": [
         /* First Image */
         {
-          "x1": 300,
-          "x2": 560,
+          "x1": d3pp_ln_y1,
+          "x2": d3pp_ln_y2,
           "y1": d3pp_l1_y,
           "y2": d3pp_l1_y
         },
         {
-          "x1": 300,
-          "x2": 560,
+          "x1": d3pp_ln_y1,
+          "x2": d3pp_ln_y2,
           "y1": d3pp_l1_y + 30,
           "y2": d3pp_l1_y + 30
         },
         {
-          "x1": 300,
-          "x2": 560,
+          "x1": d3pp_ln_y1,
+          "x2": d3pp_ln_y2,
           "y1": d3pp_l1_y + 60,
           "y2": d3pp_l1_y + 60
         },
         {
-          "x1": 300,
-          "x2": 560,
+          "x1": d3pp_ln_y1,
+          "x2": d3pp_ln_y2,
           "y1": d3pp_l1_y + 90,
           "y2": d3pp_l1_y + 90
         },
         {
-          "x1": 300,
-          "x2": 560,
+          "x1": d3pp_ln_y1,
+          "x2": d3pp_ln_y2,
           "y1": d3pp_l1_y + 120,
           "y2": d3pp_l1_y + 120
         },
         {
-          "x1": 300,
-          "x2": 560,
+          "x1": d3pp_ln_y1,
+          "x2": d3pp_ln_y2,
           "y1": d3pp_l1_y + 150,
           "y2": d3pp_l1_y + 150,
         },
 
         /* Second Image */
         {
-          "x1": 300,
-          "x2": 560,
+          "x1": d3pp_ln_y1,
+          "x2": d3pp_ln_y2,
           "y1": d3pp_l2_y,
           "y2": d3pp_l2_y
         },
         {
-          "x1": 300,
-          "x2": 560,
+          "x1": d3pp_ln_y1,
+          "x2": d3pp_ln_y2,
           "y1": d3pp_l2_y + 30,
           "y2": d3pp_l2_y + 30
         },
         {
-          "x1": 300,
-          "x2": 560,
+          "x1": d3pp_ln_y1,
+          "x2": d3pp_ln_y2,
           "y1": d3pp_l2_y + 60,
           "y2": d3pp_l2_y + 60
         },
         {
-          "x1": 300,
-          "x2": 560,
+          "x1": d3pp_ln_y1,
+          "x2": d3pp_ln_y2,
           "y1": d3pp_l2_y + 90,
           "y2": d3pp_l2_y + 90
         },
         {
-          "x1": 300,
-          "x2": 560,
+          "x1": d3pp_ln_y1,
+          "x2": d3pp_ln_y2,
           "y1": d3pp_l2_y + 120,
           "y2": d3pp_l2_y + 120
         },
         {
-          "x1": 300,
-          "x2": 560,
+          "x1": d3pp_ln_y1,
+          "x2": d3pp_ln_y2,
           "y1": d3pp_l2_y + 150,
           "y2": d3pp_l2_y + 150,
         },
 
         /* Third Image */
         {
-          "x1": 300,
-          "x2": 560,
+          "x1": d3pp_ln_y1,
+          "x2": d3pp_ln_y2,
           "y1": d3pp_l3_y,
           "y2": d3pp_l3_y
         },
         {
-          "x1": 300,
-          "x2": 560,
+          "x1": d3pp_ln_y1,
+          "x2": d3pp_ln_y2,
           "y1": d3pp_l3_y + 30,
           "y2": d3pp_l3_y + 30
         },
         {
-          "x1": 300,
-          "x2": 560,
+          "x1": d3pp_ln_y1,
+          "x2": d3pp_ln_y2,
           "y1": d3pp_l3_y + 60,
           "y2": d3pp_l3_y + 60
         },
         {
-          "x1": 300,
-          "x2": 560,
+          "x1": d3pp_ln_y1,
+          "x2": d3pp_ln_y2,
           "y1": d3pp_l3_y + 90,
           "y2": d3pp_l3_y + 90
         },
         {
-          "x1": 300,
-          "x2": 560,
+          "x1": d3pp_ln_y1,
+          "x2": d3pp_ln_y2,
           "y1": d3pp_l3_y + 120,
           "y2": d3pp_l3_y + 120
         },
         {
-          "x1": 300,
-          "x2": 560,
+          "x1": d3pp_ln_y1,
+          "x2": d3pp_ln_y2,
           "y1": d3pp_l3_y + 150,
           "y2": d3pp_l3_y + 150,
         },
@@ -186,21 +190,21 @@ export const d3_print_portrait = {
         {
           "x": 30,
           "y": 582,
-          "width": 240,
-          "height": 180
+          "width": d3_img_width,
+          "height": d3_img_height
         },
         { // [(y1 - [y3 + height]) / 2] + [y3 + height]
           // (y1)/2 + [y3 + height]/2 = [y1 + y3 + height] / 2
           "x": 30,
           "y": 331,
-          "width": 240,
-          "height": 180
+          "width": d3_img_width,
+          "height": d3_img_height
         },
         {
           "x": 30,
           "y": 80,
-          "width": 240,
-          "height": 180
+          "width": d3_img_width,
+          "height": d3_img_height
         }
       ],
     }
