@@ -1,3 +1,10 @@
+// Potrait { width: 595.28, height: 841.89 }
+// Landscape { width: 841.89, height: 595.28 }
+
+
+
+// Top Level //
+
 const pWidth = 595.28;
 const pHeight = 841.89;
 const lWidth = 841.89;
@@ -24,6 +31,7 @@ const d3pp_l3_y = d3pp_img3_y + 3;
 
 
 
+
 // Template 3-Image Print Landscape //
 
 const d3pl_img1_x = 30;
@@ -42,13 +50,8 @@ const d3pl_l3_x2 = d3pl_img3_x + d3_img_width;
 
 const d3pl_ln_y = d3pl_img_y - 60;
 
-// Potrait { width: 595.28, height: 841.89 }
-// Landscape { width: 841.89, height: 595.28 }
-
 
 // TODO: Create other templates
-// TODO: Convert d3_print_portrait to variables
-// TODO: Create factory functions for image and lines
 // TODO: Create TextfieldC
 
 // Potrait / Landscape

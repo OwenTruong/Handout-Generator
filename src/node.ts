@@ -1,7 +1,7 @@
 import * as R from "ramda";
 
 
-import * as Defaults from "./modules/defaults";
+import * as Defaults from "./modules/defaults/defaults";
 import { PDF } from "./modules/PDF";
 
 async function test(dstPDF: string, imgsPath: string) {
