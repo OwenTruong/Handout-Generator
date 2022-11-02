@@ -1,14 +1,9 @@
 // Potrait { width: 595.28, height: 841.89 }
 // Landscape { width: 841.89, height: 595.28 }
 
-
+import { pWidth, pHeight, lWidth, lHeight } from "@/constants/constants";
 
 // Top Level //
-
-const pWidth = 595.28;
-const pHeight = 841.89;
-const lWidth = 841.89;
-const lHeight = 595.28;
 
 const d3_img_width = 240;
 const d3_img_height = 180;
@@ -98,6 +93,7 @@ export const d3_print_portrait = {
         "y": 30,
         "size": 12
       },
+      "dim": [ pWidth, pHeight],
       "lines": [
         ...createLineBlock(d3pp_ln_x1, d3pp_ln_x2, d3pp_l1_y, d3pp_l1_y),
         ...createLineBlock(d3pp_ln_x1, d3pp_ln_x2, d3pp_l2_y, d3pp_l2_y),
@@ -123,6 +119,8 @@ export const d3_print_landscape = {
         "y": 30,
         "size": 12
       },
+
+      "dim": [ lWidth, lHeight ],
 
       "lines": [
         ...createLineBlock(d3pl_l1_x1, d3pl_l1_x2, d3pl_ln_y, d3pl_ln_y),

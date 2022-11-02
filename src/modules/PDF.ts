@@ -88,7 +88,7 @@ export class PDF {
     while (filePaths.length != 0) {
       // pageTemplate -> If template = 2, page 1, 3, 5 and etc follow temp1 and page 2, 4, 6 and etc follow temp2
       const pageTemp: PageC = pagesTemp[pnum % pagesTemp.length];
-      const page = this.#pdfDoc.addPage(); // size: { width: 595.28, height: 841.89 }
+      const page = this.#pdfDoc.addPage(pageTemp.dim); // size: { width: 595.28, height: 841.89 }
 
       // Add Page Number to PDF
       const PageN: TextC = pageTemp.pageN;
