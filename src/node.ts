@@ -8,7 +8,7 @@ async function test(dstPDF: string, imgsPath: string) {
   // Dynamically pick image folder
   // TODO: Have PDF function accept landscape
   const pdf = new PDF();
-  await pdf.init(Defaults.d3_print_landscape);
+  await pdf.init(Defaults.d3_print_portrait);
   await pdf.createPDF(dstPDF, imgsPath);
   await pdf.writePDF('./test.pdf');
 }
