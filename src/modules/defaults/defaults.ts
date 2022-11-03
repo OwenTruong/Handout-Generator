@@ -77,6 +77,10 @@ function createLineBlock(x1: number, x2: number, y1: number, y2: number) {
   return arr;
 }
 
+function createFields(x: number, y: number, width: number, height: number) {
+  return { x, y, width, height };
+}
+
 function createImage(x: number, y: number, width: number, height: number) {
   return { x, y, width, height };
 }
@@ -84,7 +88,7 @@ function createImage(x: number, y: number, width: number, height: number) {
 
 
 export const d3_print_portrait = {
-  "name": "Default 3 Portrait Print",
+  "name": "Default 3 Print Portrait",
 
   "pages": [
     {
@@ -110,7 +114,7 @@ export const d3_print_portrait = {
 }
 
 export const d3_print_landscape = {
-  "name": "Default 3 Portrait Print",
+  "name": "Default 3 Print Landscape",
 
   "pages": [
     {
@@ -132,6 +136,38 @@ export const d3_print_landscape = {
         createImage(d3pl_img1_x, d3pl_img_y, d3_img_width, d3_img_height),
         createImage(d3pl_img2_x, d3pl_img_y, d3_img_width, d3_img_height),
         createImage(d3pl_img3_x, d3pl_img_y, d3_img_width, d3_img_height),
+      ],
+    }
+  ]
+}
+
+
+
+export const d3_digital_portrait = {
+  "name": "Default 3 Digital Portrait",
+
+  "pages": [
+    {
+      "pageN": {
+        "x": lWidth - 50,
+        "y": 30,
+        "size": 12
+      },
+      "dim": [ pWidth, pHeight],
+      // "lines": [
+      //   ...createLineBlock(d3pp_ln_x1, d3pp_ln_x2, d3pp_l1_y, d3pp_l1_y),
+      //   ...createLineBlock(d3pp_ln_x1, d3pp_ln_x2, d3pp_l2_y, d3pp_l2_y),
+      //   ...createLineBlock(d3pp_ln_x1, d3pp_ln_x2, d3pp_l3_y, d3pp_l3_y),
+      // ],
+
+      "fields": [
+
+      ]
+
+      "images": [ // y-axis of image is reversed because img3_y > img1_y, we want from top y to bottom y
+        createImage(d3pp_img_x, d3pp_img3_y, d3_img_width, d3_img_height),
+        createImage(d3pp_img_x, d3pp_img2_y, d3_img_width, d3_img_height),
+        createImage(d3pp_img_x, d3pp_img1_y, d3_img_width, d3_img_height),
       ],
     }
   ]
