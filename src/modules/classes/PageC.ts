@@ -1,9 +1,9 @@
-import { TextC } from '@/classes/TextC';
-import { ImageC } from '@/classes/ImageC';
-import { LineC } from '@/classes/LineC';
+import { TextC } from '@classes/TextC';
+import { ImageC } from '@classes/ImageC';
+import { LineC } from '@classes/LineC';
 
-import { checkData } from '@/functions/checkData';
-import { checkType } from '@/functions/checkType';
+import { checkData } from '@functions/checkData';
+import { checkType } from '@functions/checkType';
 
 export class PageC {
   pageN: TextC;

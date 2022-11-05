@@ -9,10 +9,10 @@ import {
   PDFFont,
 } from 'pdf-lib';
 
-import { checkData } from '@/functions/checkData';
-import { checkType } from '@/functions/checkType';
+import { checkData } from '@functions/checkData';
+import { checkType } from '@functions/checkType';
 
-import { mainFont } from '@/constants/constants';
+import { mainFont } from '@constants/constants';
 
 export class TextfieldC {
   x: number;

@@ -1,8 +1,7 @@
 const path = require('path');
 
-
 const nodeConfig = {
-  name: "Node",
+  name: 'Node',
   mode: process.env.NODE_ENV || 'development',
   target: 'node',
   entry: './src/node.ts',
@@ -18,7 +17,7 @@ const nodeConfig = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-        }
+        },
       },
     ],
   },
@@ -28,6 +27,10 @@ const nodeConfig = {
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src/modules'),
+      '@classes': path.resolve(__dirname, 'src/modules/classes'),
+      '@constants': path.resolve(__dirname, 'src/modules/constants'),
+      '@defaults': path.resolve(__dirname, 'src/modules/defaults'),
+      '@functions': path.resolve(__dirname, 'src/modules/functions'),
     },
     extensions: ['.ts', '.js'],
   },
@@ -38,4 +41,4 @@ const nodeConfig = {
   // }
 };
 
-module.exports = nodeConfig
+module.exports = nodeConfig;

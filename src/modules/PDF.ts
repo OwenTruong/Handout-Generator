@@ -1,12 +1,6 @@
+import { PDFDocument, PDFPage } from 'pdf-lib';
 
-import { 
-  PDFDocument,
-  PDFPage,
-} from 'pdf-lib';
-
-
-
-import { OpaqueEnv } from "@/classes/OpaqueEnv";
+import { OpaqueEnv } from '@classes/OpaqueEnv';
 
 // import { TemplateT } from "@/types/TemplateT";
 // import { LineT } from "@/types/LineT";
@@ -14,14 +8,11 @@ import { OpaqueEnv } from "@/classes/OpaqueEnv";
 
 // import { integrityCheck } from "@/functions/integrityCheck";
 
-import { TemplateC } from "@/classes/TemplateC";
-import { PageC } from "@/classes/PageC";
-import { LineC } from "@/classes/LineC";
-import { ImageC } from "@/classes/ImageC";
-import { TextC } from '@/classes/TextC';
-
-
-
+import { TemplateC } from '@classes/TemplateC';
+import { PageC } from '@classes/PageC';
+import { LineC } from '@classes/LineC';
+import { ImageC } from '@classes/ImageC';
+import { TextC } from '@classes/TextC';
 
 export class PDF {
   #pdfDoc!: PDFDocument;
@@ -48,8 +39,13 @@ export class PDF {
   }
 
   // Embed a certain amount of images to a page given a template
-  async #embedImgsToPage(page: PDFPage, imgTmps: ImageC[], filePaths: string[]): Promise<void> {
-    if (imgTmps.length < filePaths.length) return console.error('Too many images for a page.');
+  async #embedImgsToPage(
+    page: PDFPage,
+    imgTmps: ImageC[],
+    filePaths: string[]
+  ): Promise<void> {
+    if (imgTmps.length < filePaths.length)
+      return console.error('Too many images for a page.');
 
     for (let i = 0; i < filePaths.length; ++i) {
       await imgTmps[i].drawImage(this.#pdfDoc, page, filePaths[i]);
@@ -67,22 +63,21 @@ export class PDF {
     textTmp.drawText(this.#pdfDoc, page, text);
   }
 
-
-
-
-
-
   async createPDF(dstPath: string, imgsPath: string): Promise<void> {
     // Error Checking
-    if (!this.#pdfDoc) 
+    if (!this.#pdfDoc)
       return console.error('Need to call init first before creating pdf');
-    if (this.#created == true) 
-      return console.error('PDF created already. To create a new one, please call init() before creating pdf');
+    if (this.#created == true)
+      return console.error(
+        'PDF created already. To create a new one, please call init() before creating pdf'
+      );
 
     // TODO FUTURE: How are we even going to get file paths in our browser implementation?
-    const filePaths: string[] = OpaqueEnv.getFilePaths(imgsPath)(['png', 'jpg']);
-    const pagesTemp: PageC[]  = this.#template.pages;
-
+    const filePaths: string[] = OpaqueEnv.getFilePaths(imgsPath)([
+      'png',
+      'jpg',
+    ]);
+    const pagesTemp: PageC[] = this.#template.pages;
 
     let pnum: number = 0;
     while (filePaths.length != 0) {
@@ -96,8 +91,10 @@ export class PDF {
 
       // Add Image to PDF
       const imgTmps: ImageC[] = pageTemp.images;
-      await this.#embedImgsToPage(page, imgTmps,
-        filePaths.splice( 0, Math.min( filePaths.length, imgTmps.length ) )
+      await this.#embedImgsToPage(
+        page,
+        imgTmps,
+        filePaths.splice(0, Math.min(filePaths.length, imgTmps.length))
       );
 
       // Add Line to PDF
@@ -109,6 +106,4 @@ export class PDF {
 
     this.#created = true;
   }
-
-
 }

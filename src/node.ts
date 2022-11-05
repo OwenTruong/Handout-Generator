@@ -1,8 +1,7 @@
-import * as R from "ramda";
+import * as R from 'ramda';
 
-
-import * as Defaults from "./modules/defaults/defaults";
-import { PDF } from "./modules/PDF";
+import * as Defaults from '@defaults/defaults';
+import { PDF } from '@/PDF';
 
 async function test(dstPDF: string, imgsPath: string) {
   // Dynamically pick image folder
@@ -17,5 +16,3 @@ async function test(dstPDF: string, imgsPath: string) {
 }
 
 test('./test.pdf', './imgs');
-
-
