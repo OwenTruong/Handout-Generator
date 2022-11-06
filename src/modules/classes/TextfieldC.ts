@@ -39,15 +39,15 @@ export class TextfieldC {
     const textfield = form.createTextField('_');
     textfield.setText('Enter Here');
 
-    // TODO: How to set width and height?
-
     const helv: PDFFont = await pdfDoc.embedFont(this.#font);
 
+    // TODO: Test code
     textfield.addToPage(page, {
       x: this.x,
       y: this.y,
       width: this.width,
       height: this.height,
+
       textColor: this.#textColor,
       backgroundColor: this.#bgColor,
       borderColor: this.#borderColor,

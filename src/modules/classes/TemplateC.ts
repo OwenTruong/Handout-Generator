@@ -10,11 +10,12 @@ export class TemplateC {
   pages: PageC[];
 
   constructor(obj: any) {
-    if (!checkData(obj.name, obj.pages))
-      throw new Error('TemplateC Argument is Invalid');
     if (!checkType([obj.name], ['string']))
       throw new Error('TemplateC Argument Name Value is Invalid');
-    this.name = obj.name;
-    this.pages = obj.pages.map((page: any) => new PageC(page));
+
+    this.name = checkData(obj.name) ? obj.name : '';
+    this.pages = checkData(obj.pages)
+      ? obj.pages.map((page: any) => new PageC(page))
+      : [];
   }
 }

@@ -42,13 +42,13 @@ export class PDF {
   async #embedImgsToPage(
     page: PDFPage,
     imgTmps: ImageC[],
-    filePaths: string[]
+    imgPaths: string[]
   ): Promise<void> {
-    if (imgTmps.length < filePaths.length)
+    if (imgTmps.length < imgPaths.length)
       return console.error('Too many images for a page.');
 
-    for (let i = 0; i < filePaths.length; ++i) {
-      await imgTmps[i].drawImage(this.#pdfDoc, page, filePaths[i]);
+    for (let i = 0; i < imgPaths.length; ++i) {
+      await imgTmps[i].drawImage(this.#pdfDoc, page, imgPaths[i]);
     }
   }
 
@@ -86,8 +86,9 @@ export class PDF {
       const page = this.#pdfDoc.addPage(pageTemp.dim); // size: { width: 595.28, height: 841.89 }
 
       // Add Page Number to PDF
-      const PageN: TextC = pageTemp.pageN;
-      this.#embedTextToPage(page, PageN, (pnum + 1).toString());
+      const PageN: TextC | null = pageTemp.pageN;
+      if (PageN != null)
+        this.#embedTextToPage(page, PageN, (pnum + 1).toString());
 
       // Add Image to PDF
       const imgTmps: ImageC[] = pageTemp.images;
