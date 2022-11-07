@@ -26,11 +26,21 @@ export class TextfieldC {
   #font = mainFont; // Font might change in the future
   #textColor = rgb(0, 0, 0);
 
-  constructor() {
-    this.x = 0;
-    this.y = 0;
-    this.width = 300;
-    this.height = 300;
+  constructor({
+    x,
+    y,
+    width,
+    height,
+  }: {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  }) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
   }
 
   // in PDF.ts accept this function as async

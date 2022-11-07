@@ -10,6 +10,7 @@ import { OpaqueEnv } from '@classes/OpaqueEnv';
 
 import { TemplateC } from '@classes/TemplateC';
 import { PageC } from '@classes/PageC';
+import { TextfieldC } from '@classes/TextfieldC';
 import { LineC } from '@classes/LineC';
 import { ImageC } from '@classes/ImageC';
 import { TextC } from '@classes/TextC';
@@ -63,6 +64,9 @@ export class PDF {
     textTmp.drawText(this.#pdfDoc, page, text);
   }
 
+  // TODO: Create method for textfield
+  #embedTextfieldToPage() {}
+
   async createPDF(dstPath: string, imgsPath: string): Promise<void> {
     // Error Checking
     if (!this.#pdfDoc)
@@ -101,6 +105,10 @@ export class PDF {
       // Add Line to PDF
       const lineTmps: LineC[] = pageTemp.lines;
       this.#embedLinesToPage(page, lineTmps);
+
+      // Add Fields to PDF // TODO: finish writing #embed
+      const fieldtmps: TextfieldC[] = pageTemp.fields;
+      this.#embedTextfieldToPage(p);
 
       pnum++;
     }

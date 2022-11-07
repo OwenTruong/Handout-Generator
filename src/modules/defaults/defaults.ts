@@ -8,6 +8,9 @@ import { pWidth, pHeight, lWidth, lHeight } from '@constants/constants';
 const d3_img_width = 240;
 const d3_img_height = 180;
 
+const d3_fd_width = d3_img_width;
+const d3_fd_height = d3_img_height;
+
 // Template 3-Image Print Portrait //
 
 const d3pp_img_x = 30;
@@ -41,6 +44,20 @@ const d3pl_l3_x2 = d3pl_img3_x + d3_img_width;
 
 const d3pl_ln_y = d3pl_img_y - d3_img_height - 40;
 
+// Template 3-Image Digital Portrait //
+
+const d3dp_img_x = d3pp_img_x;
+
+const d3dp_img1_y = d3pp_img1_y;
+const d3dp_img2_y = d3pp_img2_y;
+const d3dp_img3_y = d3pp_img3_y;
+
+const d3dp_fd_x = 300;
+
+const d3dp_f1_y = d3pp_img1_y;
+const d3dp_f2_y = d3pp_img2_y;
+const d3dp_f3_y = d3pp_img3_y;
+
 // TODO: Create other templates
 // TODO: Create TextfieldC
 
@@ -68,7 +85,7 @@ function createLineBlock(x1: number, x2: number, y1: number, y2: number) {
   return arr;
 }
 
-function createFields(x: number, y: number, width: number, height: number) {
+function createField(x: number, y: number, width: number, height: number) {
   return { x, y, width, height };
 }
 
@@ -142,13 +159,12 @@ export const d3_digital_portrait = {
         size: 12,
       },
       dim: [pWidth, pHeight],
-      // "lines": [
-      //   ...createLineBlock(d3pp_ln_x1, d3pp_ln_x2, d3pp_l1_y, d3pp_l1_y),
-      //   ...createLineBlock(d3pp_ln_x1, d3pp_ln_x2, d3pp_l2_y, d3pp_l2_y),
-      //   ...createLineBlock(d3pp_ln_x1, d3pp_ln_x2, d3pp_l3_y, d3pp_l3_y),
-      // ],
 
-      fields: [],
+      fields: [
+        createField(d3dp_fd_x, d3dp_f1_y, d3_fd_width, d3_fd_height),
+        createField(d3dp_fd_x, d3dp_f2_y, d3_fd_width, d3_fd_height),
+        createField(d3dp_fd_x, d3dp_f3_y, d3_fd_width, d3_fd_height),
+      ],
 
       images: [
         // y-axis of image is reversed because img3_y > img1_y, we want from top y to bottom y
