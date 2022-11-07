@@ -59,7 +59,7 @@ const d3dp_f2_y = d3pp_img2_y;
 const d3dp_f3_y = d3pp_img3_y;
 
 // TODO: Create other templates
-// TODO: Create TextfieldC
+// TODO: Create TextFieldC
 
 // Potrait / Landscape
 // Print / Computer
@@ -70,7 +70,7 @@ const d3dp_f3_y = d3pp_img3_y;
 
 // There is only going to be 1 page templates for defaults
 // Images have the same size in a template
-// Components include images, lines, textfields, text and page number
+// Components include images, lines, TextFields, text and page number
 
 function createLine(x1: number, x2: number, y1: number, y2: number) {
   return { x1, x2, y1, y2 };

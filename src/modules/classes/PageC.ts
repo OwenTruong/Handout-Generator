@@ -1,5 +1,5 @@
 import { TextC } from '@classes/TextC';
-import { TextfieldC } from '@classes/TextfieldC';
+import { TextFieldC } from '@/classes/TextFieldC';
 import { ImageC } from '@classes/ImageC';
 import { LineC } from '@classes/LineC';
 
@@ -10,7 +10,7 @@ export class PageC {
   pageN: TextC | null;
   lines: LineC[];
   images: ImageC[];
-  fields: TextfieldC[];
+  fields: TextFieldC[];
   dim: [number, number];
 
   // Input is a page object (it is unknown if it has all of the properties of PageC)
@@ -35,7 +35,7 @@ export class PageC {
       : [];
 
     this.fields = checkData(page.fields)
-      ? page.fields.map((field: any) => new TextfieldC(field))
+      ? page.fields.map((field: any) => new TextFieldC(field))
       : [];
 
     this.dim = page.dim;

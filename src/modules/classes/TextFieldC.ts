@@ -3,6 +3,7 @@ import {
   PDFPage,
   PDFImage,
   PDFForm,
+  PDFTextField,
   RGB,
   rgb,
   StandardFonts,
@@ -14,13 +15,13 @@ import { checkType } from '@functions/checkType';
 
 import { mainFont } from '@constants/constants';
 
-export class TextfieldC {
+export class TextFieldC {
   x: number;
   y: number;
   width: number;
   height: number;
 
-  #bgColor: RGB = rgb(0, 0, 0);
+  #bgColor: RGB = rgb(1, 1, 1);
   #borderColor: RGB = rgb(0, 0, 0);
   #borderWidth: number = 1;
   #font = mainFont; // Font might change in the future
@@ -37,22 +38,39 @@ export class TextfieldC {
     width: number;
     height: number;
   }) {
+    if (
+      !checkData(x, y, width, height) &&
+      !checkType(
+        [x, y, width, height],
+        ['number', 'number', 'number', 'number']
+      )
+    )
+      throw new Error('TextFieldC Object is Invalid');
+
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
   }
 
+  #createTextField(form: PDFForm): PDFTextField {
+    try {
+      return form.createTextField(String(Math.random() * 100));
+    } catch (err) {
+      return this.#createTextField(form);
+    }
+  }
+
   // in PDF.ts accept this function as async
-  async drawTextfield(pdfDoc: PDFDocument, page: PDFPage) {
+  async drawTextField(pdfDoc: PDFDocument, page: PDFPage) {
     const form: PDFForm = pdfDoc.getForm();
-    const textfield = form.createTextField('_');
-    textfield.setText('Enter Here');
+    const textField: PDFTextField = this.#createTextField(form);
+    textField.setText('Enter Here');
 
     const helv: PDFFont = await pdfDoc.embedFont(this.#font);
 
     // TODO: Test code
-    textfield.addToPage(page, {
+    textField.addToPage(page, {
       x: this.x,
       y: this.y,
       width: this.width,
