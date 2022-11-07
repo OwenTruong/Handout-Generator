@@ -59,7 +59,7 @@ const d3dp_f2_y = d3pp_img2_y;
 const d3dp_f3_y = d3pp_img3_y;
 
 // TODO: Create other templates
-// TODO: Create TextFieldC
+// TODO: Make the global scope less cluttered
 
 // Potrait / Landscape
 // Print / Computer

@@ -60,13 +60,12 @@ export class PDF {
     }
   }
 
-  #embedTextToPage(page: PDFPage, textTmp: TextC, text: string): void {
-    textTmp.drawText(this.#pdfDoc, page, text);
-  }
-
-  // TODO: Create method for TextField
   #embedTextFieldToPage(page: PDFPage, fields: TextFieldC[]) {
     fields.forEach((field) => field.drawTextField(this.#pdfDoc, page));
+  }
+
+  #embedTextToPage(page: PDFPage, textTmp: TextC, text: string): void {
+    textTmp.drawText(this.#pdfDoc, page, text);
   }
 
   async createPDF(dstPath: string, imgsPath: string): Promise<void> {
@@ -108,7 +107,7 @@ export class PDF {
       const lineTmps: LineC[] = pageTemp.lines;
       this.#embedLinesToPage(page, lineTmps);
 
-      // Add Fields to PDF // TODO: finish writing #embed
+      // Add Fields to PDF
       const fieldTmps: TextFieldC[] = pageTemp.fields;
       this.#embedTextFieldToPage(page, fieldTmps);
 

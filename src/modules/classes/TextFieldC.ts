@@ -69,7 +69,6 @@ export class TextFieldC {
 
     const helv: PDFFont = await pdfDoc.embedFont(this.#font);
 
-    // TODO: Test code
     textField.addToPage(page, {
       x: this.x,
       y: this.y,
