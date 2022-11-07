@@ -52,7 +52,7 @@ const d3dp_img1_y = d3pp_img1_y;
 const d3dp_img2_y = d3pp_img2_y;
 const d3dp_img3_y = d3pp_img3_y;
 
-const d3dp_fd_x = 300;
+const d3dp_fd_x = d3pp_ln_x1;
 
 const d3dp_f1_y = d3pp_img1_y;
 const d3dp_f2_y = d3pp_img2_y;
