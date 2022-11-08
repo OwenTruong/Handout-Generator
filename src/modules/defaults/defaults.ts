@@ -12,6 +12,7 @@ import * as Landscape4 from '@defaults/FourImage/portrait';
 
 export const defaults = Object.assign(
   {},
+
   Portrait1,
   Landscape1,
 
