@@ -1,180 +1,29 @@
-// Potrait { width: 595.28, height: 841.89 }
-// Landscape { width: 841.89, height: 595.28 }
+import * as Portrait1 from '@defaults/OneImage/portrait';
+import * as Landscape1 from '@defaults/OneImage/landscape';
 
-import { pWidth, pHeight, lWidth, lHeight } from '@constants/constants';
+import * as Portrait2 from '@defaults/TwoImage/portrait';
+import * as Landscape2 from '@defaults/TwoImage/landscape';
 
-// Top Level //
+import * as Portrait3 from '@defaults/ThreeImage/portrait';
+import * as Landscape3 from '@defaults/ThreeImage/landscape';
 
-const d3_img_width = 240;
-const d3_img_height = 180;
+import * as Portrait4 from '@defaults/FourImage/portrait';
+import * as Landscape4 from '@defaults/FourImage/portrait';
 
-const d3_fd_width = d3_img_width;
-const d3_fd_height = d3_img_height;
+export const defaults = Object.assign(
+  {},
+  Portrait1,
+  Landscape1,
 
-// Template 3-Image Print Portrait //
+  Portrait2,
+  Landscape2,
 
-const d3pp_img_x = 30;
+  Portrait3,
+  Landscape3,
 
-const d3pp_img1_y = 80;
-const d3pp_img2_y = d3pp_img1_y + (d3_img_height + 71);
-const d3pp_img3_y = d3pp_img1_y + (d3_img_height + 71) + (d3_img_height + 71);
-
-const d3pp_ln_x1 = 300;
-const d3pp_ln_x2 = 560;
-
-const d3pp_l1_y = d3pp_img1_y + 5;
-const d3pp_l2_y = d3pp_img2_y + 5;
-const d3pp_l3_y = d3pp_img3_y + 5;
-
-// Template 3-Image Print Landscape //
-
-const d3pl_img1_x = 30;
-const d3pl_img2_x = 30 + d3_img_width + 30;
-const d3pl_img3_x = 30 + d3_img_width + 30 + d3_img_width + 30;
-
-const d3pl_img_y = lHeight - 100 - d3_img_height;
-
-const d3pl_l1_x1 = d3pl_img1_x;
-const d3pl_l2_x1 = d3pl_img2_x;
-const d3pl_l3_x1 = d3pl_img3_x;
-
-const d3pl_l1_x2 = d3pl_img1_x + d3_img_width;
-const d3pl_l2_x2 = d3pl_img2_x + d3_img_width;
-const d3pl_l3_x2 = d3pl_img3_x + d3_img_width;
-
-const d3pl_ln_y = d3pl_img_y - d3_img_height - 40;
-
-// Template 3-Image Digital Portrait //
-
-const d3dp_img_x = d3pp_img_x;
-
-const d3dp_img1_y = d3pp_img1_y;
-const d3dp_img2_y = d3pp_img2_y;
-const d3dp_img3_y = d3pp_img3_y;
-
-const d3dp_fd_x = d3pp_ln_x1;
-
-const d3dp_f1_y = d3pp_img1_y;
-const d3dp_f2_y = d3pp_img2_y;
-const d3dp_f3_y = d3pp_img3_y;
-
-// TODO: Create other templates
-// TODO: Make the global scope less cluttered
-
-// Potrait / Landscape
-// Print / Computer
-
-// Image size should stay the same for the 4 versions: Potrait-Print, Potrait-Computer, Landscape-Print, Landscape-Computer
-
-// I believe what I need to do is to create a print-version so that I have an idea of what I need to do for computer version.
-
-// There is only going to be 1 page templates for defaults
-// Images have the same size in a template
-// Components include images, lines, TextFields, text and page number
-
-function createLine(x1: number, x2: number, y1: number, y2: number) {
-  return { x1, x2, y1, y2 };
-}
-
-function createLineBlock(x1: number, x2: number, y1: number, y2: number) {
-  const arr = [];
-  const spacing = 30;
-  for (let i = 0; i < 6; i++)
-    arr.push(createLine(x1, x2, y1 + spacing * i, y2 + spacing * i));
-
-  return arr;
-}
-
-function createField(x: number, y: number, width: number, height: number) {
-  return { x, y, width, height };
-}
-
-function createImage(x: number, y: number, width: number, height: number) {
-  return { x, y, width, height };
-}
-
-export const d3_print_portrait = {
-  name: 'Default 3 Print Portrait',
-
-  pages: [
-    {
-      pageN: {
-        x: lWidth - 50,
-        y: 30,
-        size: 12,
-      },
-      dim: [pWidth, pHeight],
-      lines: [
-        ...createLineBlock(d3pp_ln_x1, d3pp_ln_x2, d3pp_l1_y, d3pp_l1_y),
-        ...createLineBlock(d3pp_ln_x1, d3pp_ln_x2, d3pp_l2_y, d3pp_l2_y),
-        ...createLineBlock(d3pp_ln_x1, d3pp_ln_x2, d3pp_l3_y, d3pp_l3_y),
-      ],
-
-      images: [
-        // y-axis of image is reversed because img3_y > img1_y, we want from top y to bottom y
-        createImage(d3pp_img_x, d3pp_img3_y, d3_img_width, d3_img_height),
-        createImage(d3pp_img_x, d3pp_img2_y, d3_img_width, d3_img_height),
-        createImage(d3pp_img_x, d3pp_img1_y, d3_img_width, d3_img_height),
-      ],
-    },
-  ],
-};
-
-export const d3_print_landscape = {
-  name: 'Default 3 Print Landscape',
-
-  pages: [
-    {
-      pageN: {
-        x: lWidth - 50,
-        y: 30,
-        size: 12,
-      },
-
-      dim: [lWidth, lHeight],
-
-      lines: [
-        ...createLineBlock(d3pl_l1_x1, d3pl_l1_x2, d3pl_ln_y, d3pl_ln_y),
-        ...createLineBlock(d3pl_l2_x1, d3pl_l2_x2, d3pl_ln_y, d3pl_ln_y),
-        ...createLineBlock(d3pl_l3_x1, d3pl_l3_x2, d3pl_ln_y, d3pl_ln_y),
-      ],
-
-      images: [
-        createImage(d3pl_img1_x, d3pl_img_y, d3_img_width, d3_img_height),
-        createImage(d3pl_img2_x, d3pl_img_y, d3_img_width, d3_img_height),
-        createImage(d3pl_img3_x, d3pl_img_y, d3_img_width, d3_img_height),
-      ],
-    },
-  ],
-};
-
-export const d3_digital_portrait = {
-  name: 'Default 3 Digital Portrait',
-
-  pages: [
-    {
-      pageN: {
-        x: lWidth - 50,
-        y: 30,
-        size: 12,
-      },
-      dim: [pWidth, pHeight],
-
-      fields: [
-        createField(d3dp_fd_x, d3dp_f1_y, d3_fd_width, d3_fd_height),
-        createField(d3dp_fd_x, d3dp_f2_y, d3_fd_width, d3_fd_height),
-        createField(d3dp_fd_x, d3dp_f3_y, d3_fd_width, d3_fd_height),
-      ],
-
-      images: [
-        // y-axis of image is reversed because img3_y > img1_y, we want from top y to bottom y
-        createImage(d3pp_img_x, d3pp_img3_y, d3_img_width, d3_img_height),
-        createImage(d3pp_img_x, d3pp_img2_y, d3_img_width, d3_img_height),
-        createImage(d3pp_img_x, d3pp_img1_y, d3_img_width, d3_img_height),
-      ],
-    },
-  ],
-};
+  Portrait4,
+  Landscape4
+);
 
 /* FOR REFERENCE */
 
