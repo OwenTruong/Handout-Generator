@@ -19,6 +19,7 @@ const l3_x2 = img3_x + img_width;
 const ln_y = img_y - img_height - 40;
 
 export const d3_print_landscape = {
+  id: 32,
   name: 'Default 3 Print Landscape',
 
   pages: [
@@ -47,6 +48,7 @@ export const d3_print_landscape = {
 };
 
 export const d3_digital_landscape = {
+  id: 33,
   name: 'Default 3 Print Landscape',
 
   pages: [

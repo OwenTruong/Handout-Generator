@@ -16,6 +16,7 @@ const l2_t = img2_y + 5;
 const l3_y = img3_y + 5;
 
 export const d3_print_portrait = {
+  id: 30,
   name: 'Default 3 Print Portrait',
 
   pages: [
@@ -45,6 +46,7 @@ export const d3_print_portrait = {
 // Digital Portrait Specific //
 
 export const d3_digital_portrait = {
+  id: 31,
   name: 'Default 3 Digital Portrait',
 
   pages: [

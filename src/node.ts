@@ -3,13 +3,13 @@ import * as R from 'ramda';
 import { defaults } from '@defaults/defaults';
 import { PDF } from '@/PDF';
 
-async function test(dstPDF: string, imgsPath: string) {
-  // Dynamically pick image folder
-  const pdf = new PDF();
-  await pdf.init(defaults.d3_print_portrait);
-  // await pdf.init(defaults.d3_print_landscape);
-  await pdf.createPDF(dstPDF, imgsPath);
-  await pdf.writePDF('./test.pdf');
+// Unpure function
+function pickTemplate(template: number, dfTemp: any[], i: number = 0): any {
+  if (dfTemp.length == i) throw new Error('Template Not Found');
+
+  if (template == dfTemp[0].id) return dfTemp[i];
+
+  pickTemplate(template, dfTemp, ++i);
 }
 
 function splitArgs(array: string[]): string[][] {
@@ -20,8 +20,6 @@ function splitArgs(array: string[]): string[][] {
       ...
     ]
    */
-  // if arr[0] is a modifier, create a new array to store the flags and its arguments
-  // else if arr[0] is an argument, create new array with arr[0] as argument
 
   const helper = (arr: string[]): string[][] => {
     if (arr.length <= 0) return [[]];
@@ -39,17 +37,19 @@ function splitArgs(array: string[]): string[][] {
   return result;
 }
 
+// Unpure function
 function parseArgs() {
   const args: string[] = process.argv.slice(2);
-  const flagArgs: string[][] = splitArgs(args);
+  const flagArgs: string[][] = args.length == 0 ? [] : splitArgs(args);
 
   // mutated obj
   const obj = {
     pdfPath: '.',
     imgPath: '.',
-    // TODO: Maybe change defFormat to accept user input in the future, and to maek defFormat take in numbers instead of strings (each number is an id to a default format)
-    defFormat: '3pp',
+    // TODO: Maybe change defFormat to accept user input in the future, and to make defFormat take in numbers instead of strings (each number is an id to a default format)
+    template: 30,
   };
+
   for (let i = 0; i < flagArgs.length; i++) {
     const flagArg = flagArgs[i];
 
@@ -57,12 +57,26 @@ function parseArgs() {
 
     if (flagArg[0] == '-d') obj.pdfPath = flagArg[1];
     if (flagArg[0] == '-i') obj.imgPath = flagArg[1];
-    if (flagArg[0] == '-df') obj.defFormat = flagArg[1];
+    if (flagArg[0] == '-df')
+      obj.template = Number(flagArg[1]) == NaN ? 30 : Number(flagArg[1]);
   }
 
   return obj;
 }
 
-parseArgs();
+// FIXME: It might not be a good idea for templates to be of type any
+// Unpure function
+async function getPDF(dstPDF: string, imgsPath: string, template: number) {
+  // Dynamically pick image folder
+  const pdf = new PDF();
+  await pdf.init(pickTemplate(template, Object.values(defaults)));
+  // await pdf.init(defaults.d3_print_landscape);
+  await pdf.createPDF(dstPDF, imgsPath);
+  await pdf.writePDF('./test.pdf');
+}
 
-test('./test.pdf', './imgs');
+(() => {
+  const data = parseArgs();
+
+  getPDF(data.pdfPath, data.imgPath, data.template);
+})();
