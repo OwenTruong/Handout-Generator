@@ -65,6 +65,7 @@ function parseArgs() {
 }
 
 // FIXME: It might not be a good idea for templates to be of type any
+// FIXME: I hate how dirty my node.ts look
 // Unpure function
 async function getPDF(dstPDF: string, imgsPath: string, template: number) {
   // Dynamically pick image folder
