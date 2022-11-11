@@ -1,15 +1,12 @@
 import fs from 'fs';
 
-
-
-const checkEquality = function(exts: string[]) {
+const checkEquality = function (exts: string[]) {
   return (str: string) => {
     for (let i = 0; i < exts.length; ++i) {
       if (str.slice(-4) == '.' + exts[i]) return true;
     }
-  }
-}
-
+  };
+};
 
 // create node and browser versions of each method
 export class OpaqueEnv {
@@ -23,20 +20,21 @@ export class OpaqueEnv {
   }
 
   // Uses fs to check if a certain file extension exists in a folder.
-  // Returns a string[] of path to files 
+  // Returns a string[] of path to files
   static getFilePaths(path: string) {
     if (path[-1] != '/') path = path + '/';
 
     return (extensions: string[]): string[] => {
       if (typeof window === 'undefined') {
-        const result: string[] = fs.readdirSync(path)
+        const result: string[] = fs
+          .readdirSync(path)
           .filter(checkEquality(extensions))
           .map((name: string) => path + name);
-      
+
         return result;
       }
 
       return [];
-    }
+    };
   }
 }

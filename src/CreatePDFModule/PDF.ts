@@ -78,14 +78,15 @@ export class PDF {
       );
 
     // TODO FUTURE: How are we even going to get file paths in our browser implementation?
-    const filePaths: string[] = OpaqueEnv.getFilePaths(imgsPath)([
+    const imgPathArr: string[] = OpaqueEnv.getFilePaths(imgsPath)([
       'png',
       'jpg',
     ]);
+    if (!imgPathArr) throw new Error('Image Files Not Found');
     const pagesTemp: PageC[] = this.#template.pages;
 
     let pnum: number = 0;
-    while (filePaths.length != 0) {
+    while (imgPathArr.length != 0) {
       // pageTemplate -> If template = 2, page 1, 3, 5 and etc follow temp1 and page 2, 4, 6 and etc follow temp2
       const pageTemp: PageC = pagesTemp[pnum % pagesTemp.length];
       const page = this.#pdfDoc.addPage(pageTemp.dim); // size: { width: 595.28, height: 841.89 }
@@ -100,7 +101,7 @@ export class PDF {
       await this.#embedImgsToPage(
         page,
         imgTmps,
-        filePaths.splice(0, Math.min(filePaths.length, imgTmps.length))
+        imgPathArr.splice(0, Math.min(imgPathArr.length, imgTmps.length))
       );
 
       // Add Line to PDF

@@ -6,21 +6,20 @@ import { PDF } from '@/PDF';
 import { parseArgs, ArgsT } from './ParseArgumentModule/parseArgs';
 
 // Unpure function
-function pickTemplate(template: number, dfTemp: any[], i: number = 0): any {
-  if (dfTemp.length == i) throw new Error('Template Not Found');
+function pickTemplate(id: number, dfTemp: any[], i: number = 0): any {
+  if (i == dfTemp.length) throw new Error('Template Not Found');
+  if (id == dfTemp[i].id) return dfTemp[i];
 
-  if (template == dfTemp[0].id) return dfTemp[i];
-
-  pickTemplate(template, dfTemp, ++i);
+  return pickTemplate(id, dfTemp, ++i);
 }
 
 // FIXME: It might not be a good idea for templates to be of type any
-// FIXME: I hate how dirty my node.ts look
+// TODO: Check if my two modules work together correctly by testing all out of the pdf formats
 // Unpure function
-async function getPDF(dstPDF: string, imgsPath: string, template: number) {
+async function getPDF(dstPDF: string, imgsPath: string, id: number) {
   // Dynamically pick image folder
   const pdf = new PDF();
-  await pdf.init(pickTemplate(template, Object.values(defaults)));
+  await pdf.init(pickTemplate(id, Object.values(defaults)));
   // await pdf.init(defaults.d3_print_landscape);
   await pdf.createPDF(dstPDF, imgsPath);
   await pdf.writePDF('./test.pdf');
@@ -28,7 +27,8 @@ async function getPDF(dstPDF: string, imgsPath: string, template: number) {
 
 (() => {
   const data: ArgsT = parseArgs(process.argv);
-  getPDF(data.pdfPath, data.imgPath, data.template);
+  console.log(data.imgPath);
+  getPDF(data.pdfPath, data.imgPath, data.id);
 })();
 
 // Pure: (input) => 3 * input
