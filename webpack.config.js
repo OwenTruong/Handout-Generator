@@ -26,11 +26,11 @@ const nodeConfig = {
 
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src/modules'),
-      '@classes': path.resolve(__dirname, 'src/modules/classes'),
-      '@constants': path.resolve(__dirname, 'src/modules/constants'),
-      '@defaults': path.resolve(__dirname, 'src/modules/defaults'),
-      '@functions': path.resolve(__dirname, 'src/modules/functions'),
+      '@': path.resolve(__dirname, 'src/CreatePDFModule'),
+      '@classes': path.resolve(__dirname, 'src/CreatePDFModule/classes'),
+      '@constants': path.resolve(__dirname, 'src/CreatePDFModule/constants'),
+      '@defaults': path.resolve(__dirname, 'src/CreatePDFModule/defaults'),
+      '@functions': path.resolve(__dirname, 'src/CreatePDFModule/functions'),
     },
     extensions: ['.ts', '.js'],
   },

@@ -12,14 +12,14 @@
 
     "skipLibCheck": true,
 
-    "baseUrl": "src/modules",
+    "baseUrl": "src",
 
     "paths": {
-      "@/*": ["*"],
-      "@classes/*": ["./classes/*"],
-      "@constants/*": ["./constants/*"],
-      "@defaults/*": ["./defaults/*"],
-      "@functions/*": ["./functions/*"]
+      "@/*": ["CreatePDFModule/*"],
+      "@classes/*": ["CreatePDFModule/classes/*"],
+      "@constants/*": ["CreatePDFModule/constants/*"],
+      "@defaults/*": ["CreatePDFModule/defaults/*"],
+      "@functions/*": ["CreatePDFModule/functions/*"]
     }
   }
 }
