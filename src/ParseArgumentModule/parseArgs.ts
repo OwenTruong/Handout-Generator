@@ -1,4 +1,5 @@
 import { splitArgs } from './_splitArgs';
+import { defaultTempID } from '@constants/constants';
 
 export type ArgsT = {
   pdfPath: string;
@@ -25,12 +26,12 @@ export function parseArgs(argv: string[]): ArgsT {
 
       if (group[0] == '-d') return { pdfPath: group[1] };
       if (group[0] == '-i') return { imgPath: group[1] };
-      if (group[0] == '-df')
-        return { id: !Number(group[1]) ? 30 : Number(group[1]) };
+      if (group[0] == '-t') {
+        if (!Number(group[1])) throw new Error('Template ID must be a number');
+        return { id: group[1] };
+      }
     })
   );
 
-  console.log(result);
-
-  return result.id ? result : Object.assign(result, { id: 30 });
+  return result.id ? result : Object.assign(result, { id: defaultTempID });
 }

@@ -1,4 +1,4 @@
-export function splitArgs(array: string[]) {
+export function splitArgs(array: string[]): string[][] {
   return array.reduce((acc, args) => {
     if (args[0] == '-') acc.push([args]);
     else if (acc.length == 0) return acc;

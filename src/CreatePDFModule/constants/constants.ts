@@ -6,3 +6,5 @@ export const lWidth = 841.89;
 export const lHeight = 595.28;
 
 export const mainFont: StandardFonts.Helvetica = StandardFonts.Helvetica;
+
+export const defaultTempID: number = 30;

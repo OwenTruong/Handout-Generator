@@ -20,7 +20,6 @@ async function getPDF(dstPDF: string, imgsPath: string, id: number) {
   // Dynamically pick image folder
   const pdf = new PDF();
   await pdf.init(pickTemplate(id, Object.values(defaults)));
-  // await pdf.init(defaults.d3_print_landscape);
   await pdf.createPDF(dstPDF, imgsPath);
   await pdf.writePDF('./test.pdf');
 }

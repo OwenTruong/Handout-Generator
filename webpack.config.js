@@ -22,7 +22,7 @@ const nodeConfig = {
     ],
   },
 
-  devtool: false,
+  devtool: 'source-map',
 
   resolve: {
     alias: {
