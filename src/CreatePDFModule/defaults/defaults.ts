@@ -8,7 +8,7 @@ import * as Portrait3 from '@defaults/ThreeImage/portrait';
 import * as Landscape3 from '@defaults/ThreeImage/landscape';
 
 import * as Portrait4 from '@defaults/FourImage/portrait';
-import * as Landscape4 from '@defaults/FourImage/portrait';
+import * as Landscape4 from '@defaults/FourImage/landscape';
 
 export const defaults = Object.assign(
   {},

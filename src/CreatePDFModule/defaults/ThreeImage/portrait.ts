@@ -12,7 +12,7 @@ const ln_x1 = 300;
 const ln_x2 = 560;
 
 const l1_y = img1_y + 5;
-const l2_t = img2_y + 5;
+const l2_y = img2_y + 5;
 const l3_y = img3_y + 5;
 
 export const d3_print_portrait = {
@@ -29,7 +29,7 @@ export const d3_print_portrait = {
       dim: [pWidth, pHeight],
       lines: [
         ...createLineBlock(ln_x1, ln_x2, l1_y, l1_y),
-        ...createLineBlock(ln_x1, ln_x2, l2_t, l2_t),
+        ...createLineBlock(ln_x1, ln_x2, l2_y, l2_y),
         ...createLineBlock(ln_x1, ln_x2, l3_y, l3_y),
       ],
 

@@ -7,9 +7,9 @@ const img_x2 = pWidth - img_x1 - img_width;
 const img_y2 = 250;
 const img_y1 = pHeight - img_y2 / 3 - img_height;
 
-export const d3_print_portrait = {
+export const d4_print_portrait = {
   id: 40,
-  name: 'Default 3 Print Portrait',
+  name: 'Default 4 Print Portrait',
 
   pages: [
     {
