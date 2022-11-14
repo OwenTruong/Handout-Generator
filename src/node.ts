@@ -14,7 +14,6 @@ function pickTemplate(id: number, dfTemp: any[], i: number = 0): any {
 }
 
 // FIXME: It might not be a good idea for templates to be of type any
-// TODO: Check if my two modules work together correctly by testing all out of the pdf formats
 // Unpure function
 async function getPDF(dstPDF: string, imgsPath: string, id: number) {
   // Dynamically pick image folder
