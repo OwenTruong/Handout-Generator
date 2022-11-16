@@ -86,3 +86,9 @@ _Start of Journal_
 11/2/22
 
 - I believe each page should have their own dimensions. If it is not specified in template, we set a default one
+
+
+11/15/22
+- It has been a while since I have written a journal but progress is being made. I wish to finish the nodejs implementation by the end of Thanksgiving Friday night 11:59pm.
+- The remaining things to do is to get all of the templates working, add the ability to embed pdf (multi page pdf and multiple pdfs), and to refactor my code to make it more functional, and to adjust my codebase a little bit and then publish it as an npm library.
+  - The question is if it would be possible to have both the nodejs interface and the npm library at the same time.
