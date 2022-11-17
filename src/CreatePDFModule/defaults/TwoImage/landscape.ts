@@ -29,8 +29,8 @@ export const d2_print_landscape = {
       dim: [lWidth, lHeight],
 
       lines: [
-        ...createLineBlock(l1_x1, l1_x2, ln_y, ln_y),
-        ...createLineBlock(l2_x1, l2_x2, ln_y, ln_y),
+        ...createLineBlock(l1_x1, l1_x2, l_y, l_y),
+        ...createLineBlock(l2_x1, l2_x2, l_y, l_y),
       ],
 
       images: [
@@ -56,8 +56,8 @@ export const d2_digital_landscape = {
       dim: [lWidth, lHeight],
 
       fields: [
-        createField(img1_x, ln_y, img_width, img_height),
-        createField(img2_x, ln_y, img_width, img_height),
+        createField(img1_x, l_y, img_width, img_height),
+        createField(img2_x, l_y, img_width, img_height),
       ],
 
       images: [
