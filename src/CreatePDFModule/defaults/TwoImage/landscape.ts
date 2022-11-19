@@ -2,8 +2,11 @@ import { lWidth, lHeight } from '@constants/constants';
 import { createLineBlock, createImage, createField } from '@defaults/functions';
 import { img_width, img_height } from '@defaults/ThreeImage/threeImage';
 
-const img1_x = lWidth - 30 * 2 - img_width;
-const img2_x = img1_x + img_width + 30;
+// FIXME: Change img1_x, images are way too much to the right
+// FIXME: Image width and height is too small in landscape. What about portrait?
+
+const img1_x = lWidth - 2 * img_width;
+const img2_x = img1_x + img_width + 60;
 
 const img_y = lHeight - 100 - img_height;
 

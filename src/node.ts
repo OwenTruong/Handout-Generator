@@ -25,7 +25,7 @@ async function getPDF(dstPDF: string, imgsPath: string, id: number) {
 
 (() => {
   const data: ArgsT = parseArgs(process.argv);
-  console.log(data.imgPath);
+  // console.log(data.imgPath);
   getPDF(data.pdfPath, data.imgPath, data.id);
 })();
 
