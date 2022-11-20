@@ -1,21 +1,21 @@
 import { lWidth, lHeight } from '@constants/constants';
 import { createLineBlock, createImage, createField } from '@defaults/functions';
-import { img_width, img_height } from '@defaults/ThreeImage/threeImage';
+import { img_width, img_height } from '@defaults/TwoImage/twoImage';
 
-// FIXME: Change img1_x, images are way too much to the right
-// FIXME: Image width and height is too small in landscape. What about portrait?
+// TODO: Check portrait mode and see if images or lines are off
 
-const img1_x = lWidth - 2 * img_width;
-const img2_x = img1_x + img_width + 60;
+const offset = 100;
+const img1_x = offset;
+const img2_x = lWidth - offset - img_width;
 
-const img_y = lHeight - 100 - img_height;
+const img_y = lHeight - 75 - img_height;
 
 const l1_x1 = img1_x;
 const l2_x1 = img2_x;
 const l1_x2 = img1_x + img_width;
 const l2_x2 = img2_x + img_width;
 
-const l_y = img_y - img_height - 40;
+const l_y = img_y - 30 * 5 - 60;
 
 export const d2_print_landscape = {
   id: 22,
