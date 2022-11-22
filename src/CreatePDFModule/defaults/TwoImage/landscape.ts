@@ -2,13 +2,11 @@ import { lWidth, lHeight } from '@constants/constants';
 import { createLineBlock, createImage, createField } from '@defaults/functions';
 import { img_width, img_height } from '@defaults/TwoImage/twoImage';
 
-// TODO: Check portrait mode and see if images or lines are off
-
 const offset = 100;
 const img1_x = offset;
 const img2_x = lWidth - offset - img_width;
 
-const img_y = lHeight - 75 - img_height;
+const img_y = lHeight - 50 - img_height;
 
 const l1_x1 = img1_x;
 const l2_x1 = img2_x;
@@ -16,6 +14,8 @@ const l1_x2 = img1_x + img_width;
 const l2_x2 = img2_x + img_width;
 
 const l_y = img_y - 30 * 5 - 60;
+
+const fd_y = l_y - 30;
 
 export const d2_print_landscape = {
   id: 22,
@@ -59,8 +59,8 @@ export const d2_digital_landscape = {
       dim: [lWidth, lHeight],
 
       fields: [
-        createField(img1_x, l_y, img_width, img_height),
-        createField(img2_x, l_y, img_width, img_height),
+        createField(img1_x, fd_y, img_width, img_height),
+        createField(img2_x, fd_y, img_width, img_height),
       ],
 
       images: [
