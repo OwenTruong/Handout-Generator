@@ -92,3 +92,6 @@ _Start of Journal_
 - It has been a while since I have written a journal but progress is being made. I wish to finish the nodejs implementation by the end of Thanksgiving Friday night 11:59pm.
 - The remaining things to do is to get all of the templates working, add the ability to embed pdf (multi page pdf and multiple pdfs), and to refactor my code to make it more functional, and to adjust my codebase a little bit and then publish it as an npm library.
   - The question is if it would be possible to have both the nodejs interface and the npm library at the same time.
+
+11/24/22
+- Almost there, just OneImage and mess around with config
