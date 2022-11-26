@@ -95,3 +95,6 @@ _Start of Journal_
 
 11/24/22
 - Almost there, just OneImage and mess around with config
+
+11/25/22
+- Unfortunately, I ran out of time to work on it during thanksgiving
