@@ -1,5 +1,5 @@
 import { pWidth, pHeight } from '@constants/constants';
-import { createImage, createLineBlock } from '@defaults/functions';
+import { createField, createImage, createLineBlock } from '@defaults/functions';
 import { img_width, img_height } from '@defaults/OneImage/oneImage';
 
 const lineImgSpace = 30;
@@ -46,6 +46,26 @@ export const d1_print_portrait = {
       dim: [pWidth, pHeight],
 
       lines: [...createLineBlock(ln_x1, ln_x2, ln_y, ln_y)],
+
+      images: [createImage(img_x, img_y1, img_width, img_height)],
+    },
+  ],
+};
+
+export const d1_digital_portrait = {
+  id: 12,
+  name: 'Default 1 Digital Portrait',
+
+  pages: [
+    {
+      pageN: {
+        x: pWidth - 50,
+        y: 30,
+        size: 12,
+      },
+      dim: [pWidth, pHeight],
+
+      fields: [createField(ln_x1, ln_x2, img_width, img_height)],
 
       images: [createImage(img_x, img_y1, img_width, img_height)],
     },
