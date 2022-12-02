@@ -43,6 +43,8 @@ export const d1_print_landscape = {
       },
       dim: [lWidth, lHeight],
 
+      lines: [...createLineBlock(ln_x1, ln_x2, ln_y, ln_y)],
+
       images: [createImage(img_x, img_y1, img_width, img_height)],
     },
   ],
@@ -60,6 +62,8 @@ export const d1_digital_landscape = {
         size: 12,
       },
       dim: [lWidth, lHeight],
+
+      fields: [createField(img1_x, fd_y, img_width, img_height)],
 
       images: [createImage(img_x, img_y1, img_width, img_height)],
     },
