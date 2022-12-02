@@ -47,3 +47,21 @@ export const d1_print_landscape = {
     },
   ],
 };
+
+export const d1_digital_landscape = {
+  id: 15,
+  name: 'Default 1 Digital Landscape',
+
+  pages: [
+    {
+      pageN: {
+        x: lWidth - 50,
+        y: 30,
+        size: 12,
+      },
+      dim: [lWidth, lHeight],
+
+      images: [createImage(img_x, img_y1, img_width, img_height)],
+    },
+  ],
+};
