@@ -98,3 +98,6 @@ _Start of Journal_
 
 11/25/22
 - Unfortunately, I ran out of time to work on it during thanksgiving
+
+12/3/22
+- I am currently working on another project so recent development has been a little bit sloppy. Tomorrow, work on piecing the OneImage template together.
