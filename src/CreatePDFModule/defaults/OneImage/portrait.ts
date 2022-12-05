@@ -45,6 +45,7 @@ export const d1_print_portrait = {
       },
       dim: [pWidth, pHeight],
 
+      // FIXME: line doesn't work.
       lines: [...createLineBlock(ln_x1, ln_x2, ln_y, ln_y)],
 
       images: [createImage(img_x, img_y1, img_width, img_height)],

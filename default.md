@@ -16,6 +16,9 @@ b can be 1 or 2 depending on if an element needs 2 x/y coordinate like line
 a and b are optional
 
 
+Elements = [ln, img, fd]
+
+
 <b> Line Generation </b>
 
 # TODO: Generate lines from top to bottom instead of bottom to top
