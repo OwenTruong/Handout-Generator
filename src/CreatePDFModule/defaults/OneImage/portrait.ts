@@ -5,12 +5,11 @@ import { img_width, img_height } from '@defaults/OneImage/oneImage';
 const lineImgSpace = 30;
 
 const img_x = (pWidth - img_width) / 2;
-const img_y1 = pHeight - 50 - img_height;
-const img_y2 = img_y1 - (img_height + lineImgSpace) - img_height / 2 - 10;
+const img_y = pHeight - 50 - img_height;
 
 const ln_x1 = img_x;
 const ln_x2 = img_x + img_width;
-const ln_y = img_y2 - 60;
+const ln_y = img_y - img_height - 40;
 
 // TODO: Add empty, field and lines to oneimage
 
@@ -27,7 +26,7 @@ export const d1_nothing_portrait = {
       },
       dim: [pWidth, pHeight],
 
-      images: [createImage(img_x, img_y1, img_width, img_height)],
+      images: [createImage(img_x, img_y, img_width, img_height)],
     },
   ],
 };
@@ -48,7 +47,7 @@ export const d1_print_portrait = {
       // FIXME: line doesn't work.
       lines: [...createLineBlock(ln_x1, ln_x2, ln_y, ln_y)],
 
-      images: [createImage(img_x, img_y1, img_width, img_height)],
+      images: [createImage(img_x, img_y, img_width, img_height)],
     },
   ],
 };
@@ -68,7 +67,7 @@ export const d1_digital_portrait = {
 
       fields: [createField(ln_x1, ln_x2, img_width, img_height)],
 
-      images: [createImage(img_x, img_y1, img_width, img_height)],
+      images: [createImage(img_x, img_y, img_width, img_height)],
     },
   ],
 };
