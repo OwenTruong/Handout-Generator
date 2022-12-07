@@ -2,8 +2,6 @@ import { pWidth, pHeight } from '@constants/constants';
 import { createField, createImage, createLineBlock } from '@defaults/functions';
 import { img_width, img_height } from '@defaults/OneImage/oneImage';
 
-const lineImgSpace = 30;
-
 const img_x = (pWidth - img_width) / 2;
 const img_y = pHeight - 50 - img_height;
 
