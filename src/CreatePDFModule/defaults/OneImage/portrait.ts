@@ -7,7 +7,8 @@ const img_y = pHeight - 50 - img_height;
 
 const ln_x1 = img_x;
 const ln_x2 = img_x + img_width;
-const ln_y = img_y - img_height - 40;
+// const ln_y = img_y - img_height - 40;
+const ln_y = img_y - 200;
 
 // TODO: Add empty, field and lines to oneimage
 

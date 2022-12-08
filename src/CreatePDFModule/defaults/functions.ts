@@ -6,11 +6,12 @@ export function createLineBlock(
   x1: number,
   x2: number,
   y1: number,
-  y2: number
+  y2: number,
+  lines = 6
 ) {
   const arr: any[] = [];
   const spacing = 30;
-  for (let i = 0; i < 6; i++)
+  for (let i = 0; i < lines; i++)
     arr.push(createLine(x1, x2, y1 + spacing * i, y2 + spacing * i));
 
   return arr;
