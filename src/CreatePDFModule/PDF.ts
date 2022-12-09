@@ -77,16 +77,16 @@ export class PDF {
         'PDF created already. To create a new one, please call init() before creating pdf'
       );
 
-    // TODO FUTURE: How are we even going to get file paths in our browser implementation?
-    const imgPathArr: string[] = OpaqueEnv.getFilePaths(imgsPath)([
+    const inputPathArr: string[] = OpaqueEnv.getFilePaths(imgsPath)([
       'png',
       'jpg',
+      'pdf',
     ]);
-    if (!imgPathArr) throw new Error('Image Files Not Found');
+    if (!inputPathArr) throw new Error('Source files Not Found');
     const pagesTemp: PageC[] = this.#template.pages;
 
     let pnum: number = 0;
-    while (imgPathArr.length != 0) {
+    while (inputPathArr.length != 0) {
       // pageTemplate -> If template = 2, page 1, 3, 5 and etc follow temp1 and page 2, 4, 6 and etc follow temp2
       const pageTemp: PageC = pagesTemp[pnum % pagesTemp.length];
       const page = this.#pdfDoc.addPage(pageTemp.dim); // size: { width: 595.28, height: 841.89 }
@@ -96,13 +96,19 @@ export class PDF {
       if (PageN != null)
         this.#embedTextToPage(page, PageN, (pnum + 1).toString());
 
-      // Add Image to PDF
-      const imgTmps: ImageC[] = pageTemp.images;
-      await this.#embedImgsToPage(
-        page,
-        imgTmps,
-        imgPathArr.splice(0, Math.min(imgPathArr.length, imgTmps.length))
-      );
+      // Add Image/PDF to Destination PDF
+      if (inputPathArr[0].slice(-3) == 'pdf') {
+        // TODO: Change PageC to accept PdfC
+        // TODO: Create embedPdf
+        // TODO: Have PdfC and ImageC implement PictureI for polymorphism
+      } else {
+        const imgTmps: ImageC[] = pageTemp.images;
+        await this.#embedImgsToPage(
+          page,
+          imgTmps,
+          inputPathArr.splice(0, Math.min(inputPathArr.length, imgTmps.length))
+        );
+      }
 
       // Add Line to PDF
       const lineTmps: LineC[] = pageTemp.lines;
