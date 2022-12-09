@@ -49,7 +49,7 @@ export class PDF {
       return console.error('Too many images for a page.');
 
     for (let i = 0; i < imgPaths.length; ++i) {
-      await imgTmps[i].drawImage(this.#pdfDoc, page, imgPaths[i]);
+      await imgTmps[i].draw(this.#pdfDoc, page, imgPaths[i]);
     }
   }
 

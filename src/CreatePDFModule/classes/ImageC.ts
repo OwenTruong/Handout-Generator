@@ -6,7 +6,9 @@ import { getFileExt } from '@functions/files/getFileExt';
 import { checkData } from '@functions/checkData';
 import { checkType } from '@functions/checkType';
 
-export class ImageC {
+import { PictureI } from '@/interfaces/PictureI';
+
+export class ImageC implements PictureI {
   x: number;
   y: number;
   width: number;
@@ -36,12 +38,8 @@ export class ImageC {
   }
 
   // A method that grabs bytes of an image with fs and add it to a page in a pdf
-  // drawImage belongs in ImageC.prototype
-  async drawImage(
-    pdfDoc: PDFDocument,
-    page: PDFPage,
-    path: string
-  ): Promise<void> {
+  // draw belongs in ImageC.prototype
+  async draw(pdfDoc: PDFDocument, page: PDFPage, path: string): Promise<void> {
     const ext: string = getFileExt(path);
     if (ext != 'png' && ext != 'jpg')
       throw new Error('IMAGE FILE EXTENSION ERROR');
