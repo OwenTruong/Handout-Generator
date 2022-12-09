@@ -8,7 +8,7 @@ const img_y = pHeight - 50 - img_height;
 const ln_x1 = img_x;
 const ln_x2 = img_x + img_width;
 // const ln_y = img_y - img_height - 40;
-const ln_y = img_y - 200;
+const ln_y = img_y - 300;
 
 // TODO: Add empty, field and lines to oneimage
 
@@ -43,8 +43,7 @@ export const d1_print_portrait = {
       },
       dim: [pWidth, pHeight],
 
-      // FIXME: line doesn't work.
-      lines: [...createLineBlock(ln_x1, ln_x2, ln_y, ln_y)],
+      lines: [...createLineBlock(ln_x1, ln_x2, ln_y, ln_y, 10)],
 
       images: [createImage(img_x, img_y, img_width, img_height)],
     },

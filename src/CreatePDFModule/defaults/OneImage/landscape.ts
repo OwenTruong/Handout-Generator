@@ -10,7 +10,7 @@ const img_y2 = img_y1 - (img_height + lineImgSpace) - img_height / 2 - 10;
 
 const ln_x1 = img_x;
 const ln_x2 = img_x + img_width;
-const ln_y = img_y2 - 60;
+const ln_y = img_y2 - 45;
 
 export const d1_nothing_landscape = {
   id: 14,
@@ -43,7 +43,7 @@ export const d1_print_landscape = {
       },
       dim: [lWidth, lHeight],
 
-      lines: [...createLineBlock(ln_x1, ln_x2, ln_y, ln_y)],
+      lines: [...createLineBlock(ln_x1, ln_x2, ln_y, ln_y, 10)],
 
       images: [createImage(img_x, img_y1, img_width, img_height)],
     },
