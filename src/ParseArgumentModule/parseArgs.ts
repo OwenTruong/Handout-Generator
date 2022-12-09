@@ -2,8 +2,8 @@ import { splitArgs } from './_splitArgs';
 import { defaultTempID } from '@constants/constants';
 
 export type ArgsT = {
-  pdfPath: string;
-  imgPath: string;
+  output: string;
+  input: string;
   id: number;
 };
 
@@ -24,8 +24,8 @@ export function parseArgs(argv: string[]): ArgsT {
     ...groups.map((group) => {
       if (group.length != 2) throw new Error('Not enough arguments for flag');
 
-      if (group[0] == '-d') return { pdfPath: group[1] };
-      if (group[0] == '-i') return { imgPath: group[1] };
+      if (group[0] == '-d') return { output: group[1] };
+      if (group[0] == '-i') return { input: group[1] };
       if (group[0] == '-t') {
         if (!Number(group[1])) throw new Error('Template ID must be a number');
         return { id: group[1] };

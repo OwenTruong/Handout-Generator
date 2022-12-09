@@ -36,7 +36,7 @@ export class PDF {
   async writePDF(path: string): Promise<void> {
     await this.#save();
     if (!this.#pdfBytes) throw new Error('Need to call init first');
-    OpaqueEnv.writeFile('./test.pdf', this.#pdfBytes);
+    OpaqueEnv.writeFile(path, this.#pdfBytes);
   }
 
   // Embed a certain amount of images to a page given a template

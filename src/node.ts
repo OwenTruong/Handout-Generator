@@ -14,19 +14,19 @@ function pickTemplate(id: number, dfTemp: any[], i: number = 0): any {
 }
 
 // FIXME: It might not be a good idea for templates to be of type any
+// TODO: Allow pdf as input
 // Unpure function
 async function getPDF(dstPDF: string, imgsPath: string, id: number) {
   // Dynamically pick image folder
   const pdf = new PDF();
   await pdf.init(pickTemplate(id, Object.values(defaults)));
   await pdf.createPDF(dstPDF, imgsPath);
-  await pdf.writePDF('./test.pdf');
+  await pdf.writePDF(dstPDF ?? 'handout.pdf');
 }
 
 (() => {
   const data: ArgsT = parseArgs(process.argv);
-  // console.log(data.imgPath);
-  getPDF(data.pdfPath, data.imgPath, data.id);
+  getPDF(data.output, data.input, data.id);
 })();
 
 // Pure: (input) => 3 * input
