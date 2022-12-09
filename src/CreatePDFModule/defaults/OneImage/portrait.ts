@@ -7,10 +7,11 @@ const img_y = pHeight - 50 - img_height;
 
 const ln_x1 = img_x;
 const ln_x2 = img_x + img_width;
-// const ln_y = img_y - img_height - 40;
 const ln_y = img_y - 300;
 
-// TODO: Add empty, field and lines to oneimage
+// const fd_y = img_y - img_height;
+const fd_height = img_height / 1.7;
+const fd_y = img_y - fd_height - 50;
 
 export const d1_nothing_portrait = {
   id: 10,
@@ -63,7 +64,7 @@ export const d1_digital_portrait = {
       },
       dim: [pWidth, pHeight],
 
-      fields: [createField(ln_x1, ln_x2, img_width, img_height)],
+      fields: [createField(ln_x1, fd_y, img_width, fd_height)],
 
       images: [createImage(img_x, img_y, img_width, img_height)],
     },
