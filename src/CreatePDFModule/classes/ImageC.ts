@@ -6,9 +6,7 @@ import { getFileExt } from '@functions/files/getFileExt';
 import { checkData } from '@functions/checkData';
 import { checkType } from '@functions/checkType';
 
-import { PictureI } from '@/interfaces/PictureI';
-
-export class ImageC implements PictureI {
+export class ImageC {
   x: number;
   y: number;
   width: number;
@@ -39,29 +37,28 @@ export class ImageC implements PictureI {
 
   // A method that grabs bytes of an image with fs and add it to a page in a pdf
   // draw belongs in ImageC.prototype
-  async draw(pdfDoc: PDFDocument, page: PDFPage, path: string): Promise<void> {
-    const ext: string = getFileExt(path);
-    if (ext != 'png' && ext != 'jpg')
-      throw new Error('IMAGE FILE EXTENSION ERROR');
-
-    // need a better one than null...
-    const fileBytes: Buffer | null = OpaqueEnv.readFile(path);
-    // TODO FUTURE: Delete this if condition once browser is implemented
-    if (!fileBytes)
-      throw new Error(
-        '(Temporary) Wrong environment: Browser not available yet'
-      );
-    const image: PDFImage = await (ext == 'png'
-      ? pdfDoc.embedPng(fileBytes)
-      : pdfDoc.embedJpg(fileBytes));
-
-    // We could pass ImageC directly but there is no guarantee I would not be changing ImageC in the future
+  async draw(
+    pdfDoc: PDFDocument,
+    page: PDFPage,
+    fileBytes: Buffer,
+    ext: String
+  ): Promise<void> {
     const options = {
       x: this.x,
       y: this.y,
       width: this.width,
       height: this.height,
     };
+
+    const fn = [pdfDoc.embedPdf, pdfDoc.embedPng, pdfDoc.embedJpg];
+
+    const image = await fn[ext == 'pdf' ? 0 : ext == 'png' ? 1 : 2](fileBytes);
+    // if (ext == 'pdf') page.drawPage()
+
+    // TODO: create 3 if else conditions for pdf, png and jpg
+
+    if ()
+
     page.drawImage(image, options);
   }
 }

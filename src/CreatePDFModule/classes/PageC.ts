@@ -1,6 +1,6 @@
 import { TextC } from '@classes/TextC';
 import { TextFieldC } from '@/classes/TextFieldC';
-import { ImageC } from '@classes/ImageC';
+import { ImageC } from '@/classes/ImageC';
 import { LineC } from '@classes/LineC';
 
 import { checkData } from '@functions/checkData';
@@ -10,6 +10,7 @@ export class PageC {
   pageN: TextC | null;
   lines: LineC[];
   images: ImageC[];
+
   fields: TextFieldC[];
   dim: [number, number];
 
@@ -30,6 +31,7 @@ export class PageC {
       ? page.lines.map((line: any) => new LineC(line))
       : [];
 
+    // FIXME: tight spot... how do I handle PngC, JpgC, PdfC and future classes here?
     this.images = checkData(page.images)
       ? page.images.map((image: any) => new ImageC(image))
       : [];

@@ -101,3 +101,6 @@ _Start of Journal_
 
 12/3/22
 - I am currently working on another project so recent development has been a little bit sloppy. Tomorrow, work on piecing the OneImage template together.
+
+12/9/22
+- The plan was to create the nodejs version with all of the logics in place, and then work on the browser version, and then finally the backend side. However, after two months, I don't have enough drive for this project to brainstorm on how I can make my project special and be worthwhile for others to use. I will suspend the project after finishing up the nodejs implementation and after writing a documentation for this project.

@@ -44,7 +44,7 @@ export class TextC {
     this.color = rgb(color[0], color[1], color[2]);
   }
 
-  async drawText(
+  async draw(
     pdfDoc: PDFDocument,
     page: PDFPage,
     message: string
@@ -52,7 +52,7 @@ export class TextC {
     const font = await pdfDoc.embedFont(mainFont);
     if (!font)
       return console.error(
-        'Unexpected error in retrieving Helvetica font in drawText method of TextC'
+        'Unexpected error in retrieving Helvetica font in draw method of TextC'
       );
 
     page.drawText(message, {

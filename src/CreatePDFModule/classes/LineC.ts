@@ -34,7 +34,7 @@ export class LineC {
     this.y2 = y2;
   }
 
-  drawLine(page: PDFPage) {
+  draw(page: PDFPage) {
     page.drawLine({
       start: { x: this.x1, y: this.y1 },
       end: { x: this.x2, y: this.y2 },

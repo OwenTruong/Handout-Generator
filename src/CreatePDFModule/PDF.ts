@@ -12,8 +12,9 @@ import { TemplateC } from '@classes/TemplateC';
 import { PageC } from '@classes/PageC';
 import { TextFieldC } from '@/classes/TextFieldC';
 import { LineC } from '@classes/LineC';
-import { ImageC } from '@classes/ImageC';
+import { ImageC } from '@/classes/ImageC';
 import { TextC } from '@classes/TextC';
+import { getFileExt } from './functions/files/getFileExt';
 
 export class PDF {
   #pdfDoc!: PDFDocument;
@@ -40,32 +41,50 @@ export class PDF {
   }
 
   // Embed a certain amount of images to a page given a template
-  async #embedImgsToPage(
+  async #embedPicturesToPage(
     page: PDFPage,
-    imgTmps: ImageC[],
+    imgTemps: ImageC[],
     imgPaths: string[]
   ): Promise<void> {
-    if (imgTmps.length < imgPaths.length)
+    if (imgTemps.length < imgPaths.length)
       return console.error('Too many images for a page.');
 
     for (let i = 0; i < imgPaths.length; ++i) {
-      await imgTmps[i].draw(this.#pdfDoc, page, imgPaths[i]);
+      const ext: string = getFileExt(imgPaths[i]);
+      if (ext != 'pdf' && ext != 'jpg' && ext != 'png')
+        throw new Error('FILE EXTENSION ERROR');
+
+      const fileBytes: Buffer | null = OpaqueEnv.readFile(imgPaths[i]);
+      // TODO FUTURE: Delete this if condition once browser is implemented
+      if (!fileBytes)
+        throw new Error(
+          '(Temporary) Wrong environment: Browser not available yet'
+        );
+
+      if (ext == 'pdf') {
+        // Loop through the pdf // FIXME: I feel like I am doing type casting wrong
+        (imgTemps[i] as PdfC).draw(this.#pdfDoc, page, fileBytes);
+      } else if (ext == 'jpg') {
+        (imgTemps[i] as JpgC).draw(this.#pdfDoc, page, fileBytes);
+      } else if (ext == 'png') {
+        (imgTemps[i] as PngC).draw(this.#pdfDoc, page, fileBytes);
+      }
     }
   }
 
   // Embed lines to a page given a template
   #embedLinesToPage(page: PDFPage, lineTmps: LineC[]): void {
     for (let i = 0; i < lineTmps.length; ++i) {
-      lineTmps[i].drawLine(page);
+      lineTmps[i].draw(page);
     }
   }
 
   #embedTextFieldToPage(page: PDFPage, fields: TextFieldC[]) {
-    fields.forEach((field) => field.drawTextField(this.#pdfDoc, page));
+    fields.forEach((field) => field.draw(this.#pdfDoc, page));
   }
 
   #embedTextToPage(page: PDFPage, textTmp: TextC, text: string): void {
-    textTmp.drawText(this.#pdfDoc, page, text);
+    textTmp.draw(this.#pdfDoc, page, text);
   }
 
   async createPDF(dstPath: string, imgsPath: string): Promise<void> {
@@ -97,18 +116,18 @@ export class PDF {
         this.#embedTextToPage(page, PageN, (pnum + 1).toString());
 
       // Add Image/PDF to Destination PDF
-      if (inputPathArr[0].slice(-3) == 'pdf') {
-        // TODO: Change PageC to accept PdfC
-        // TODO: Create embedPdf
-        // TODO: Have PdfC and ImageC implement PictureI for polymorphism
-      } else {
-        const imgTmps: ImageC[] = pageTemp.images;
-        await this.#embedImgsToPage(
-          page,
-          imgTmps,
-          inputPathArr.splice(0, Math.min(inputPathArr.length, imgTmps.length))
-        );
-      }
+      // TODO: Change PageC to accept PdfC
+      // TODO: Create embedPdf
+      // TODO: Have PdfC and ImageC implement PictureI for polymorphism
+      const pictureTemp: PictureI[] = pageTemp.images;
+      await this.#embedPicturesToPage(
+        page,
+        pictureTemp,
+        inputPathArr.splice(
+          0,
+          Math.min(inputPathArr.length, pictureTemp.length)
+        )
+      );
 
       // Add Line to PDF
       const lineTmps: LineC[] = pageTemp.lines;

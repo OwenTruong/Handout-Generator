@@ -62,7 +62,7 @@ export class TextFieldC {
   }
 
   // in PDF.ts accept this function as async
-  async drawTextField(pdfDoc: PDFDocument, page: PDFPage) {
+  async draw(pdfDoc: PDFDocument, page: PDFPage) {
     const form: PDFForm = pdfDoc.getForm();
     const textField: PDFTextField = this.#createTextField(form);
     textField.setText('Enter Here');
