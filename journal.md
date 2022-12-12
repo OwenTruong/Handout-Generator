@@ -104,3 +104,10 @@ _Start of Journal_
 
 12/9/22
 - The plan was to create the nodejs version with all of the logics in place, and then work on the browser version, and then finally the backend side. However, after two months, I don't have enough drive for this project to brainstorm on how I can make my project special and be worthwhile for others to use. I will suspend the project after finishing up the nodejs implementation and after writing a documentation for this project.
+
+
+12/11/22
+- I should clean up on import rules and the default variables in the defaults folder.
+- Few things left to do again: have program accept pdf as input and try to refactor my code so that it is a bit more functional, and then write a documentation.
+- I want to implement server side features like aws lambda and dynamodb, but I can't think of anything right now.
+
