@@ -57,8 +57,11 @@ export class ImageC {
 
     // TODO: create 3 if else conditions for pdf, png and jpg
 
-    if ()
+    if (ext == 'pdf') {
+    } else if (ext == 'png') {
+    } else {
+    }
 
-    page.drawImage(image, options);
+    // page.drawImage(image, options);
   }
 }
