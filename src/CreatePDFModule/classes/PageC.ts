@@ -31,7 +31,7 @@ export class PageC {
       ? page.lines.map((line: any) => new LineC(line))
       : [];
 
-    // FIXME: tight spot... how do I handle PngC, JpgC, PdfC and future classes here?
+    // FIXME: tight spot... how do I handle PngC, JpgC, SrcPdfC and future classes here?
     this.images = checkData(page.images)
       ? page.images.map((image: any) => new ImageC(image))
       : [];

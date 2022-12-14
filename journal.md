@@ -111,3 +111,7 @@ _Start of Journal_
 - Few things left to do again: have program accept pdf as input and try to refactor my code so that it is a bit more functional, and then write a documentation.
 - I want to implement server side features like aws lambda and dynamodb, but I can't think of anything right now.
 
+12/13/22
+- OOP JS is not fun...
+  - I have trapped myself. It is really difficult to implement the ability to embed pdf inside pdf... I should not have refactored my createPDF method that early.
+

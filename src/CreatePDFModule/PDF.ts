@@ -1,4 +1,4 @@
-import { PDFDocument, PDFPage } from 'pdf-lib';
+import { PDFDocument, PDFImage, PDFPage } from 'pdf-lib';
 
 import { OpaqueEnv } from '@classes/OpaqueEnv';
 
@@ -15,6 +15,7 @@ import { LineC } from '@classes/LineC';
 import { ImageC } from '@/classes/ImageC';
 import { TextC } from '@classes/TextC';
 import { getFileExt } from './functions/files/getFileExt';
+import { SrcPdfC } from './classes/PdfC';
 
 export class PDF {
   #pdfDoc!: PDFDocument;
@@ -46,31 +47,30 @@ export class PDF {
     imgTemps: ImageC[],
     imgPaths: string[]
   ): Promise<void> {
-    if (imgTemps.length < imgPaths.length)
-      return console.error('Too many images for a page.');
-
-    for (let i = 0; i < imgPaths.length; ++i) {
-      const ext: string = getFileExt(imgPaths[i]);
-      if (ext != 'pdf' && ext != 'jpg' && ext != 'png')
-        throw new Error('FILE EXTENSION ERROR');
-
-      const fileBytes: Buffer | null = OpaqueEnv.readFile(imgPaths[i]);
-      // TODO FUTURE: Delete this if condition once browser is implemented
-      if (!fileBytes)
-        throw new Error(
-          '(Temporary) Wrong environment: Browser not available yet'
-        );
-
-      if (ext == 'pdf') {
-        // Loop through the pdf // FIXME: I feel like I am doing type casting wrong
-        (imgTemps[i] as PdfC).draw(this.#pdfDoc, page, fileBytes);
-      } else if (ext == 'jpg') {
-        (imgTemps[i] as JpgC).draw(this.#pdfDoc, page, fileBytes);
-      } else if (ext == 'png') {
-        (imgTemps[i] as PngC).draw(this.#pdfDoc, page, fileBytes);
-      }
-    }
+    // if (imgTemps.length < imgPaths.length)
+    //   return console.error('Too many images for a page.');
+    // for (let i = 0; i < imgPaths.length; ++i) {
+    //   const ext: string = getFileExt(imgPaths[i]);
+    //   if (ext != 'pdf' && ext != 'jpg' && ext != 'png')
+    //     throw new Error('FILE EXTENSION ERROR');
+    //   const fileBytes: Buffer | null = OpaqueEnv.readFile(imgPaths[i]);
+    //   // TODO FUTURE: Delete this if condition once browser is implemented
+    //   if (!fileBytes)
+    //     throw new Error(
+    //       '(Temporary) Wrong environment: Browser not available yet'
+    //     );
+    //   if (ext == 'pdf') {
+    //     // Loop through the pdf // FIXME: I feel like I am doing type casting wrong
+    //     (imgTemps[i] as SrcPdfC).draw(this.#pdfDoc, page, fileBytes);
+    //   } else if (ext == 'jpg') {
+    //     (imgTemps[i] as JpgC).draw(this.#pdfDoc, page, fileBytes);
+    //   } else if (ext == 'png') {
+    //     (imgTemps[i] as PngC).draw(this.#pdfDoc, page, fileBytes);
+    //   }
+    // }
   }
+
+  // #embedPdfToPage(page: PDFPage, pdfPages);
 
   // Embed lines to a page given a template
   #embedLinesToPage(page: PDFPage, lineTmps: LineC[]): void {
@@ -85,6 +85,31 @@ export class PDF {
 
   #embedTextToPage(page: PDFPage, textTmp: TextC, text: string): void {
     textTmp.draw(this.#pdfDoc, page, text);
+  }
+
+  async #getPictures(paths: string[]) {
+    const pictures: (PDFPage | PDFImage)[] = [];
+    for (const path of paths) {
+      const ext = path.slice(-3);
+
+      // if (ext == 'pdf') return this.#pdfDoc.embedPages
+      const buffer: Buffer | null = OpaqueEnv.readFile(path);
+      if (!buffer)
+        throw new Error(
+          '(Temporary) Wrong environment: Browser not available yet'
+        );
+
+      SrcPdfC.getPdfPages(buffer);
+
+      if (ext == 'pdf') {
+        pictures.concat(await SrcPdfC.getPdfPages(buffer));
+      } else if (ext == 'png') {
+        pictures.push(await this.#pdfDoc.embedPng(buffer));
+      } else if (ext == 'jpg') {
+        pictures.push(await this.#pdfDoc.embedJpg(buffer));
+      } else throw new Error('Extension not found in file path');
+    }
+    return pictures;
   }
 
   async createPDF(dstPath: string, imgsPath: string): Promise<void> {
@@ -103,6 +128,11 @@ export class PDF {
     ]);
     if (!inputPathArr) throw new Error('Source files Not Found');
     const pagesTemp: PageC[] = this.#template.pages;
+    const pictures: (PDFPage | PDFImage)[] = await this.#getPictures(
+      inputPathArr
+    );
+
+    // PRIORITY TODO: CLEAN UP EMBEDPICTURESTOPAGE TO USE PICTURES INSTEAD OF IT EMBEDDING ITSELF AND CREATE PDFC SO THAT WE HAVE A CLASS FOR CREATING PDFS, WORRY ABOUT THE FACT IF WE EVEN NEED A SEPARATE PDF / IMAGE CLASS FOR THIS NOW THAT WE HAVE TAKEN A LOT OF RESPONSIBILITY AWAY, AND ALSO WORRIES ABOUT (PdfPage | PdfImage)[] LOOKING UGLY... DO NOT BOTHER REFACTORING UNTIL YOU KNOW FOR FACT THAT YOU CAN EMBED SRCPDF INTO DSTPDF
 
     let pnum: number = 0;
     while (inputPathArr.length != 0) {
@@ -116,18 +146,19 @@ export class PDF {
         this.#embedTextToPage(page, PageN, (pnum + 1).toString());
 
       // Add Image/PDF to Destination PDF
-      // TODO: Change PageC to accept PdfC
+      // TODO: Change PageC to accept SrcPdfC
       // TODO: Create embedPdf
-      // TODO: Have PdfC and ImageC implement PictureI for polymorphism
-      const pictureTemp: PictureI[] = pageTemp.images;
-      await this.#embedPicturesToPage(
-        page,
-        pictureTemp,
-        inputPathArr.splice(
-          0,
-          Math.min(inputPathArr.length, pictureTemp.length)
-        )
-      );
+      // TODO: Have SrcPdfC and ImageC implement PictureI for polymorphism
+
+      // const pictureTemp: PictureI[] = pageTemp.images;
+      // await this.#embedPicturesToPage(
+      //   page,
+      //   pictureTemp,
+      //   inputPathArr.splice(
+      //     0,
+      //     Math.min(inputPathArr.length, pictureTemp.length)
+      //   )
+      // );
 
       // Add Line to PDF
       const lineTmps: LineC[] = pageTemp.lines;
