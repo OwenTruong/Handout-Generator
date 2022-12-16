@@ -2,6 +2,7 @@ import { PDFDocument, PDFPage, PDFImage, PDFEmbeddedPage } from 'pdf-lib';
 
 import { checkData } from '@functions/checkData';
 import { checkType } from '@functions/checkType';
+import { PDFEmbeddedPicture } from '@/others/types';
 
 export class PictureC {
   x: number;
@@ -34,12 +35,7 @@ export class PictureC {
 
   // A method that grabs bytes of an image with fs and add it to a page in a pdf
   // draw belongs in ImageC.prototype
-  async drawImage(
-    pdfDoc: PDFDocument,
-    page: PDFPage,
-    image: PDFImage,
-    ext: String
-  ): Promise<void> {
+  async #drawImage(page: PDFPage, image: PDFImage): Promise<void> {
     const options = {
       x: this.x,
       y: this.y,
@@ -47,15 +43,10 @@ export class PictureC {
       height: this.height,
     };
 
-    const fn = [pdfDoc.embedPng, pdfDoc.embedJpg];
     page.drawImage(image, options);
   }
 
-  async drawPage(
-    pdfDoc: PDFDocument,
-    dstPage: PDFPage,
-    srcPage: PDFEmbeddedPage
-  ) {
+  async #drawPage(dstPage: PDFPage, srcPage: PDFEmbeddedPage) {
     const options = {
       x: this.x,
       y: this.y,
@@ -64,5 +55,11 @@ export class PictureC {
     };
 
     dstPage.drawPage(srcPage, options);
+  }
+
+  async draw(dstPage: PDFPage, pic: PDFEmbeddedPicture) {
+    if (pic.type == 'pdf')
+      this.#drawPage(dstPage, pic.picture as PDFEmbeddedPage);
+    else this.#drawImage(dstPage, pic.picture as PDFImage);
   }
 }

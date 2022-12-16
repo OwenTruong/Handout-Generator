@@ -33,7 +33,7 @@ export class PageC {
 
     // FIXME: tight spot... how do I handle PngC, JpgC, SrcPdfC and future classes here?
     this.pictures = checkData(page.pictures)
-      ? page.pictures.map((picture: any) => new ImageC(picture))
+      ? page.pictures.map((picture: any) => new PictureC(picture))
       : [];
 
     this.fields = checkData(page.fields)

@@ -15,7 +15,7 @@ import { LineC } from '@classes/LineC';
 import { PictureC } from '@/classes/PictureC';
 import { TextC } from '@classes/TextC';
 import { getFileExt } from './functions/files/getFileExt';
-import { SrcPdfC } from './classes/PdfC';
+import { PDFEmbeddedPicture } from './others/types';
 
 export class PDF {
   #pdfDoc!: PDFDocument;
@@ -45,8 +45,10 @@ export class PDF {
   async #embedPicturesToPage(
     page: PDFPage,
     pictureTemp: any,
-    pictures: (PDFPage | PDFImage)[]
-  ): Promise<void> {}
+    pictures: PDFEmbeddedPicture[]
+  ): Promise<void> {
+    // TODO: How do I tell if pictures[i] is a pdf or an image?
+  }
 
   // #embedPdfToPage(page: PDFPage, pdfPages);
 
@@ -65,8 +67,13 @@ export class PDF {
     textTmp.draw(this.#pdfDoc, page, text);
   }
 
+  static async getPdfPages(pdfBuffer: Buffer) {
+    const pdfDoc = await PDFDocument.load(pdfBuffer);
+    return pdfDoc.getPages();
+  }
+
   async #getPictures(paths: string[]) {
-    const pictures: (PDFImage | PDFEmbeddedPage)[] = [];
+    const pictures: PDFEmbeddedPicture[] = [];
     for (const path of paths) {
       const ext = path.slice(-3);
 
@@ -77,18 +84,27 @@ export class PDF {
           '(Temporary) Wrong environment: Browser not available yet'
         );
 
-      SrcPdfC.getPdfPages(buffer);
-
-      // FIXME: PDFPage.drawPage only accepts PDFEmbeddedPage
-
       if (ext == 'pdf') {
-        pictures.concat(
-          (await SrcPdfC.getPdfPages(buffer)) as PDFEmbeddedPage[]
+        const srcPages: PDFPage[] = await PDF.getPdfPages(buffer);
+        const embeddedPages: PDFEmbeddedPicture[] = await Promise.all(
+          srcPages.map(async (page) => {
+            return {
+              picture: await this.#pdfDoc.embedPage(page),
+              type: 'page',
+            };
+          })
         );
+        pictures.concat(embeddedPages);
       } else if (ext == 'png') {
-        pictures.push(await this.#pdfDoc.embedPng(buffer));
+        pictures.push({
+          picture: await this.#pdfDoc.embedPng(buffer),
+          type: 'image',
+        });
       } else if (ext == 'jpg') {
-        pictures.push(await this.#pdfDoc.embedJpg(buffer));
+        pictures.push({
+          picture: await this.#pdfDoc.embedJpg(buffer),
+          type: 'image',
+        });
       } else throw new Error('Extension not found in file path');
     }
     return pictures;
@@ -110,7 +126,7 @@ export class PDF {
     ]);
     if (!inputPathArr) throw new Error('Source files Not Found');
     const pagesTemp: PageC[] = this.#template.pages;
-    const pictures: (PDFPage | PDFImage)[] = await this.#getPictures(
+    const pictures: PDFEmbeddedPicture[] = await this.#getPictures(
       inputPathArr
     );
 
@@ -130,7 +146,6 @@ export class PDF {
       // Add Image/PDF to Destination PDF
       // TODO: Change PageC to accept SrcPdfC
       // TODO: Create embedPdf
-      // TODO: Have SrcPdfC and ImageC implement PictureI for polymorphism
 
       // const pictureTemp: PictureI[] = pageTemp.images;
       // await this.#embedPicturesToPage(
@@ -142,10 +157,10 @@ export class PDF {
       //   )
       // );
 
-      const pictureTemp: any = pageTemp.pictures;
+      const pictureTemp: PictureC[] = pageTemp.pictures;
       await this.#embedPicturesToPage(
         page,
-        pictureTemp,
+        pageTemp.pictures,
         pictures.splice(0, Math.min(pictures.length, pictureTemp.length))
       );
 

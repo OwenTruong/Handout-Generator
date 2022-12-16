@@ -1,3 +1,7 @@
-import { PDFImage, PDFPage } from 'pdf-lib';
+import { PDFEmbeddedPage, PDFImage, PDFPage } from 'pdf-lib';
 
-export type PDFPicture = PDFPage | PDFImage;
+// type = image | pdf
+export type PDFEmbeddedPicture = {
+  picture: PDFEmbeddedPage | PDFImage;
+  type: string;
+};
