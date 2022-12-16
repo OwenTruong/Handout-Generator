@@ -1,4 +1,4 @@
-import { lWidth, lHeight } from '@constants/constants';
+import { lWidth, lHeight } from '@/others/constants';
 import { createImage } from '@defaults/functions';
 import { img_width, img_height } from '@defaults/FourImage/fourImage';
 

@@ -1,4 +1,4 @@
-import { pWidth, pHeight } from '@constants/constants';
+import { pWidth, pHeight } from '@/others/constants';
 import { createImage } from '@defaults/functions';
 import { img_width, img_height } from '@defaults/FourImage/fourImage';
 

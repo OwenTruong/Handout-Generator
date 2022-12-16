@@ -13,7 +13,7 @@ import {
 import { checkData } from '@functions/checkData';
 import { checkType } from '@functions/checkType';
 
-import { mainFont } from '@constants/constants';
+import { mainFont } from '@/others/constants';
 
 export class TextFieldC {
   x: number;

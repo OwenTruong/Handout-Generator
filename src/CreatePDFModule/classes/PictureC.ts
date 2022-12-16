@@ -1,12 +1,9 @@
-import { PDFDocument, PDFPage, PDFImage } from 'pdf-lib';
+import { PDFDocument, PDFPage, PDFImage, PDFEmbeddedPage } from 'pdf-lib';
 
-import { OpaqueEnv } from '@classes/OpaqueEnv';
-
-import { getFileExt } from '@functions/files/getFileExt';
 import { checkData } from '@functions/checkData';
 import { checkType } from '@functions/checkType';
 
-export class ImageC {
+export class PictureC {
   x: number;
   y: number;
   width: number;
@@ -37,10 +34,10 @@ export class ImageC {
 
   // A method that grabs bytes of an image with fs and add it to a page in a pdf
   // draw belongs in ImageC.prototype
-  async draw(
+  async drawImage(
     pdfDoc: PDFDocument,
     page: PDFPage,
-    fileBytes: Buffer,
+    image: PDFImage,
     ext: String
   ): Promise<void> {
     const options = {
@@ -51,7 +48,21 @@ export class ImageC {
     };
 
     const fn = [pdfDoc.embedPng, pdfDoc.embedJpg];
-    const image = await fn[ext != 'png' ? 1 : 0](fileBytes);
     page.drawImage(image, options);
+  }
+
+  async drawPage(
+    pdfDoc: PDFDocument,
+    dstPage: PDFPage,
+    srcPage: PDFEmbeddedPage
+  ) {
+    const options = {
+      x: this.x,
+      y: this.y,
+      width: this.width,
+      height: this.height,
+    };
+
+    dstPage.drawPage(srcPage, options);
   }
 }

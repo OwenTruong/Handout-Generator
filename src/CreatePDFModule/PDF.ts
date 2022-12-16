@@ -1,4 +1,4 @@
-import { PDFDocument, PDFImage, PDFPage } from 'pdf-lib';
+import { PDFDocument, PDFEmbeddedPage, PDFImage, PDFPage } from 'pdf-lib';
 
 import { OpaqueEnv } from '@classes/OpaqueEnv';
 
@@ -12,7 +12,7 @@ import { TemplateC } from '@classes/TemplateC';
 import { PageC } from '@classes/PageC';
 import { TextFieldC } from '@/classes/TextFieldC';
 import { LineC } from '@classes/LineC';
-import { ImageC } from '@/classes/ImageC';
+import { PictureC } from '@/classes/PictureC';
 import { TextC } from '@classes/TextC';
 import { getFileExt } from './functions/files/getFileExt';
 import { SrcPdfC } from './classes/PdfC';
@@ -44,31 +44,9 @@ export class PDF {
   // Embed a certain amount of images to a page given a template
   async #embedPicturesToPage(
     page: PDFPage,
-    imgTemps: ImageC[],
-    imgPaths: string[]
-  ): Promise<void> {
-    // if (imgTemps.length < imgPaths.length)
-    //   return console.error('Too many images for a page.');
-    // for (let i = 0; i < imgPaths.length; ++i) {
-    //   const ext: string = getFileExt(imgPaths[i]);
-    //   if (ext != 'pdf' && ext != 'jpg' && ext != 'png')
-    //     throw new Error('FILE EXTENSION ERROR');
-    //   const fileBytes: Buffer | null = OpaqueEnv.readFile(imgPaths[i]);
-    //   // TODO FUTURE: Delete this if condition once browser is implemented
-    //   if (!fileBytes)
-    //     throw new Error(
-    //       '(Temporary) Wrong environment: Browser not available yet'
-    //     );
-    //   if (ext == 'pdf') {
-    //     // Loop through the pdf // FIXME: I feel like I am doing type casting wrong
-    //     (imgTemps[i] as SrcPdfC).draw(this.#pdfDoc, page, fileBytes);
-    //   } else if (ext == 'jpg') {
-    //     (imgTemps[i] as JpgC).draw(this.#pdfDoc, page, fileBytes);
-    //   } else if (ext == 'png') {
-    //     (imgTemps[i] as PngC).draw(this.#pdfDoc, page, fileBytes);
-    //   }
-    // }
-  }
+    pictureTemp: any,
+    pictures: (PDFPage | PDFImage)[]
+  ): Promise<void> {}
 
   // #embedPdfToPage(page: PDFPage, pdfPages);
 
@@ -88,7 +66,7 @@ export class PDF {
   }
 
   async #getPictures(paths: string[]) {
-    const pictures: (PDFPage | PDFImage)[] = [];
+    const pictures: (PDFImage | PDFEmbeddedPage)[] = [];
     for (const path of paths) {
       const ext = path.slice(-3);
 
@@ -101,8 +79,12 @@ export class PDF {
 
       SrcPdfC.getPdfPages(buffer);
 
+      // FIXME: PDFPage.drawPage only accepts PDFEmbeddedPage
+
       if (ext == 'pdf') {
-        pictures.concat(await SrcPdfC.getPdfPages(buffer));
+        pictures.concat(
+          (await SrcPdfC.getPdfPages(buffer)) as PDFEmbeddedPage[]
+        );
       } else if (ext == 'png') {
         pictures.push(await this.#pdfDoc.embedPng(buffer));
       } else if (ext == 'jpg') {
@@ -159,6 +141,13 @@ export class PDF {
       //     Math.min(inputPathArr.length, pictureTemp.length)
       //   )
       // );
+
+      const pictureTemp: any = pageTemp.pictures;
+      await this.#embedPicturesToPage(
+        page,
+        pictureTemp,
+        pictures.splice(0, Math.min(pictures.length, pictureTemp.length))
+      );
 
       // Add Line to PDF
       const lineTmps: LineC[] = pageTemp.lines;

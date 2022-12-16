@@ -1,5 +1,5 @@
 import { splitArgs } from './_splitArgs';
-import { defaultTempID } from '@constants/constants';
+import { defaultTempID } from '@/others/constants';
 
 export type ArgsT = {
   output: string;

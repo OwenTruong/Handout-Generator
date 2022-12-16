@@ -117,3 +117,4 @@ _Start of Journal_
 
 12/14/22
 - Change of plans. I will see through this project until the end (node, web, backend). It would be lame to stop at node.
+- I really messed myself up by the tight coupling of classes huh. I think I should have followed either functional or oop.. and for js, definitely follow functional...

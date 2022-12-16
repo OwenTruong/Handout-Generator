@@ -1,4 +1,4 @@
-import { pWidth, pHeight } from '@constants/constants';
+import { pWidth, pHeight } from '@/others/constants';
 import { createField, createImage, createLineBlock } from '@defaults/functions';
 import { img_width, img_height } from '@defaults/OneImage/oneImage';
 
