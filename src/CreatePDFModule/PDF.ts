@@ -31,6 +31,8 @@ export class PDF {
   }
 
   async #save(): Promise<void> {
+    // FIXME: trying to save() gives error for embedding pdfpages => TypeError: `image` must be of type `PDFImage`, but was actually of type `NaN`
+
     if (!this.#pdfDoc) throw new Error('Need to call init first');
     this.#pdfBytes = await this.#pdfDoc.save();
   }
@@ -133,8 +135,6 @@ export class PDF {
       inputPathArr
     );
 
-    // PRIORITY TODO: CLEAN UP EMBEDPICTURESTOPAGE TO USE PICTURES INSTEAD OF IT EMBEDDING ITSELF AND CREATE PDFC SO THAT WE HAVE A CLASS FOR CREATING PDFS, WORRY ABOUT THE FACT IF WE EVEN NEED A SEPARATE PDF / IMAGE CLASS FOR THIS NOW THAT WE HAVE TAKEN A LOT OF RESPONSIBILITY AWAY, AND ALSO WORRIES ABOUT (PdfPage | PdfImage)[] LOOKING UGLY... DO NOT BOTHER REFACTORING UNTIL YOU KNOW FOR FACT THAT YOU CAN EMBED SRCPDF INTO DSTPDF
-
     let pnum: number = 0;
     while (pictures.length != 0) {
       // pageTemplate -> If template = 2, page 1, 3, 5 and etc follow temp1 and page 2, 4, 6 and etc follow temp2
@@ -153,8 +153,6 @@ export class PDF {
         Math.min(pictures.length, pictureTemp.length)
       );
       await this.#embedPicturesToPage(page, pageTemp.pictures, splicedPic);
-
-      console.log(pictureTemp.length, pictures.length);
 
       // Add Line to PDF
       const lineTmps: LineC[] = pageTemp.lines;

@@ -58,7 +58,7 @@ export class PictureC {
   }
 
   async draw(dstPage: PDFPage, pic: PDFEmbeddedPicture) {
-    if (pic.type == 'pdf')
+    if (pic.type == 'page')
       this.#drawPage(dstPage, pic.picture as PDFEmbeddedPage);
     else this.#drawImage(dstPage, pic.picture as PDFImage);
   }
