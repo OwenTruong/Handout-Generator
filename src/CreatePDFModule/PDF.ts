@@ -47,7 +47,6 @@ export class PDF {
     pictureTemp: PictureC[],
     pictures: PDFEmbeddedPicture[]
   ): Promise<void> {
-    console.log('I was here');
     pictureTemp.forEach((picTemp, i) => {
       picTemp.draw(page, pictures[i]);
     });
@@ -97,7 +96,8 @@ export class PDF {
             };
           })
         );
-        pictures.concat(embeddedPages);
+
+        embeddedPages.forEach((page) => pictures.push(page));
       } else if (ext == 'png') {
         pictures.push({
           picture: await this.#pdfDoc.embedPng(buffer),
