@@ -50,6 +50,7 @@ export class PDF {
     pictures: PDFEmbeddedPicture[]
   ): Promise<void> {
     pictureTemp.forEach((picTemp, i) => {
+      if (!pictures[i]) return; // for templates with more than 1 picture per page, the last page might look empty
       picTemp.draw(page, pictures[i]);
     });
   }
@@ -112,6 +113,7 @@ export class PDF {
         });
       } else throw new Error('Extension not found in file path');
     }
+
     return pictures;
   }
 
