@@ -122,3 +122,14 @@ _Start of Journal_
 
 12/15/22
 - Let'ssss go, I managed to get embedded pdf working for OneImage temp, let's see if it works in general.
+- Some more bug fix after my previous bullet point today, and now the program works. I just need to refactor a little bit. 
+  - Change -t template argument to something else because the ids are confusing.
+  - Check if all NodeJS specific codes are in Opaque.
+  - Figure out the responsibilities of each class, and whether or not if this program really need a specific type/class/interface.
+  - If we need the type, consider global types.
+  - Reduce coupling between classes and refactor it so that it is more functional.
+  - Brainstorm a bit on how I am going to write my documentation: make sure it ready for browser documentation and server-side documentation.
+    - Consider reading this article: https://12factor.net
+  - Consider turning the CreatePDFModule folder into an NPM package.
+  - Consider changing the name of PDF class to Handout instead.
+
