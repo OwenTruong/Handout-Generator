@@ -44,10 +44,13 @@ export class PDF {
   // Embed a certain amount of images to a page given a template
   async #embedPicturesToPage(
     page: PDFPage,
-    pictureTemp: any,
+    pictureTemp: PictureC[],
     pictures: PDFEmbeddedPicture[]
   ): Promise<void> {
-    // TODO: How do I tell if pictures[i] is a pdf or an image?
+    console.log('I was here');
+    pictureTemp.forEach((picTemp, i) => {
+      picTemp.draw(page, pictures[i]);
+    });
   }
 
   // #embedPdfToPage(page: PDFPage, pdfPages);
@@ -133,7 +136,7 @@ export class PDF {
     // PRIORITY TODO: CLEAN UP EMBEDPICTURESTOPAGE TO USE PICTURES INSTEAD OF IT EMBEDDING ITSELF AND CREATE PDFC SO THAT WE HAVE A CLASS FOR CREATING PDFS, WORRY ABOUT THE FACT IF WE EVEN NEED A SEPARATE PDF / IMAGE CLASS FOR THIS NOW THAT WE HAVE TAKEN A LOT OF RESPONSIBILITY AWAY, AND ALSO WORRIES ABOUT (PdfPage | PdfImage)[] LOOKING UGLY... DO NOT BOTHER REFACTORING UNTIL YOU KNOW FOR FACT THAT YOU CAN EMBED SRCPDF INTO DSTPDF
 
     let pnum: number = 0;
-    while (inputPathArr.length != 0) {
+    while (pictures.length != 0) {
       // pageTemplate -> If template = 2, page 1, 3, 5 and etc follow temp1 and page 2, 4, 6 and etc follow temp2
       const pageTemp: PageC = pagesTemp[pnum % pagesTemp.length];
       const page = this.#pdfDoc.addPage(pageTemp.dim); // size: { width: 595.28, height: 841.89 }
@@ -144,25 +147,14 @@ export class PDF {
         this.#embedTextToPage(page, PageN, (pnum + 1).toString());
 
       // Add Image/PDF to Destination PDF
-      // TODO: Change PageC to accept SrcPdfC
-      // TODO: Create embedPdf
-
-      // const pictureTemp: PictureI[] = pageTemp.images;
-      // await this.#embedPicturesToPage(
-      //   page,
-      //   pictureTemp,
-      //   inputPathArr.splice(
-      //     0,
-      //     Math.min(inputPathArr.length, pictureTemp.length)
-      //   )
-      // );
-
       const pictureTemp: PictureC[] = pageTemp.pictures;
-      await this.#embedPicturesToPage(
-        page,
-        pageTemp.pictures,
-        pictures.splice(0, Math.min(pictures.length, pictureTemp.length))
+      const splicedPic = pictures.splice(
+        0,
+        Math.min(pictures.length, pictureTemp.length)
       );
+      await this.#embedPicturesToPage(page, pageTemp.pictures, splicedPic);
+
+      console.log(pictureTemp.length, pictures.length);
 
       // Add Line to PDF
       const lineTmps: LineC[] = pageTemp.lines;

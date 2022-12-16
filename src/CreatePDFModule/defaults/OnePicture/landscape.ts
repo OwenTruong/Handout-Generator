@@ -1,16 +1,16 @@
 import { lWidth, lHeight } from '@/others/constants';
-import { createImage } from '@defaults/functions';
-import { img_width, img_height } from '@defaults/OneImage/oneImage';
+import { createpicture } from '@defaults/functions';
+import { pic_width, pic_height } from '@defaults/OnePicture/onePicture';
 
-const lineImgSpace = 30;
+const linepicSpace = 30;
 
-const img_x = (lWidth - img_width) / 2;
-const img_y1 = lHeight - 50 - img_height;
-const img_y2 = img_y1 - (img_height + lineImgSpace) - img_height / 2 - 10;
+const pic_x = (lWidth - pic_width) / 2;
+const pic_y1 = lHeight - 50 - pic_height;
+const pic_y2 = pic_y1 - (pic_height + linepicSpace) - pic_height / 2 - 10;
 
-// const ln_x1 = img_x;
-// const ln_x2 = img_x + img_width;
-// const ln_y = img_y2 - 45;
+// const ln_x1 = pic_x;
+// const ln_x2 = pic_x + pic_width;
+// const ln_y = pic_y2 - 45;
 
 export const d1_nothing_landscape = {
   id: 13,
@@ -25,7 +25,7 @@ export const d1_nothing_landscape = {
       },
       dim: [lWidth, lHeight],
 
-      images: [createImage(img_x, img_y1, img_width, img_height)],
+      pictures: [createpicture(pic_x, pic_y1, pic_width, pic_height)],
     },
   ],
 };
@@ -45,7 +45,7 @@ export const d1_nothing_landscape = {
 
 //       lines: [...createLineBlock(ln_x1, ln_x2, ln_y, ln_y, 10)],
 
-//       images: [createImage(img_x, img_y1, img_width, img_height)],
+//       pictures: [createpicture(pic_x, pic_y1, pic_width, pic_height)],
 //     },
 //   ],
 // };
@@ -63,9 +63,9 @@ export const d1_nothing_landscape = {
 //       },
 //       dim: [lWidth, lHeight],
 
-//       fields: [createField(img_x, ln_y, img_width, img_height)],
+//       fields: [createField(pic_x, ln_y, pic_width, pic_height)],
 
-//       images: [createImage(img_x, img_y1, img_width, img_height)],
+//       pictures: [createpicture(pic_x, pic_y1, pic_width, pic_height)],
 //     },
 //   ],
 // };

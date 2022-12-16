@@ -26,7 +26,7 @@ export function createField(
   return { x, y, width, height };
 }
 
-export function createImage(
+export function createpicture(
   x: number,
   y: number,
   width: number,

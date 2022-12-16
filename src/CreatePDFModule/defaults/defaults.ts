@@ -1,14 +1,14 @@
-import * as Portrait1 from '@defaults/OneImage/portrait';
-import * as Landscape1 from '@defaults/OneImage/landscape';
+import * as Portrait1 from '@defaults/Onepicture/portrait';
+import * as Landscape1 from '@defaults/Onepicture/landscape';
 
-import * as Portrait2 from '@defaults/TwoImage/portrait';
-import * as Landscape2 from '@defaults/TwoImage/landscape';
+import * as Portrait2 from '@defaults/Twopicture/portrait';
+import * as Landscape2 from '@defaults/Twopicture/landscape';
 
-import * as Portrait3 from '@defaults/ThreeImage/portrait';
-import * as Landscape3 from '@defaults/ThreeImage/landscape';
+import * as Portrait3 from '@defaults/Threepicture/portrait';
+import * as Landscape3 from '@defaults/Threepicture/landscape';
 
-import * as Portrait4 from '@defaults/FourImage/portrait';
-import * as Landscape4 from '@defaults/FourImage/landscape';
+import * as Portrait4 from '@defaults/Fourpicture/portrait';
+import * as Landscape4 from '@defaults/Fourpicture/landscape';
 
 export const defaults = Object.assign(
   {},
@@ -39,7 +39,7 @@ export const defaults = Object.assign(
 //         "size": 12
 //       },
 //       "lines": [
-//         /* First Image */
+//         /* First picture */
 //         {
 //           "x1": 300,
 //           "x2": 560,
@@ -77,7 +77,7 @@ export const defaults = Object.assign(
 //           "y2": d3pp_l1_y + 150,
 //         },
 
-//         /* Second Image */
+//         /* Second picture */
 //         {
 //           "x1": 300,
 //           "x2": 560,
@@ -115,7 +115,7 @@ export const defaults = Object.assign(
 //           "y2": d3pp_l2_y + 150,
 //         },
 
-//         /* Third Image */
+//         /* Third picture */
 //         {
 //           "x1": 300,
 //           "x2": 560,
@@ -154,7 +154,7 @@ export const defaults = Object.assign(
 //         },
 //       ],
 
-//       "images": [
+//       "pictures": [
 //         {
 //           "x": 30,
 //           "y": 582,

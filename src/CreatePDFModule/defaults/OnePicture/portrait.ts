@@ -1,17 +1,21 @@
 import { pWidth, pHeight } from '@/others/constants';
-import { createField, createImage, createLineBlock } from '@defaults/functions';
-import { img_width, img_height } from '@defaults/OneImage/oneImage';
+import {
+  createField,
+  createpicture,
+  createLineBlock,
+} from '@defaults/functions';
+import { pic_width, pic_height } from '@defaults/OnePicture/onePicture';
 
-const img_x = (pWidth - img_width) / 2;
-const img_y = pHeight - 50 - img_height;
+const pic_x = (pWidth - pic_width) / 2;
+const pic_y = pHeight - 50 - pic_height;
 
-const ln_x1 = img_x;
-const ln_x2 = img_x + img_width;
-const ln_y = img_y - 300;
+const ln_x1 = pic_x;
+const ln_x2 = pic_x + pic_width;
+const ln_y = pic_y - 300;
 
-// const fd_y = img_y - img_height;
-const fd_height = img_height / 1.7;
-const fd_y = img_y - fd_height - 50;
+// const fd_y = pic_y - pic_height;
+const fd_height = pic_height / 1.7;
+const fd_y = pic_y - fd_height - 50;
 
 export const d1_nothing_portrait = {
   id: 10,
@@ -26,7 +30,7 @@ export const d1_nothing_portrait = {
       },
       dim: [pWidth, pHeight],
 
-      images: [createImage(img_x, img_y, img_width, img_height)],
+      pictures: [createpicture(pic_x, pic_y, pic_width, pic_height)],
     },
   ],
 };
@@ -46,7 +50,7 @@ export const d1_print_portrait = {
 
       lines: [...createLineBlock(ln_x1, ln_x2, ln_y, ln_y, 10)],
 
-      images: [createImage(img_x, img_y, img_width, img_height)],
+      pictures: [createpicture(pic_x, pic_y, pic_width, pic_height)],
     },
   ],
 };
@@ -64,9 +68,9 @@ export const d1_digital_portrait = {
       },
       dim: [pWidth, pHeight],
 
-      fields: [createField(ln_x1, fd_y, img_width, fd_height)],
+      fields: [createField(ln_x1, fd_y, pic_width, fd_height)],
 
-      images: [createImage(img_x, img_y, img_width, img_height)],
+      pictures: [createpicture(pic_x, pic_y, pic_width, pic_height)],
     },
   ],
 };
