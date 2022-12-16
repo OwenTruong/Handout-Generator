@@ -115,3 +115,5 @@ _Start of Journal_
 - OOP JS is not fun...
   - I have trapped myself. It is really difficult to implement the ability to embed pdf inside pdf... I should not have refactored my createPDF method that early.
 
+12/14/22
+- Change of plans. I will see through this project until the end (node, web, backend). It would be lame to stop at node.
