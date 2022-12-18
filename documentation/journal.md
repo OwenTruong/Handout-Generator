@@ -133,3 +133,10 @@ _Start of Journal_
   - Consider turning the CreatePDFModule folder into an NPM package.
   - Consider changing the name of PDF class to Handout instead.
 
+
+12/17/22
+- First thing to be changed tomorrow is to separate the responsibilities between the pdf(handout) class and the template classes. Should the template classes be in charge of type checking? Should the components in the template classes call each other and be tightly coupled?
+- Consider adding mediator and proxy patterns.
+
+
+
