@@ -30,7 +30,6 @@ export class Handout {
   #getDefaultTemplate(id: number, defaults: Template[]): Template {
     for (let i = 0; i < defaults.length; i++) {
       if (id == defaults[i].id) return defaults[i];
-      return this.#getDefaultTemplate(id, defaults);
     }
     throw new Error('Template Not Found');
   }
@@ -188,6 +187,7 @@ export class Handout {
 
       // Add Fields to PDF
       this.#embedFieldsToPage(page, pageTemplate.fields);
+      pnum++;
     }
 
     return await this.#save();
@@ -195,3 +195,4 @@ export class Handout {
 }
 
 // TODO: Look to Bridge Design Pattern for implementing cross platform support
+// FIXME: Source Map does not work

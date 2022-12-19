@@ -50,7 +50,11 @@ function getAssets(paths: string[]) {
 
 // TODO: CHECK IF CODE STILL WORKS. IF SO, FINISH ALL THE OTHER TODO LISTS IN THE TS FOLDERS AND START CLEANING UP
 
-async function getHandout(pdfPath: string, picturePath: string, id: number) {
+async function getHandout(
+  pdfPath: string = 'handout.pdf',
+  picturePath: string,
+  id: number = 30
+) {
   const assets = getAssets(getFilePaths(picturePath)(['pdf', 'png', 'jpg']));
   const handout = new Handout();
 
@@ -60,5 +64,5 @@ async function getHandout(pdfPath: string, picturePath: string, id: number) {
 
 (() => {
   const data: ArgsT = parseArgs(process.argv);
-  getHandout(data.output, data.input, data.id);
+  getHandout(data.output, data.input, +data.id);
 })();
