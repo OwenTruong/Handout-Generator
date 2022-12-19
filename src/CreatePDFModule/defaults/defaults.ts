@@ -1,30 +1,47 @@
-import * as Portrait1 from '@defaults/Onepicture/portrait';
-import * as Landscape1 from '@defaults/Onepicture/landscape';
+import {
+  d1_nothing_portrait,
+  d1_print_portrait,
+  d1_digital_portrait,
+} from '@defaults/OnePicture/portrait';
+import { d1_nothing_landscape } from '@defaults/OnePicture/landscape';
 
-import * as Portrait2 from '@defaults/Twopicture/portrait';
-import * as Landscape2 from '@defaults/Twopicture/landscape';
+import { d2_nothing_portrait } from '@defaults/TwoPicture/portrait';
+import {
+  d2_print_landscape,
+  d2_digital_landscape,
+} from '@defaults/TwoPicture/landscape';
 
-import * as Portrait3 from '@defaults/Threepicture/portrait';
-import * as Landscape3 from '@defaults/Threepicture/landscape';
+import {
+  d3_print_portrait,
+  d3_digital_portrait,
+} from '@defaults/ThreePicture/portrait';
+import {
+  d3_print_landscape,
+  d3_digital_landscape,
+} from '@defaults/ThreePicture/landscape';
 
-import * as Portrait4 from '@defaults/Fourpicture/portrait';
-import * as Landscape4 from '@defaults/Fourpicture/landscape';
+import { d4_print_portrait } from '@defaults/FourPicture/portrait';
+import { d4_print_landscape } from '@defaults/FourPicture/landscape';
 
-export const defaults = Object.assign(
-  {},
+export const defaults = {
+  d1_nothing_portrait,
+  d1_print_portrait,
+  d1_digital_portrait,
 
-  Portrait1,
-  Landscape1,
+  d1_nothing_landscape,
 
-  Portrait2,
-  Landscape2,
+  d2_nothing_portrait,
+  d2_print_landscape,
+  d2_digital_landscape,
 
-  Portrait3,
-  Landscape3,
+  d3_print_portrait,
+  d3_digital_portrait,
+  d3_print_landscape,
+  d3_digital_landscape,
 
-  Portrait4,
-  Landscape4
-);
+  d4_print_portrait,
+  d4_print_landscape,
+};
 
 /* FOR REFERENCE */
 

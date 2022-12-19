@@ -37,7 +37,7 @@ export const d1_nothing_portrait: Template = {
   ],
 };
 
-export const d1_print_portrait = {
+export const d1_print_portrait: Template = {
   id: 11,
   name: 'Default 1 Print Portrait',
 
@@ -50,14 +50,14 @@ export const d1_print_portrait = {
       },
       dim: [pWidth, pHeight],
 
-      lines: [...createLineBlock(ln_x1, ln_x2, ln_y, ln_y, 10)],
-
+      fields: [],
       pictures: [createpicture(pic_x, pic_y, pic_width, pic_height)],
+      lines: [...createLineBlock(ln_x1, ln_x2, ln_y, ln_y, 10)],
     },
   ],
 };
 
-export const d1_digital_portrait = {
+export const d1_digital_portrait: Template = {
   id: 12,
   name: 'Default 1 Digital Portrait',
 
@@ -71,8 +71,8 @@ export const d1_digital_portrait = {
       dim: [pWidth, pHeight],
 
       fields: [createField(ln_x1, fd_y, pic_width, fd_height)],
-
       pictures: [createpicture(pic_x, pic_y, pic_width, pic_height)],
+      lines: [],
     },
   ],
 };
