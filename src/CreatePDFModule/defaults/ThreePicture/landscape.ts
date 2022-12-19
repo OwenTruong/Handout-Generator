@@ -22,7 +22,7 @@ const l3_x2 = pic3_x + pic_width;
 
 const ln_y = pic_y - pic_height - 40;
 
-export const d3_print_landscape = {
+export const d3_print_landscape: Template = {
   id: 32,
   name: 'Default 3 Print Landscape',
 
@@ -36,16 +36,17 @@ export const d3_print_landscape = {
 
       dim: [lWidth, lHeight],
 
-      lines: [
-        ...createLineBlock(l1_x1, l1_x2, ln_y, ln_y),
-        ...createLineBlock(l2_x1, l2_x2, ln_y, ln_y),
-        ...createLineBlock(l3_x1, l3_x2, ln_y, ln_y),
-      ],
-
+      fields: [],
       pictures: [
         createpicture(pic1_x, pic_y, pic_width, pic_height),
         createpicture(pic2_x, pic_y, pic_width, pic_height),
         createpicture(pic3_x, pic_y, pic_width, pic_height),
+      ],
+
+      lines: [
+        ...createLineBlock(l1_x1, l1_x2, ln_y, ln_y),
+        ...createLineBlock(l2_x1, l2_x2, ln_y, ln_y),
+        ...createLineBlock(l3_x1, l3_x2, ln_y, ln_y),
       ],
     },
   ],

@@ -1,5 +1,4 @@
 import { PDFDocument, PDFEmbeddedPage, PDFImage, PDFPage } from 'pdf-lib';
-
 import { OpaqueEnv } from '@classes/OpaqueEnv';
 
 // import { TemplateT } from "@/types/TemplateT";
@@ -168,5 +167,39 @@ export class PDF {
     }
 
     this.#created = true;
+  }
+}
+
+function isArray<T>(obj: unknown): obj is Array<T> {
+  return typeof obj === 'object' && obj !== null && 'length' in obj;
+}
+
+function hasProperty(obj: unknown, prop: string) {
+  return (prop: string) =>
+    typeof obj === 'object' && obj !== null && prop in obj;
+}
+
+class Template {
+  #template: Page[];
+
+  constructor(id: number) {
+    this.#template = this.#pickDefaultTemplate(id, Object.values(defaults));
+    // Also will handle fetch requests in the future
+  }
+
+  #pickDefaultTemplate(id: number, dfTemp: unknown[], i: number = 0): unknown {
+    if (i == dfTemp.length) throw new Error('Template Not Found');
+    if (id == dfTemp[i].id) return dfTemp[i];
+
+    return this.#pickTemplate(id, dfTemp, ++i);
+  }
+}
+
+export class Handout {
+  #pdfDoc!: PDFDocument;
+  #verifiedTemplate!: any;
+
+  createHandout(assets: Buffer, templateId: number = 0) {
+    new Template(templateId);
   }
 }

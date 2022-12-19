@@ -17,7 +17,7 @@ const ln_y = pic_y - 300;
 const fd_height = pic_height / 1.7;
 const fd_y = pic_y - fd_height - 50;
 
-export const d1_nothing_portrait = {
+export const d1_nothing_portrait: Template = {
   id: 10,
   name: 'Default 1 Nothing Portrait',
 
@@ -30,7 +30,9 @@ export const d1_nothing_portrait = {
       },
       dim: [pWidth, pHeight],
 
+      fields: [],
       pictures: [createpicture(pic_x, pic_y, pic_width, pic_height)],
+      lines: [],
     },
   ],
 };

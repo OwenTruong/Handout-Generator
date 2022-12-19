@@ -19,7 +19,7 @@ const l1_y = pic1_y + 5;
 const l2_y = pic2_y + 5;
 const l3_y = pic3_y + 5;
 
-export const d3_print_portrait = {
+export const d3_print_portrait: Template = {
   id: 30,
   name: 'Default 3 Print Portrait',
 
@@ -31,6 +31,7 @@ export const d3_print_portrait = {
         size: 12,
       },
       dim: [pWidth, pHeight],
+
       lines: [
         ...createLineBlock(ln_x1, ln_x2, l1_y, l1_y),
         ...createLineBlock(ln_x1, ln_x2, l2_y, l2_y),
@@ -43,13 +44,14 @@ export const d3_print_portrait = {
         createpicture(pic_x, pic2_y, pic_width, pic_height),
         createpicture(pic_x, pic1_y, pic_width, pic_height),
       ],
+      fields: [],
     },
   ],
 };
 
 // Digital Portrait Specific //
 
-export const d3_digital_portrait = {
+export const d3_digital_portrait: Template = {
   id: 31,
   name: 'Default 3 Digital Portrait',
 
@@ -74,6 +76,8 @@ export const d3_digital_portrait = {
         createpicture(pic_x, pic2_y, pic_width, pic_height),
         createpicture(pic_x, pic1_y, pic_width, pic_height),
       ],
+
+      lines: [],
     },
   ],
 };

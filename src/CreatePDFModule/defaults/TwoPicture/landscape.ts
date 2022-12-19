@@ -21,7 +21,7 @@ const l_y = pic_y - 30 * 5 - 60;
 
 const fd_y = l_y - 30;
 
-export const d2_print_landscape = {
+export const d2_print_landscape: Template = {
   id: 22,
   name: 'Default 2 Print Landscape',
 
@@ -35,14 +35,15 @@ export const d2_print_landscape = {
 
       dim: [lWidth, lHeight],
 
-      lines: [
-        ...createLineBlock(l1_x1, l1_x2, l_y, l_y),
-        ...createLineBlock(l2_x1, l2_x2, l_y, l_y),
-      ],
-
+      fields: [],
       pictures: [
         createpicture(pic1_x, pic_y, pic_width, pic_height),
         createpicture(pic2_x, pic_y, pic_width, pic_height),
+      ],
+
+      lines: [
+        ...createLineBlock(l1_x1, l1_x2, l_y, l_y),
+        ...createLineBlock(l2_x1, l2_x2, l_y, l_y),
       ],
     },
   ],
@@ -71,6 +72,8 @@ export const d2_digital_landscape = {
         createpicture(pic1_x, pic_y, pic_width, pic_height),
         createpicture(pic2_x, pic_y, pic_width, pic_height),
       ],
+
+      lines: [],
     },
   ],
 };

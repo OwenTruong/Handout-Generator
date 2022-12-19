@@ -12,7 +12,7 @@ const pic_y2 = pic_y1 - (pic_height + linepicSpace) - pic_height / 2 - 10;
 // const ln_x2 = pic_x + pic_width;
 // const ln_y = pic_y2 - 45;
 
-export const d1_nothing_landscape = {
+export const d1_nothing_landscape: Template = {
   id: 13,
   name: 'Default 1 Nothing Landscape',
 
@@ -25,7 +25,9 @@ export const d1_nothing_landscape = {
       },
       dim: [lWidth, lHeight],
 
+      fields: [],
       pictures: [createpicture(pic_x, pic_y1, pic_width, pic_height)],
+      lines: [],
     },
   ],
 };

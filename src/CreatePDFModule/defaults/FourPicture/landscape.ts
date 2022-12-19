@@ -7,7 +7,7 @@ const pic_x2 = lWidth - pic_x1 - pic_width;
 const pic_y2 = 75;
 const pic_y1 = lHeight - pic_y2 - pic_height;
 
-export const d4_print_landscape = {
+export const d4_print_landscape: Template = {
   id: 42,
   name: 'Default 4 Print Landscape',
 
@@ -21,6 +21,7 @@ export const d4_print_landscape = {
 
       dim: [lWidth, lHeight],
 
+      fields: [],
       pictures: [
         // y1 > y2
         createpicture(pic_x1, pic_y1, pic_width, pic_height),
@@ -28,6 +29,8 @@ export const d4_print_landscape = {
         createpicture(pic_x1, pic_y2, pic_width, pic_height),
         createpicture(pic_x2, pic_y2, pic_width, pic_height),
       ],
+
+      lines: [],
     },
   ],
 };
