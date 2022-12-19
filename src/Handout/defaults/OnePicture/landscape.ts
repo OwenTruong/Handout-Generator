@@ -1,6 +1,6 @@
 import { lWidth, lHeight } from '@/others/constants';
-import { createPicture } from '@defaults/functions';
-import { pic_width, pic_height } from '@defaults/OnePicture/onePicture';
+import { createPicture } from '@/defaults/functions';
+import { pic_width, pic_height } from '@/defaults/OnePicture/onePicture';
 
 const linepicSpace = 30;
 

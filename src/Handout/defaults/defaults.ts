@@ -2,26 +2,26 @@ import {
   d1_nothing_portrait,
   d1_print_portrait,
   d1_digital_portrait,
-} from '@defaults/OnePicture/portrait';
-import { d1_nothing_landscape } from '@defaults/OnePicture/landscape';
+} from '@/defaults/OnePicture/portrait';
+import { d1_nothing_landscape } from '@/defaults/OnePicture/landscape';
 
-import { d2_nothing_portrait } from '@defaults/TwoPicture/portrait';
+import { d2_nothing_portrait } from '@/defaults/TwoPicture/portrait';
 import {
   d2_print_landscape,
   d2_digital_landscape,
-} from '@defaults/TwoPicture/landscape';
+} from '@/defaults/TwoPicture/landscape';
 
 import {
   d3_print_portrait,
   d3_digital_portrait,
-} from '@defaults/ThreePicture/portrait';
+} from '@/defaults/ThreePicture/portrait';
 import {
   d3_print_landscape,
   d3_digital_landscape,
-} from '@defaults/ThreePicture/landscape';
+} from '@/defaults/ThreePicture/landscape';
 
-import { d4_print_portrait } from '@defaults/FourPicture/portrait';
-import { d4_print_landscape } from '@defaults/FourPicture/landscape';
+import { d4_print_portrait } from '@/defaults/FourPicture/portrait';
+import { d4_print_landscape } from '@/defaults/FourPicture/landscape';
 
 export const defaults = {
   d1_nothing_portrait,

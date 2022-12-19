@@ -3,8 +3,8 @@ import {
   createField,
   createPicture,
   createLineBlock,
-} from '@defaults/functions';
-import { pic_width, pic_height } from '@defaults/OnePicture/onePicture';
+} from '@/defaults/functions';
+import { pic_width, pic_height } from '@/defaults/OnePicture/onePicture';
 
 const pic_x = (pWidth - pic_width) / 2;
 const pic_y = pHeight - 50 - pic_height;

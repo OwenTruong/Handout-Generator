@@ -1,7 +1,6 @@
 import { parseArgs, ArgsT } from './ParseArgumentModule/parseArgs';
-import { Handout } from '@/Handout';
+import { Asset, Handout } from '@/Handout';
 import fs from 'fs';
-import { PDFEmbeddedPicture } from '@/others/types'; // FIXME: Bad, but temporarly. Do not import types from inside the CreatePDFModule
 
 function checkEquality(exts: string[]): (str: string) => boolean {
   return (str: string) => {
@@ -30,11 +29,7 @@ function getFilePaths(path: string): (extensions: string[]) => string[] {
 }
 
 function getAssets(paths: string[]) {
-  // TODO: Create type for assets in the module folder
-  const assets: {
-    type: Extension;
-    bytes: Buffer;
-  }[] = [];
+  const assets: Asset[] = [];
 
   for (const path of paths) {
     const ext = path.slice(-3);
@@ -47,8 +42,6 @@ function getAssets(paths: string[]) {
 
   return assets;
 }
-
-// TODO: CHECK IF CODE STILL WORKS. IF SO, FINISH ALL THE OTHER TODO LISTS IN THE TS FOLDERS AND START CLEANING UP
 
 async function getHandout(
   pdfPath: string = 'handout.pdf',

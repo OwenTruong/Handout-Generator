@@ -1,8 +1,8 @@
 // LineC and ImageC are not allowed to import TemplateC
 
-import { PageC } from '@classes/PageC';
-import { checkData } from '@functions/checkData';
-import { checkType } from '@functions/checkType';
+import { PageC } from 'Archive/classes/PageC';
+import { checkData } from 'Archive/functions/checkData';
+import { checkType } from 'Archive/functions/checkType';
 
 // My purpose of using types and classes
 export class TemplateC {

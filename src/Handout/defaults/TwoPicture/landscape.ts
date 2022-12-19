@@ -3,8 +3,8 @@ import {
   createLineBlock,
   createPicture,
   createField,
-} from '@defaults/functions';
-import { pic_width, pic_height } from '@defaults/TwoPicture/twoPicture';
+} from '@/defaults/functions';
+import { pic_width, pic_height } from '@/defaults/TwoPicture/twoPicture';
 
 const offset = 100;
 const pic1_x = offset;

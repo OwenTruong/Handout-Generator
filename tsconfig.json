@@ -15,11 +15,9 @@
     "baseUrl": "src",
 
     "paths": {
-      "@/*": ["CreatePDFModule/*"],
-      "@classes/*": ["CreatePDFModule/classes/*"],
-      "@constants/*": ["CreatePDFModule/constants/*"],
-      "@defaults/*": ["CreatePDFModule/defaults/*"],
-      "@functions/*": ["CreatePDFModule/functions/*"]
+      "@/*": ["Handout/*"],
+      "@defaults/*": ["Handout/defaults/*"],
+      "@others/*": ["Handout/others/*"]
     }
   }
 }

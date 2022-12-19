@@ -1,7 +1,7 @@
 import { pWidth, pHeight } from '@/others/constants';
-import { createPicture } from '@defaults/functions';
-import { pic_width, pic_height } from '@defaults/FourPicture/fourPicture';
-import { TemplateC } from '@/classes/TemplateC';
+import { createPicture } from '@/defaults/functions';
+import { pic_width, pic_height } from '@/defaults/FourPicture/fourPicture';
+import { TemplateC } from 'Archive/classes/TemplateC';
 
 const pic_x1 = 50;
 const pic_x2 = pWidth - pic_x1 - pic_width;

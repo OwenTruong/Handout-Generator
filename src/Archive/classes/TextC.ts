@@ -1,7 +1,7 @@
 import { PDFDocument, PDFPage, RGB, rgb } from 'pdf-lib';
 
-import { checkData } from '@functions/checkData';
-import { checkType } from '@functions/checkType';
+import { checkData } from 'Archive/functions/checkData';
+import { checkType } from 'Archive/functions/checkType';
 
 import { mainFont } from '@/others/constants';
 

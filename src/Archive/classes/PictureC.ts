@@ -1,7 +1,7 @@
 import { PDFDocument, PDFPage, PDFImage, PDFEmbeddedPage } from 'pdf-lib';
 
-import { checkData } from '@functions/checkData';
-import { checkType } from '@functions/checkType';
+import { checkData } from 'Archive/functions/checkData';
+import { checkType } from 'Archive/functions/checkType';
 import { PDFEmbeddedPicture } from '@/others/types';
 
 export class PictureC {

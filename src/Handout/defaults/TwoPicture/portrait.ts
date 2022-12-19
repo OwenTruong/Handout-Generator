@@ -1,6 +1,6 @@
 import { pWidth, pHeight } from '@/others/constants';
-import { createPicture } from '@defaults/functions';
-import { pic_width, pic_height } from '@defaults/TwoPicture/twoPicture';
+import { createPicture } from '@/defaults/functions';
+import { pic_width, pic_height } from '@/defaults/TwoPicture/twoPicture';
 
 const linepicSpace = 30;
 

@@ -1,6 +1,6 @@
 import { lWidth, lHeight } from '@/others/constants';
-import { createPicture } from '@defaults/functions';
-import { pic_width, pic_height } from '@defaults/FourPicture/fourPicture';
+import { createPicture } from '@/defaults/functions';
+import { pic_width, pic_height } from '@/defaults/FourPicture/fourPicture';
 
 const pic_width_modified = pic_width * 1.25;
 const pic_height_modified = pic_height * 1.25;

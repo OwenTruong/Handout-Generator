@@ -3,8 +3,8 @@ import {
   createLineBlock,
   createPicture,
   createField,
-} from '@defaults/functions';
-import { pic_width, pic_height } from '@defaults/ThreePicture/threePicture';
+} from '@/defaults/functions';
+import { pic_width, pic_height } from '@/defaults/ThreePicture/threePicture';
 
 const pic1_x = 30;
 const pic2_x = 30 + pic_width + 30;

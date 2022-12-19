@@ -1,4 +1,4 @@
-import { defaults } from '@defaults/defaults';
+import { defaults } from '@/defaults/defaults';
 import {
   PDFDocument,
   PDFEmbeddedPage,
@@ -7,17 +7,19 @@ import {
   PDFPage,
   PDFTextField,
 } from 'pdf-lib';
-import { mainFont, mainColor } from './others/constants';
-import { PDFEmbeddedPicture } from './others/types';
+import { mainFont, mainColor } from '@/others/constants';
+import {
+  PDFEmbeddedPicture,
+  Template,
+  Label,
+  Picture,
+  Line,
+  Textfield,
+  Page,
+  Asset,
+} from '@/others/types';
 
-function isArray<T>(obj: unknown): obj is Array<T> {
-  return typeof obj === 'object' && obj !== null && 'length' in obj;
-}
-
-function hasProperty(obj: unknown, prop: string) {
-  return (prop: string) =>
-    typeof obj === 'object' && obj !== null && prop in obj;
-}
+export { Asset };
 
 export class Handout {
   #document!: PDFDocument;
@@ -54,12 +56,7 @@ export class Handout {
     return doc.getPages();
   }
 
-  async #embedBytes(
-    assets: {
-      type: Extension;
-      bytes: Buffer;
-    }[]
-  ): Promise<PDFEmbeddedPicture[]> {
+  async #embedBytes(assets: Asset[]): Promise<PDFEmbeddedPicture[]> {
     const pictures: PDFEmbeddedPicture[] = [];
     for (const asset of assets) {
       if (asset.type === 'jpg')
@@ -154,13 +151,7 @@ export class Handout {
     return this.#document.save();
   }
 
-  async createHandout(
-    assets: {
-      type: Extension;
-      bytes: Buffer;
-    }[],
-    templateId: number | 'customPH' = 0
-  ) {
+  async createHandout(assets: Asset[], templateId: number | 'customPH' = 0) {
     this.#document = await PDFDocument.create();
     this.#setTemplate(templateId);
 

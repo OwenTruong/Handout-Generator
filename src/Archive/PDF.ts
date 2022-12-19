@@ -1,14 +1,14 @@
 import { PDFDocument, PDFEmbeddedPage, PDFImage, PDFPage } from 'pdf-lib';
-import { OpaqueEnv } from '@classes/OpaqueEnv';
+import { OpaqueEnv } from 'Archive/classes/OpaqueEnv';
 
-import { TemplateC } from '@classes/TemplateC';
-import { PageC } from '@classes/PageC';
-import { TextFieldC } from '@/classes/TextFieldC';
-import { LineC } from '@classes/LineC';
-import { PictureC } from '@/classes/PictureC';
-import { TextC } from '@classes/TextC';
-import { getFileExt } from './functions/files/getFileExt';
-import { PDFEmbeddedPicture } from './others/types';
+import { TemplateC } from 'Archive/classes/TemplateC';
+import { PageC } from 'Archive/classes/PageC';
+import { TextFieldC } from 'Archive/classes/TextFieldC';
+import { LineC } from 'Archive/classes/LineC';
+import { PictureC } from 'Archive/classes/PictureC';
+import { TextC } from 'Archive/classes/TextC';
+import { getFileExt } from './functions/getFileExt';
+import { PDFEmbeddedPicture } from '../Handout/others/types';
 
 export class PDF {
   #pdfDoc!: PDFDocument;

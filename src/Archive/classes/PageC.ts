@@ -1,10 +1,10 @@
-import { TextC } from '@classes/TextC';
-import { TextFieldC } from '@/classes/TextFieldC';
-import { PictureC } from '@/classes/PictureC';
-import { LineC } from '@classes/LineC';
+import { TextC } from 'Archive/classes/TextC';
+import { TextFieldC } from 'Archive/classes/TextFieldC';
+import { PictureC } from 'Archive/classes/PictureC';
+import { LineC } from 'Archive/classes/LineC';
 
-import { checkData } from '@functions/checkData';
-import { checkType } from '@functions/checkType';
+import { checkData } from 'Archive/functions/checkData';
+import { checkType } from 'Archive/functions/checkType';
 
 export class PageC {
   pageN: TextC | null;
