@@ -1,37 +1,64 @@
-import * as R from 'ramda';
-
-import { defaults } from '@defaults/defaults';
-import { PDF } from '@/PDF';
-
 import { parseArgs, ArgsT } from './ParseArgumentModule/parseArgs';
+import { Handout } from '@/Handout';
+import fs from 'fs';
+import { PDFEmbeddedPicture } from '@/others/types'; // FIXME: Bad, but temporarly. Do not import types from inside the CreatePDFModule
 
-// Unpure function
-function pickTemplate(id: number, dfTemp: any[], i: number = 0): any {
-  if (i == dfTemp.length) throw new Error('Template Not Found');
-  if (id == dfTemp[i].id) return dfTemp[i];
-
-  return pickTemplate(id, dfTemp, ++i);
+function checkEquality(exts: string[]): (str: string) => boolean {
+  return (str: string) => {
+    for (let i = 0; i < exts.length; ++i) {
+      if (str.slice(-4) == '.' + exts[i]) return true;
+    }
+    return false;
+  };
 }
 
-// FIXME: It might not be a good idea for templates to be of type any
-// TODO: Allow pdf as input
-// Unpure function
-async function getPDF(pdfPath: string, inputPath: string, id: number) {
-  // Dynamically pick image folder
-  const pdf = new PDF();
-  await pdf.init(pickTemplate(id, Object.values(defaults)));
-  await pdf.createPDF(pdfPath, inputPath);
-  await pdf.writePDF(pdfPath ?? 'handout.pdf');
+function getFilePaths(path: string): (extensions: string[]) => string[] {
+  if (path[-1] != '/') path = path + '/';
+
+  return (extensions: string[]): string[] => {
+    if (typeof window === 'undefined') {
+      const result: string[] = fs
+        .readdirSync(path)
+        .filter(checkEquality(extensions))
+        .map((name: string) => path + name);
+
+      return result;
+    }
+
+    return [];
+  };
+}
+
+function getAssets(paths: string[]) {
+  // TODO: Create type for assets in the module folder
+  const assets: {
+    type: Extension;
+    bytes: Buffer;
+  }[] = [];
+
+  for (const path of paths) {
+    const ext = path.slice(-3);
+    const buffer: Buffer = fs.readFileSync(path);
+
+    if (ext == 'jpg' || ext == 'png' || ext == 'pdf')
+      assets.push({ type: ext, bytes: buffer });
+    else throw new Error('Wrong File in getAssets(paths: string[])');
+  }
+
+  return assets;
+}
+
+// TODO: CHECK IF CODE STILL WORKS. IF SO, FINISH ALL THE OTHER TODO LISTS IN THE TS FOLDERS AND START CLEANING UP
+
+async function getHandout(pdfPath: string, picturePath: string, id: number) {
+  const assets = getAssets(getFilePaths(picturePath)(['pdf', 'png', 'jpg']));
+  const handout = new Handout();
+
+  const handoutBytes = await handout.createHandout(assets, id);
+  fs.writeFileSync(pdfPath, handoutBytes);
 }
 
 (() => {
   const data: ArgsT = parseArgs(process.argv);
-  getPDF(data.output, data.input, data.id);
+  getHandout(data.output, data.input, data.id);
 })();
-
-// Pure: (input) => 3 * input
-// Impure: (input: number) => print(3 * input)
-
-// input = "foo"
-// Impure: const owen = "smart";
-// (input: "string") => owen + input
