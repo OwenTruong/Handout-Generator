@@ -1,5 +1,5 @@
 import { pWidth, pHeight } from '@/others/constants';
-import { createpicture } from '@defaults/functions';
+import { createPicture } from '@defaults/functions';
 import { pic_width, pic_height } from '@defaults/FourPicture/fourPicture';
 import { TemplateC } from '@/classes/TemplateC';
 
@@ -25,10 +25,10 @@ export const d4_print_portrait: Template = {
       pictures: [
         // TODO: I need a uniform system where y1 > y2 in all of my templates
         // y1 > y2
-        createpicture(pic_x1, pic_y1, pic_width, pic_height),
-        createpicture(pic_x2, pic_y1, pic_width, pic_height),
-        createpicture(pic_x1, pic_y2, pic_width, pic_height),
-        createpicture(pic_x2, pic_y2, pic_width, pic_height),
+        createPicture(pic_x1, pic_y1, pic_width, pic_height),
+        createPicture(pic_x2, pic_y1, pic_width, pic_height),
+        createPicture(pic_x1, pic_y2, pic_width, pic_height),
+        createPicture(pic_x2, pic_y2, pic_width, pic_height),
       ],
       fields: [],
     },

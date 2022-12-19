@@ -1,7 +1,7 @@
 import { lWidth, lHeight } from '@/others/constants';
 import {
   createLineBlock,
-  createpicture,
+  createPicture,
   createField,
 } from '@defaults/functions';
 import { pic_width, pic_height } from '@defaults/TwoPicture/twoPicture';
@@ -37,8 +37,8 @@ export const d2_print_landscape: Template = {
 
       fields: [],
       pictures: [
-        createpicture(pic1_x, pic_y, pic_width, pic_height),
-        createpicture(pic2_x, pic_y, pic_width, pic_height),
+        createPicture(pic1_x, pic_y, pic_width, pic_height),
+        createPicture(pic2_x, pic_y, pic_width, pic_height),
       ],
 
       lines: [
@@ -49,7 +49,7 @@ export const d2_print_landscape: Template = {
   ],
 };
 
-export const d2_digital_landscape = {
+export const d2_digital_landscape: Template = {
   id: 23,
   name: 'Default 2 Digital Landscape',
 
@@ -69,8 +69,8 @@ export const d2_digital_landscape = {
       ],
 
       pictures: [
-        createpicture(pic1_x, pic_y, pic_width, pic_height),
-        createpicture(pic2_x, pic_y, pic_width, pic_height),
+        createPicture(pic1_x, pic_y, pic_width, pic_height),
+        createPicture(pic2_x, pic_y, pic_width, pic_height),
       ],
 
       lines: [],

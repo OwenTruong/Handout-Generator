@@ -1,5 +1,5 @@
 import { lWidth, lHeight } from '@/others/constants';
-import { createpicture } from '@defaults/functions';
+import { createPicture } from '@defaults/functions';
 import { pic_width, pic_height } from '@defaults/OnePicture/onePicture';
 
 const linepicSpace = 30;
@@ -26,7 +26,7 @@ export const d1_nothing_landscape: Template = {
       dim: [lWidth, lHeight],
 
       fields: [],
-      pictures: [createpicture(pic_x, pic_y1, pic_width, pic_height)],
+      pictures: [createPicture(pic_x, pic_y1, pic_width, pic_height)],
       lines: [],
     },
   ],
@@ -47,7 +47,7 @@ export const d1_nothing_landscape: Template = {
 
 //       lines: [...createLineBlock(ln_x1, ln_x2, ln_y, ln_y, 10)],
 
-//       pictures: [createpicture(pic_x, pic_y1, pic_width, pic_height)],
+//       pictures: [createPicture(pic_x, pic_y1, pic_width, pic_height)],
 //     },
 //   ],
 // };
@@ -67,7 +67,7 @@ export const d1_nothing_landscape: Template = {
 
 //       fields: [createField(pic_x, ln_y, pic_width, pic_height)],
 
-//       pictures: [createpicture(pic_x, pic_y1, pic_width, pic_height)],
+//       pictures: [createPicture(pic_x, pic_y1, pic_width, pic_height)],
 //     },
 //   ],
 // };

@@ -5,8 +5,10 @@ interface Label {
 }
 
 interface Line {
-  x: number;
-  y: number;
+  x1: number;
+  x2: number;
+  y1: number;
+  y2: number;
 }
 
 interface Textfield {
@@ -32,8 +34,10 @@ interface Page {
 }
 
 interface Template {
-  id: number;
+  id?: number;
   name: string;
 
   pages: Page[];
 }
+
+type Extension = 'jpg' | 'pdf' | 'png';

@@ -1,7 +1,7 @@
 import { pWidth, pHeight } from '@/others/constants';
 import {
   createLineBlock,
-  createpicture,
+  createPicture,
   createField,
 } from '@defaults/functions';
 import { pic_width, pic_height } from '@defaults/ThreePicture/threePicture';
@@ -40,9 +40,9 @@ export const d3_print_portrait: Template = {
 
       pictures: [
         // y-axis of picture is reversed because pic3_y > pic1_y, we want from top y to bottom y
-        createpicture(pic_x, pic3_y, pic_width, pic_height),
-        createpicture(pic_x, pic2_y, pic_width, pic_height),
-        createpicture(pic_x, pic1_y, pic_width, pic_height),
+        createPicture(pic_x, pic3_y, pic_width, pic_height),
+        createPicture(pic_x, pic2_y, pic_width, pic_height),
+        createPicture(pic_x, pic1_y, pic_width, pic_height),
       ],
       fields: [],
     },
@@ -72,9 +72,9 @@ export const d3_digital_portrait: Template = {
 
       pictures: [
         // y-axis of picture is reversed because pic3_y > pic1_y, we want from top y to bottom y
-        createpicture(pic_x, pic3_y, pic_width, pic_height),
-        createpicture(pic_x, pic2_y, pic_width, pic_height),
-        createpicture(pic_x, pic1_y, pic_width, pic_height),
+        createPicture(pic_x, pic3_y, pic_width, pic_height),
+        createPicture(pic_x, pic2_y, pic_width, pic_height),
+        createPicture(pic_x, pic1_y, pic_width, pic_height),
       ],
 
       lines: [],

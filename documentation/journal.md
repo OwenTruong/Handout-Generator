@@ -140,3 +140,5 @@ _Start of Journal_
 
 
 
+12/18/22
+- I have realized that just because you split up a bunch of classes, it doesn't mean that it makes it easier to read or make finding bugs easier.......

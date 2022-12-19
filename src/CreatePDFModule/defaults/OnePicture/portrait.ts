@@ -1,7 +1,7 @@
 import { pWidth, pHeight } from '@/others/constants';
 import {
   createField,
-  createpicture,
+  createPicture,
   createLineBlock,
 } from '@defaults/functions';
 import { pic_width, pic_height } from '@defaults/OnePicture/onePicture';
@@ -31,7 +31,7 @@ export const d1_nothing_portrait: Template = {
       dim: [pWidth, pHeight],
 
       fields: [],
-      pictures: [createpicture(pic_x, pic_y, pic_width, pic_height)],
+      pictures: [createPicture(pic_x, pic_y, pic_width, pic_height)],
       lines: [],
     },
   ],
@@ -51,7 +51,7 @@ export const d1_print_portrait: Template = {
       dim: [pWidth, pHeight],
 
       fields: [],
-      pictures: [createpicture(pic_x, pic_y, pic_width, pic_height)],
+      pictures: [createPicture(pic_x, pic_y, pic_width, pic_height)],
       lines: [...createLineBlock(ln_x1, ln_x2, ln_y, ln_y, 10)],
     },
   ],
@@ -71,7 +71,7 @@ export const d1_digital_portrait: Template = {
       dim: [pWidth, pHeight],
 
       fields: [createField(ln_x1, fd_y, pic_width, fd_height)],
-      pictures: [createpicture(pic_x, pic_y, pic_width, pic_height)],
+      pictures: [createPicture(pic_x, pic_y, pic_width, pic_height)],
       lines: [],
     },
   ],

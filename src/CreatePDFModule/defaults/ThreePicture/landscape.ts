@@ -1,7 +1,7 @@
 import { lWidth, lHeight } from '@/others/constants';
 import {
   createLineBlock,
-  createpicture,
+  createPicture,
   createField,
 } from '@defaults/functions';
 import { pic_width, pic_height } from '@defaults/ThreePicture/threePicture';
@@ -38,9 +38,9 @@ export const d3_print_landscape: Template = {
 
       fields: [],
       pictures: [
-        createpicture(pic1_x, pic_y, pic_width, pic_height),
-        createpicture(pic2_x, pic_y, pic_width, pic_height),
-        createpicture(pic3_x, pic_y, pic_width, pic_height),
+        createPicture(pic1_x, pic_y, pic_width, pic_height),
+        createPicture(pic2_x, pic_y, pic_width, pic_height),
+        createPicture(pic3_x, pic_y, pic_width, pic_height),
       ],
 
       lines: [
@@ -52,7 +52,7 @@ export const d3_print_landscape: Template = {
   ],
 };
 
-export const d3_digital_landscape = {
+export const d3_digital_landscape: Template = {
   id: 33,
   name: 'Default 3 Print Landscape',
 
@@ -79,10 +79,12 @@ export const d3_digital_landscape = {
       ],
 
       pictures: [
-        createpicture(pic1_x, pic_y, pic_width, pic_height),
-        createpicture(pic2_x, pic_y, pic_width, pic_height),
-        createpicture(pic3_x, pic_y, pic_width, pic_height),
+        createPicture(pic1_x, pic_y, pic_width, pic_height),
+        createPicture(pic2_x, pic_y, pic_width, pic_height),
+        createPicture(pic3_x, pic_y, pic_width, pic_height),
       ],
+
+      lines: [],
     },
   ],
 };

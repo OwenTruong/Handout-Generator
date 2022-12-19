@@ -1,5 +1,5 @@
 import { lWidth, lHeight } from '@/others/constants';
-import { createpicture } from '@defaults/functions';
+import { createPicture } from '@defaults/functions';
 import { pic_width, pic_height } from '@defaults/FourPicture/fourPicture';
 
 const pic_x1 = 108;
@@ -24,10 +24,10 @@ export const d4_print_landscape: Template = {
       fields: [],
       pictures: [
         // y1 > y2
-        createpicture(pic_x1, pic_y1, pic_width, pic_height),
-        createpicture(pic_x2, pic_y1, pic_width, pic_height),
-        createpicture(pic_x1, pic_y2, pic_width, pic_height),
-        createpicture(pic_x2, pic_y2, pic_width, pic_height),
+        createPicture(pic_x1, pic_y1, pic_width, pic_height),
+        createPicture(pic_x2, pic_y1, pic_width, pic_height),
+        createPicture(pic_x1, pic_y2, pic_width, pic_height),
+        createPicture(pic_x2, pic_y2, pic_width, pic_height),
       ],
 
       lines: [],
