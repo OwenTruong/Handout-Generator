@@ -97,6 +97,7 @@ async function getHandout(
   fs.writeFileSync(handoutPath, handoutBytes);
 }
 
+// TODO: Change -t template argument to something else because the ids are confusing.
 (() => {
   // properties: -d (string) -i (string) -t (+number)
   const data: {
