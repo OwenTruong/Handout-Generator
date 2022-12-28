@@ -100,6 +100,7 @@ async function getHandout(
 // TODO: Change -t template argument to something else because the ids are confusing.
 // we could have 1 flag for each type
 // or we could have a flag for a string that maps to each defaults
+// we could also add a default
 (() => {
   // properties: -d (string) -i (string) -t (+number)
   const data: {
