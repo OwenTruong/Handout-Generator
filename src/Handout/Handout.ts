@@ -185,5 +185,4 @@ export class Handout {
   }
 }
 
-// TODO: Look to Bridge Design Pattern for implementing cross platform support
 // FIXME: Source Map does not work
