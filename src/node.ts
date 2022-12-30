@@ -101,6 +101,8 @@ async function getHandout(
 // we could have 1 flag for each type
 // or we could have a flag for a string that maps to each defaults
 // we could also add a default
+
+// Wait... how about we assign each template a specific human-readable code name instead? Because we planned on allowing users to import their templates from cloud and we could have them assign specific code names to their templates too! Something like this: node main.js -default ThreeTom and node main.js -custom Favorite1
 (() => {
   // properties: -d (string) -i (string) -t (+number)
   const data: {
