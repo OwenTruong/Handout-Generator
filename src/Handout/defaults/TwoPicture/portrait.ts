@@ -1,6 +1,7 @@
 import { pWidth, pHeight } from '@/others/constants';
 import { createPicture } from '@/defaults/functions';
 import { pic_width, pic_height } from '@/defaults/TwoPicture/twoPicture';
+import { Template } from '@/others/types';
 
 const linepicSpace = 30;
 
@@ -9,7 +10,7 @@ const pic_y1 = pHeight - 50 - pic_height;
 const pic_y2 = pic_y1 - (pic_height + linepicSpace) - pic_height / 2 - 10;
 
 export const d2_nothing_portrait: Template = {
-  id: 20,
+  id: 'TwoTraitNothing',
   name: 'Default 2 Nothing Portrait',
 
   pages: [

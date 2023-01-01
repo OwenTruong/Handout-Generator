@@ -1,6 +1,7 @@
 import { lWidth, lHeight } from '@/others/constants';
 import { createPicture } from '@/defaults/functions';
 import { pic_width, pic_height } from '@/defaults/FourPicture/fourPicture';
+import { Template } from '@/others/types';
 
 const pic_width_modified = pic_width * 1.25;
 const pic_height_modified = pic_height * 1.25;
@@ -11,7 +12,7 @@ const pic_y2 = 40;
 const pic_y1 = lHeight - pic_y2 - pic_height_modified;
 
 export const d4_print_landscape: Template = {
-  id: 42,
+  id: 'FourScapeLine',
   name: 'Default 4 Print Landscape',
 
   pages: [

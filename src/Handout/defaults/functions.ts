@@ -1,4 +1,4 @@
-import { Line, Picture, Textfield } from '@others/types';
+import { Line, Picture, Textfield } from '@/others/types';
 
 export function createLine(
   x1: number,

@@ -5,6 +5,7 @@ import {
   createLineBlock,
 } from '@/defaults/functions';
 import { pic_width, pic_height } from '@/defaults/OnePicture/onePicture';
+import { Template } from '@/others/types';
 
 const pic_x = (pWidth - pic_width) / 2;
 const pic_y = pHeight - 50 - pic_height;
@@ -18,7 +19,7 @@ const fd_height = pic_height / 1.7;
 const fd_y = pic_y - fd_height - 50;
 
 export const d1_nothing_portrait: Template = {
-  id: 10,
+  id: 'OneTraitNothing',
   name: 'Default 1 Nothing Portrait',
 
   pages: [
@@ -38,7 +39,7 @@ export const d1_nothing_portrait: Template = {
 };
 
 export const d1_print_portrait: Template = {
-  id: 11,
+  id: 'OneTraitLine',
   name: 'Default 1 Print Portrait',
 
   pages: [
@@ -58,7 +59,7 @@ export const d1_print_portrait: Template = {
 };
 
 export const d1_digital_portrait: Template = {
-  id: 12,
+  id: 'OneTraitField',
   name: 'Default 1 Digital Portrait',
 
   pages: [

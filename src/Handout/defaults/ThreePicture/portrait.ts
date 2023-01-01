@@ -5,6 +5,7 @@ import {
   createField,
 } from '@/defaults/functions';
 import { pic_width, pic_height } from '@/defaults/ThreePicture/threePicture';
+import { Template } from '@/others/types';
 
 const pic_x = 30;
 
@@ -20,7 +21,7 @@ const l2_y = pic2_y + 5;
 const l3_y = pic3_y + 5;
 
 export const d3_print_portrait: Template = {
-  id: 30,
+  id: 'ThreeTraitLine',
   name: 'Default 3 Print Portrait',
 
   pages: [
@@ -52,7 +53,7 @@ export const d3_print_portrait: Template = {
 // Digital Portrait Specific //
 
 export const d3_digital_portrait: Template = {
-  id: 31,
+  id: 'ThreeTraitField',
   name: 'Default 3 Digital Portrait',
 
   pages: [

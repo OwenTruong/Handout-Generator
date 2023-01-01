@@ -8,16 +8,10 @@ import {
   PDFTextField,
 } from 'pdf-lib';
 import { mainFont, mainColor } from '@/others/constants';
-import {
-  PDFEmbeddedPicture,
-  Template,
-  Label,
-  Picture,
-  Line,
-  Textfield,
-  Page,
-  Asset,
-} from '@/others/types';
+
+import { Asset, Label, Line, Page, PDFEmbeddedPicture, Picture, Template, Textfield } from '@/others/types'
+
+// TODO: Keey converting templates id to (Image #)(Orientation)(Property)
 
 export { Asset };
 

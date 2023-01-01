@@ -35,8 +35,24 @@ export type Page = {
   dim: [number, number];
 };
 
+type Id = 
+  'OneTraitNothing' | 'OneTraitLine' | 'OneTraitField' |
+  'OneScapeNothing' |
+
+  'TwoTraitNothing' |
+  'TwoScapeLine' | 'TwoScapeField' | 
+
+  'ThreeTraitLine' | 'ThreeTraitField' |
+  'ThreeScapeLine' | 'ThreeScapeField' |
+
+  'FourTraitLine' |
+  'FourScapeLine' |
+  
+  string;
+
+
 export type Template = {
-  id?: number;
+  id: Id;
   name: string;
 
   pages: Page[];

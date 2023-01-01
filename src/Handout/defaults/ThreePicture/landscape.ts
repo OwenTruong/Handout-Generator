@@ -5,6 +5,7 @@ import {
   createField,
 } from '@/defaults/functions';
 import { pic_width, pic_height } from '@/defaults/ThreePicture/threePicture';
+import { Template } from '@/others/types';
 
 const pic1_x = 30;
 const pic2_x = 30 + pic_width + 30;
@@ -23,7 +24,7 @@ const l3_x2 = pic3_x + pic_width;
 const ln_y = pic_y - pic_height - 40;
 
 export const d3_print_landscape: Template = {
-  id: 32,
+  id: 'ThreeScapeLine',
   name: 'Default 3 Print Landscape',
 
   pages: [
@@ -53,7 +54,7 @@ export const d3_print_landscape: Template = {
 };
 
 export const d3_digital_landscape: Template = {
-  id: 33,
+  id: 'ThreeScapeField',
   name: 'Default 3 Print Landscape',
 
   pages: [

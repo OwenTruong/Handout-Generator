@@ -5,6 +5,7 @@ import {
   createField,
 } from '@/defaults/functions';
 import { pic_width, pic_height } from '@/defaults/TwoPicture/twoPicture';
+import { Template } from '@/others/types';
 
 const offset = 100;
 const pic1_x = offset;
@@ -22,7 +23,7 @@ const l_y = pic_y - 30 * 5 - 60;
 const fd_y = l_y - 30;
 
 export const d2_print_landscape: Template = {
-  id: 22,
+  id: 'TwoScapeLine',
   name: 'Default 2 Print Landscape',
 
   pages: [
@@ -50,7 +51,7 @@ export const d2_print_landscape: Template = {
 };
 
 export const d2_digital_landscape: Template = {
-  id: 23,
+  id: 'TwoScapeField',
   name: 'Default 2 Digital Landscape',
 
   pages: [
