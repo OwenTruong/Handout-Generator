@@ -12,6 +12,7 @@ import { mainFont, mainColor } from '@/others/constants';
 import { Asset, Label, Line, Page, PDFEmbeddedPicture, Picture, Template, Textfield } from '@/others/types'
 
 // TODO: Keey converting templates id to (Image #)(Orientation)(Property)
+// aaaah
 
 export { Asset };
 
