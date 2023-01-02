@@ -9,12 +9,12 @@ import {
 } from 'pdf-lib';
 import { mainFont, mainColor } from '@/others/constants';
 
-import { Asset, Label, Line, Page, PDFEmbeddedPicture, Picture, Template, Textfield } from '@/others/types'
+import { Asset, Label, Line, Page, PDFEmbeddedPicture, Picture, Template, TemplateRepo, Textfield } from '@/others/types'
 
 // TODO: Keey converting templates id to (Image #)(Orientation)(Property)
 // aaaah
 
-export { Asset };
+export { Asset, TemplateRepo };
 
 export class Handout {
   #document!: PDFDocument;
@@ -24,11 +24,11 @@ export class Handout {
    * TEMPLATES METHODS
    ********/
 
-  #getDefaultTemplate(id: number, defaults: Template[]): Template {
+  #getDefaultTemplate(id: string, defaults: Template[]): Template {
     for (let i = 0; i < defaults.length; i++) {
       if (id == defaults[i].id) return defaults[i];
     }
-    throw new Error('Template Not Found');
+    throw new Error('Template Not Found'); // TODO: Provide a list of default templates when id != defaults[i].id
   }
 
   #fetchTemplate(): Template {
@@ -36,9 +36,9 @@ export class Handout {
     return ph as Template;
   }
 
-  #setTemplate(id: number | 'customPH'): void {
+  #setTemplate(id: string, repo: TemplateRepo): void {
     this.#template =
-      typeof id === 'number'
+      repo === 'default'
         ? this.#getDefaultTemplate(id, Object.values(defaults))
         : this.#fetchTemplate();
   }
@@ -146,9 +146,9 @@ export class Handout {
     return this.#document.save();
   }
 
-  async createHandout(assets: Asset[], templateId: number | 'customPH' = 0) {
+  async createHandout(assets: Asset[], templateId: string, repo: TemplateRepo) {
     this.#document = await PDFDocument.create();
-    this.#setTemplate(templateId);
+    this.#setTemplate(templateId, repo);
 
     const pictures: PDFEmbeddedPicture[] = await this.#embedBytes(assets);
 

@@ -1,5 +1,5 @@
 import { parseArguments } from './ParseArguments/parseArguments';
-import { Asset, Handout } from '@/Handout';
+import { Asset, TemplateRepo, Handout } from '@/Handout';
 import fs from 'fs';
 
 /**
@@ -86,14 +86,15 @@ function getAssets(paths: string[]): Asset[] {
  * @param id The ID of a default template handout
  */
 async function getHandout(
-  handoutPath: string = 'handout.pdf',
-  picturePath: string,
-  id: number = 30
+  handoutPath: string = './handout.pdf',
+  picturePath: string = '.',
+  id: string = 'ThreeTraitLine',
+  repo: TemplateRepo = 'default'
 ): Promise<void> {
   const assets = getAssets(getFilePaths(picturePath)(['pdf', 'png', 'jpg']));
   const handout = new Handout();
 
-  const handoutBytes = await handout.createHandout(assets, id);
+  const handoutBytes = await handout.createHandout(assets, id, repo);
   fs.writeFileSync(handoutPath, handoutBytes);
 }
 
@@ -102,24 +103,28 @@ async function getHandout(
 // or we could have a flag for a string that maps to each defaults
 // we could also add a default
 
-// Wait... how about we assign each template a specific human-readable code name instead? Because we planned on allowing users to import their templates from cloud and we could have them assign specific code names to their templates too! Something like this: node main.js -default ThreeTom and node main.js -custom Favorite1
-// full example: node main.js -i src_path -o dst_path -default ThreeTom -custom Favorite1 (can't have default and custom at the same time)
+// Wait... how about we assign each template a specific human-readable code name instead? Because we planned on allowing users to import their templates from cloud and we could have them assign specific code names to their templates too! Something like this: node main.js -default ThreeTom and node main.js -online Favorite1
+// full example: node main.js -i src_path -o dst_path -default ThreeTom -online Favorite1 (can't have default and online at the same time)
 (() => {
   // properties: -d (string) -i (string) -t (+number)
   const data: {
     [k: string]: string[];
   } = parseArguments(process.argv);
 
-  if (!('-o' in data) || typeof data['-o'][0] !== 'string')
-    data['-o'] = ['handout.pdf'];
-  if (!('-i' in data) || typeof data['-i'][0] !== 'string')
-    throw new Error('input flag error');
-  if (!('-t' in data) || typeof data['-t'][0] !== 'string')
-    throw new Error('Template id flag error');
+  // if (!('-o' in data) || typeof data['-o'][0] !== 'string')
+  //   data['-o'] = ['handout.pdf'];
+  // if (!('-i' in data) || typeof data['-i'][0] !== 'string')
+  //   throw new Error('input flag error');
+  // if (!('-t' in data) || typeof data['-t'][0] !== 'string')
+  //   throw new Error('Template id flag error');
 
-  const output: string = data['-o'][0];
-  const input: string = data['-i'][0];
-  const id: string = data['-t'][0];
 
-  getHandout(output, input, +id);
+  const output: string | undefined = data['-o'][0] ?? undefined;
+  const input: string | undefined = data['-i'][0] ?? undefined;
+  const id: string | undefined = data['-default'] ? data['-default'][0] : 
+                                  (data['-online'] ? data['-online'][0] : undefined);
+  const repo: TemplateRepo | undefined = data['-default'] ? 'default' : 
+                                          (data['-online'] ? 'online' : undefined);
+
+  getHandout(output, input, id, repo);
 })();

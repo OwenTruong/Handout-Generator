@@ -70,3 +70,6 @@ export type PDFEmbeddedPicture = {
   picture: PDFEmbeddedPage | PDFImage;
   type: 'page' | 'image';
 };
+
+
+export type TemplateRepo = 'default' | 'online'
