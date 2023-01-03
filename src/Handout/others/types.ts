@@ -50,7 +50,6 @@ type Id =
   
   string;
 
-
 export type Template = {
   id: Id;
   name: string;

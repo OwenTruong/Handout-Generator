@@ -7,12 +7,11 @@ import {
   PDFPage,
   PDFTextField,
 } from 'pdf-lib';
-import { mainFont, mainColor } from '@/others/constants';
+import { mainFont, mainColor, defaultTemplateList } from '@/others/constants';
 
 import { Asset, Label, Line, Page, PDFEmbeddedPicture, Picture, Template, TemplateRepo, Textfield } from '@/others/types'
 
 // TODO: Keey converting templates id to (Image #)(Orientation)(Property)
-// aaaah
 
 export { Asset, TemplateRepo };
 
@@ -28,7 +27,11 @@ export class Handout {
     for (let i = 0; i < defaults.length; i++) {
       if (id == defaults[i].id) return defaults[i];
     }
-    throw new Error('Template Not Found'); // TODO: Provide a list of default templates when id != defaults[i].id
+
+    throw new Error(
+      'Template not found, here are some default templates you can try:\n' + 
+      defaultTemplateList.reduce((result: string, id: string, i: number) => result + '  - ' + id + '\n', '')
+    );
   }
 
   #fetchTemplate(): Template {
@@ -113,6 +116,7 @@ export class Handout {
       else if (picture.type === 'image')
         page.drawImage(picture.picture as PDFImage, dim);
       else throw new Error('Runtime Error with PDFEmbeddedPicture.type');
+
     });
   }
   async #embedLinesToPage(page: PDFPage, linesDim: Line[]) {
@@ -167,6 +171,7 @@ export class Handout {
         Math.min(pictures.length, pageTemplate.pictures.length)
       );
       this.#embedPicturesToPage(page, pageTemplate.pictures, splicedPic);
+      console.log('???'); // FIXME: Exited while loop before this console.log statement... what happened?
 
       // Add Line to PDF
       this.#embedLinesToPage(page, pageTemplate.lines);

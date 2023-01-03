@@ -119,8 +119,9 @@ async function getHandout(
   //   throw new Error('Template id flag error');
 
 
-  const output: string | undefined = data['-o'][0] ?? undefined;
-  const input: string | undefined = data['-i'][0] ?? undefined;
+  const output: string | undefined = data['-o'] ? data['-o'][0] : undefined;
+  const input: string | undefined = data['-i'] ? data['-i'][0] : undefined;
+
   const id: string | undefined = data['-default'] ? data['-default'][0] : 
                                   (data['-online'] ? data['-online'][0] : undefined);
   const repo: TemplateRepo | undefined = data['-default'] ? 'default' : 
@@ -128,3 +129,5 @@ async function getHandout(
 
   getHandout(output, input, id, repo);
 })();
+
+// FIXME: Bug with ThreeTraitLine returning empty page with -i imgs
