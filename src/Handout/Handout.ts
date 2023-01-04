@@ -57,7 +57,7 @@ export class Handout {
   async #embedBytes(assets: Asset[]): Promise<PDFEmbeddedPicture[]> {
     const pictures: PDFEmbeddedPicture[] = [];
     for (const asset of assets) {
-      if (asset.type === 'jpg')
+      if (asset.type === 'jpg' || asset.type === 'jpeg')
         pictures.push({
           picture: await this.#document.embedJpg(asset.bytes),
           type: 'image',
@@ -156,6 +156,9 @@ export class Handout {
 
     const pictures: PDFEmbeddedPicture[] = await this.#embedBytes(assets);
 
+    console.log(pictures.length);
+
+
     let pnum = 0;
     while (pictures.length !== 0) {
       const pageTemplate: Page =
@@ -171,7 +174,6 @@ export class Handout {
         Math.min(pictures.length, pageTemplate.pictures.length)
       );
       this.#embedPicturesToPage(page, pageTemplate.pictures, splicedPic);
-      console.log('???'); // FIXME: Exited while loop before this console.log statement... what happened?
 
       // Add Line to PDF
       this.#embedLinesToPage(page, pageTemplate.lines);

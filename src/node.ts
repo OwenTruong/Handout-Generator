@@ -21,6 +21,7 @@ export function checkType(obj: unknown): (type: string) => boolean {
   return (type: string) => typeof obj === type;
 }
 
+
 /**
  * A curried function that checks if a file's extension is equal to one of the target extension.
  * @param targetExtensions An array of target extensions that we wish to check a fileName string against.
@@ -31,10 +32,16 @@ function checkEquality(
 ): (fileName: string) => boolean {
   return (fileName: string) => {
     for (let i = 0; i < targetExtensions.length; ++i) {
-      if (fileName.slice(-4) == '.' + targetExtensions[i]) return true;
+      if (fileName.slice(-4) == targetExtensions[i]) return true;
     }
     return false;
   };
+}
+
+function getExtension(path: string): string {
+  const ext: RegExpMatchArray | null = path.match(/[^\.]*$/);
+  if (ext === null) return '';
+  return ext[0];
 }
 
 /**
@@ -70,8 +77,9 @@ function getAssets(paths: string[]): Asset[] {
   for (const path of paths) {
     const ext = path.slice(-3);
     const buffer: Buffer = fs.readFileSync(path);
+    console.log(getExtension(path)); // FIXME: Continue here. set ext to getExtension(path), we are offloading the task to a function
 
-    if (ext == 'jpg' || ext == 'png' || ext == 'pdf')
+    if ( ext == 'pdf' || ext == 'png' || ext == 'jpg' || ext == 'jpeg')
       assets.push({ type: ext, bytes: buffer });
     else throw new Error('Wrong File in getAssets(paths: string[])');
   }
@@ -85,13 +93,13 @@ function getAssets(paths: string[]): Asset[] {
  * @param picturePath Origin folder of where all of our assets (images and pdf that will be embedded into the handout) are stored.
  * @param id The ID of a default template handout
  */
-async function getHandout(
+async function getHandout( // FIXME: Make functions accept jpeg (4-word extension)
   handoutPath: string = './handout.pdf',
   picturePath: string = '.',
   id: string = 'ThreeTraitLine',
   repo: TemplateRepo = 'default'
 ): Promise<void> {
-  const assets = getAssets(getFilePaths(picturePath)(['pdf', 'png', 'jpg']));
+  const assets = getAssets(getFilePaths(picturePath)(['pdf', 'png', 'jpg', 'jpeg']));
   const handout = new Handout();
 
   const handoutBytes = await handout.createHandout(assets, id, repo);

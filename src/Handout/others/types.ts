@@ -57,7 +57,7 @@ export type Template = {
   pages: Page[];
 };
 
-export type Extension = 'jpg' | 'pdf' | 'png';
+export type Extension = 'jpg' | 'jpeg' | 'pdf' | 'png';
 
 export type Asset = {
   type: Extension;
