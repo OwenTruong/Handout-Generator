@@ -9,9 +9,17 @@ import {
 } from 'pdf-lib';
 import { mainFont, mainColor, defaultTemplateList } from '@/others/constants';
 
-import { Asset, Label, Line, Page, PDFEmbeddedPicture, Picture, Template, TemplateRepo, Textfield } from '@/others/types'
-
-// TODO: Keey converting templates id to (Image #)(Orientation)(Property)
+import {
+  Asset,
+  Label,
+  Line,
+  Page,
+  PDFEmbeddedPicture,
+  Picture,
+  Template,
+  TemplateRepo,
+  Textfield,
+} from '@/others/types';
 
 export { Asset, TemplateRepo };
 
@@ -29,8 +37,12 @@ export class Handout {
     }
 
     throw new Error(
-      'Template not found, here are some default templates you can try:\n' + 
-      defaultTemplateList.reduce((result: string, id: string, i: number) => result + '  - ' + id + '\n', '')
+      'Template not found, here are some default templates you can try:\n' +
+        defaultTemplateList.reduce(
+          (result: string, id: string, i: number) =>
+            result + '  - ' + id + '\n',
+          ''
+        )
     );
   }
 
@@ -56,29 +68,44 @@ export class Handout {
 
   async #embedBytes(assets: Asset[]): Promise<PDFEmbeddedPicture[]> {
     const pictures: PDFEmbeddedPicture[] = [];
-    for (const asset of assets) {
+
+    for (let i = 0; i < assets.length; i++) {
+      const asset = assets[i];
+      // FIXME: Wow this is terrible code. I need to catch errors better
       if (asset.type === 'jpg' || asset.type === 'jpeg')
-        pictures.push({
-          picture: await this.#document.embedJpg(asset.bytes),
-          type: 'image',
-        });
+        try {
+          pictures.push({
+            picture: await this.#document.embedJpg(asset.bytes),
+            type: 'image',
+          });
+        } catch (_) {
+          console.error(`Jpg/Jpeg on the ${i + 1}th image is invalid`);
+        }
       else if (asset.type === 'png')
-        pictures.push({
-          picture: await this.#document.embedPng(asset.bytes),
-          type: 'image',
-        });
+        try {
+          pictures.push({
+            picture: await this.#document.embedPng(asset.bytes),
+            type: 'image',
+          });
+        } catch (_) {
+          console.error(`Png on the ${i + 1}th image is invalid`);
+        }
       else if (asset.type === 'pdf') {
-        const srcPages = await this.#getPdfPages(asset.bytes);
-        const embeddedPages: PDFEmbeddedPicture[] = await Promise.all(
-          srcPages.map(async (page) => {
-            return {
-              picture: await this.#document.embedPage(page),
-              type: 'page',
-            };
-          })
-        );
-        embeddedPages.forEach((page) => pictures.push(page));
-      } else throw new Error('Wrong Extension');
+        try {
+          const srcPages = await this.#getPdfPages(asset.bytes);
+          const embeddedPages: PDFEmbeddedPicture[] = await Promise.all(
+            srcPages.map(async (page) => {
+              return {
+                picture: await this.#document.embedPage(page),
+                type: 'page',
+              };
+            })
+          );
+          embeddedPages.forEach((page) => pictures.push(page));
+        } catch (_) {
+          console.error(`Pdf on the ${i + 1}th image is invalid`);
+        }
+      } else console.error('Wrong Extension');
     }
     return pictures;
   }
@@ -116,7 +143,6 @@ export class Handout {
       else if (picture.type === 'image')
         page.drawImage(picture.picture as PDFImage, dim);
       else throw new Error('Runtime Error with PDFEmbeddedPicture.type');
-
     });
   }
   async #embedLinesToPage(page: PDFPage, linesDim: Line[]) {
@@ -155,9 +181,6 @@ export class Handout {
     this.#setTemplate(templateId, repo);
 
     const pictures: PDFEmbeddedPicture[] = await this.#embedBytes(assets);
-
-    console.log(pictures.length);
-
 
     let pnum = 0;
     while (pictures.length !== 0) {

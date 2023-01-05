@@ -21,7 +21,6 @@ export function checkType(obj: unknown): (type: string) => boolean {
   return (type: string) => typeof obj === type;
 }
 
-
 /**
  * A curried function that checks if a file's extension is equal to one of the target extension.
  * @param targetExtensions An array of target extensions that we wish to check a fileName string against.
@@ -75,11 +74,10 @@ function getAssets(paths: string[]): Asset[] {
   const assets: Asset[] = [];
 
   for (const path of paths) {
-    const ext = path.slice(-3);
+    const ext = getExtension(path);
     const buffer: Buffer = fs.readFileSync(path);
-    console.log(getExtension(path)); // FIXME: Continue here. set ext to getExtension(path), we are offloading the task to a function
 
-    if ( ext == 'pdf' || ext == 'png' || ext == 'jpg' || ext == 'jpeg')
+    if (ext == 'pdf' || ext == 'png' || ext == 'jpg' || ext == 'jpeg')
       assets.push({ type: ext, bytes: buffer });
     else throw new Error('Wrong File in getAssets(paths: string[])');
   }
@@ -93,23 +91,20 @@ function getAssets(paths: string[]): Asset[] {
  * @param picturePath Origin folder of where all of our assets (images and pdf that will be embedded into the handout) are stored.
  * @param id The ID of a default template handout
  */
-async function getHandout( // FIXME: Make functions accept jpeg (4-word extension)
+async function getHandout(
   handoutPath: string = './handout.pdf',
   picturePath: string = '.',
   id: string = 'ThreeTraitLine',
   repo: TemplateRepo = 'default'
 ): Promise<void> {
-  const assets = getAssets(getFilePaths(picturePath)(['pdf', 'png', 'jpg', 'jpeg']));
+  const assets = getAssets(
+    getFilePaths(picturePath)(['pdf', 'png', 'jpg', 'jpeg'])
+  );
   const handout = new Handout();
 
   const handoutBytes = await handout.createHandout(assets, id, repo);
   fs.writeFileSync(handoutPath, handoutBytes);
 }
-
-// TODO: Change -t template argument to something else because the ids are confusing.
-// we could have 1 flag for each type
-// or we could have a flag for a string that maps to each defaults
-// we could also add a default
 
 // Wait... how about we assign each template a specific human-readable code name instead? Because we planned on allowing users to import their templates from cloud and we could have them assign specific code names to their templates too! Something like this: node main.js -default ThreeTom and node main.js -online Favorite1
 // full example: node main.js -i src_path -o dst_path -default ThreeTom -online Favorite1 (can't have default and online at the same time)
@@ -126,16 +121,21 @@ async function getHandout( // FIXME: Make functions accept jpeg (4-word extensio
   // if (!('-t' in data) || typeof data['-t'][0] !== 'string')
   //   throw new Error('Template id flag error');
 
-
   const output: string | undefined = data['-o'] ? data['-o'][0] : undefined;
   const input: string | undefined = data['-i'] ? data['-i'][0] : undefined;
 
-  const id: string | undefined = data['-default'] ? data['-default'][0] : 
-                                  (data['-online'] ? data['-online'][0] : undefined);
-  const repo: TemplateRepo | undefined = data['-default'] ? 'default' : 
-                                          (data['-online'] ? 'online' : undefined);
+  const id: string | undefined = data['-default']
+    ? data['-default'][0]
+    : data['-online']
+    ? data['-online'][0]
+    : undefined;
+  const repo: TemplateRepo | undefined = data['-default']
+    ? 'default'
+    : data['-online']
+    ? 'online'
+    : undefined;
 
   getHandout(output, input, id, repo);
 })();
 
-// FIXME: Bug with ThreeTraitLine returning empty page with -i imgs
+// TODO: Modularize files, these big files with multiple functions are starting to feel cluttered
