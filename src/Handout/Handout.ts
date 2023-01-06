@@ -69,42 +69,41 @@ export class Handout {
   async #embedBytes(assets: Asset[]): Promise<PDFEmbeddedPicture[]> {
     const pictures: PDFEmbeddedPicture[] = [];
 
+    const wrapper = <T>(executeable: () => T, errorMsg: string) => {
+      try {
+        return executeable();
+      } catch (_) {
+        console.error(errorMsg);
+        return undefined;
+      }
+    };
+
     for (let i = 0; i < assets.length; i++) {
       const asset = assets[i];
       // FIXME: Wow this is terrible code. I need to catch errors better
-      if (asset.type === 'jpg' || asset.type === 'jpeg')
-        try {
-          pictures.push({
-            picture: await this.#document.embedJpg(asset.bytes),
-            type: 'image',
-          });
-        } catch (_) {
-          console.error(`Jpg/Jpeg on the ${i + 1}th image is invalid`);
-        }
-      else if (asset.type === 'png')
-        try {
-          pictures.push({
-            picture: await this.#document.embedPng(asset.bytes),
-            type: 'image',
-          });
-        } catch (_) {
-          console.error(`Png on the ${i + 1}th image is invalid`);
-        }
-      else if (asset.type === 'pdf') {
-        try {
-          const srcPages = await this.#getPdfPages(asset.bytes);
-          const embeddedPages: PDFEmbeddedPicture[] = await Promise.all(
-            srcPages.map(async (page) => {
-              return {
-                picture: await this.#document.embedPage(page),
-                type: 'page',
-              };
-            })
-          );
-          embeddedPages.forEach((page) => pictures.push(page));
-        } catch (_) {
-          console.error(`Pdf on the ${i + 1}th image is invalid`);
-        }
+      if (asset.type === 'jpg' || asset.type === 'jpeg') {
+        const picture = await this.#document.embedJpg(asset.bytes);
+        pictures.push({
+          picture,
+          type: 'image',
+        });
+      } else if (asset.type === 'png') {
+        const picture = await this.#document.embedPng(asset.bytes);
+        pictures.push({
+          picture,
+          type: 'image',
+        });
+      } else if (asset.type === 'pdf') {
+        const srcPages = await this.#getPdfPages(asset.bytes);
+        const embeddedPages: PDFEmbeddedPicture[] = await Promise.all(
+          srcPages.map(async (page) => {
+            return {
+              picture: await this.#document.embedPage(page),
+              type: 'page',
+            };
+          })
+        );
+        embeddedPages.forEach((page) => pictures.push(page));
       } else console.error('Wrong Extension');
     }
     return pictures;
