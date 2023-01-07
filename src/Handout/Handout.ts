@@ -69,9 +69,13 @@ export class Handout {
   async #embedBytes(assets: Asset[]): Promise<PDFEmbeddedPicture[]> {
     const pictures: PDFEmbeddedPicture[] = [];
 
-    const wrapper = <T>(executeable: () => T, errorMsg: string) => {
+    // TODO: Complete wrapper for jpg, jpeg, png, and pdf
+    const wrapper = async <T>(
+      executeable: () => T,
+      errorMsg: string
+    ): Promise<T | undefined> => {
       try {
-        return executeable();
+        return await executeable();
       } catch (_) {
         console.error(errorMsg);
         return undefined;
@@ -80,9 +84,12 @@ export class Handout {
 
     for (let i = 0; i < assets.length; i++) {
       const asset = assets[i];
-      // FIXME: Wow this is terrible code. I need to catch errors better
       if (asset.type === 'jpg' || asset.type === 'jpeg') {
-        const picture = await this.#document.embedJpg(asset.bytes);
+        const picture: PDFImage | undefined = await wrapper(
+          this.#document.embedJpg.bind(_, asset.bytes),
+          `ERROR: Invalid jpg/jpeg at image #${i}`
+        );
+        if (picture === undefined) continue;
         pictures.push({
           picture,
           type: 'image',
