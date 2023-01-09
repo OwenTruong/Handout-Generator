@@ -71,8 +71,8 @@ export class Handout {
 
     // TODO: Complete wrapper for jpg, jpeg, png, and pdf
     const wrapper = async <T>(
-      executeable: () => T,
-      errorMsg: string
+      errorMsg: string,
+      executeable: () => T
     ): Promise<T | undefined> => {
       try {
         return await executeable();
@@ -82,12 +82,16 @@ export class Handout {
       }
     };
 
+    // TODO: Object.bind doesn't work well with typescript and trying to map certain asset types(jpg, jpeg, png and pdf) to certain functions doesn't work...
     for (let i = 0; i < assets.length; i++) {
       const asset = assets[i];
+      const verify = wrapper.bind(
+        undefined,
+        `ERROR: Invalid ${asset.type} at asset #${i}`
+      );
       if (asset.type === 'jpg' || asset.type === 'jpeg') {
-        const picture: PDFImage | undefined = await wrapper(
-          this.#document.embedJpg.bind(_, asset.bytes),
-          `ERROR: Invalid jpg/jpeg at image #${i}`
+        const picture: PDFImage | undefined = await verify(
+          this.#document.embedJpg.bind(undefined, asset.bytes)
         );
         if (picture === undefined) continue;
         pictures.push({
@@ -95,13 +99,21 @@ export class Handout {
           type: 'image',
         });
       } else if (asset.type === 'png') {
-        const picture = await this.#document.embedPng(asset.bytes);
+        const picture: PDFImage | undefined = await wrapper(
+          this.#document.embedPng.bind(undefined, asset.bytes),
+          `ERROR: Invalid ${asset.type} at asset #${i}`
+        );
+        if (picture === undefined) continue;
         pictures.push({
           picture,
           type: 'image',
         });
       } else if (asset.type === 'pdf') {
-        const srcPages = await this.#getPdfPages(asset.bytes);
+        const srcPages: PDFPage[] | undefined = await wrapper(
+          this.#getPdfPages.bind(undefined, asset.bytes),
+          `ERROR: Invalid ${asset.type} at asset #${i}`
+        );
+        if (srcPages === undefined) continue;
         const embeddedPages: PDFEmbeddedPicture[] = await Promise.all(
           srcPages.map(async (page) => {
             return {
