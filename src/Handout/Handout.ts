@@ -21,7 +21,7 @@ import {
   Textfield,
 } from '@/others/types';
 
-export { Asset, TemplateRepo };
+// export type PublicAsset = Asset;
 
 export class Handout {
   #document!: PDFDocument;
@@ -70,26 +70,28 @@ export class Handout {
     const pictures: PDFEmbeddedPicture[] = [];
 
     // TODO: Complete wrapper for jpg, jpeg, png, and pdf
-    const wrapper = (errorMsg: string) => {
-      return async <T>(executeable: () => T): Promise<T | undefined> => {
+    const wrapper =
+      <W>(errorMsg: string, input: W) =>
+      async <T>(executeable: (input: W) => T): Promise<T | undefined> => {
         try {
-          return await executeable();
-        } catch (_) {
-          // FIXME: Cannot read properties of undefined (reading 'context')
-          console.log(_);
-          console.error(errorMsg);
+          return executeable(input);
+        } catch (err) {
+          // FIXME: Something happened in embedJpg function... I am pretty sure I did use buffer as input...
+          // console.error(errorMsg);
           return undefined;
         }
       };
-    };
 
     // TODO: Object.bind doesn't work well with typescript and trying to map certain asset types(jpg, jpeg, png and pdf) to certain functions doesn't work...
     for (let i = 0; i < assets.length; i++) {
       const asset = assets[i];
-      const verify = wrapper(`ERROR: Invalid ${asset.type} at asset #${i}`);
+      const verify = wrapper(
+        `ERROR: Invalid ${asset.type} at asset #${i}`,
+        asset.bytes
+      );
       if (asset.type === 'jpg' || asset.type === 'jpeg') {
         const picture: PDFImage | undefined = await verify(
-          this.#document.embedJpg.bind(undefined, asset.bytes)
+          this.#document.embedJpg
         );
         if (picture === undefined) continue;
         pictures.push({
@@ -224,4 +226,5 @@ export class Handout {
   }
 }
 
+export { TemplateRepo, Asset };
 // FIXME: Source Map does not work
