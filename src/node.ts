@@ -3,25 +3,6 @@ import { Asset, TemplateRepo, Handout } from '@/Handout';
 import fs from 'fs';
 
 /**
- * Given an unknown object, check if it contains a certain property.
- * @param obj Unknown
- * @returns boolean
- */
-export function hasProperty(obj: unknown): (prop: string) => boolean {
-  return (prop: string) =>
-    typeof obj === 'object' && obj !== null && prop in obj;
-}
-
-/**
- *
- * @param obj
- * @returns
- */
-export function checkType(obj: unknown): (type: string) => boolean {
-  return (type: string) => typeof obj === type;
-}
-
-/**
  * A curried function that checks if a file's extension is equal to one of the target extension.
  * @param targetExtensions An array of target extensions that we wish to check a fileName string against.
  * @returns An anonymous arrow function that receives a fileName string and returns a boolean.
