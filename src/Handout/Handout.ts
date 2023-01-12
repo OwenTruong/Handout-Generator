@@ -69,59 +69,44 @@ export class Handout {
   async #embedBytes(assets: Asset[]): Promise<PDFEmbeddedPicture[]> {
     const pictures: PDFEmbeddedPicture[] = [];
 
-    // TODO: Complete wrapper for jpg, jpeg, png, and pdf
-    const wrapper =
-      <W>(errorMsg: string, input: W) =>
-      async <T>(executeable: (input: W) => T): Promise<T | undefined> => {
-        try {
-          return executeable(input);
-        } catch (err) {
-          // FIXME: Something happened in embedJpg function... I am pretty sure I did use buffer as input...
-          // console.error(errorMsg);
-          return undefined;
-        }
-      };
-
-    // TODO: Object.bind doesn't work well with typescript and trying to map certain asset types(jpg, jpeg, png and pdf) to certain functions doesn't work...
     for (let i = 0; i < assets.length; i++) {
       const asset = assets[i];
-      const verify = wrapper(
-        `ERROR: Invalid ${asset.type} at asset #${i}`,
-        asset.bytes
-      );
-      if (asset.type === 'jpg' || asset.type === 'jpeg') {
-        const picture: PDFImage | undefined = await verify(
-          this.#document.embedJpg
+      try {
+        if (asset.type === 'jpg' || asset.type === 'jpeg') {
+          // const picture: PDFImage | undefined = await verify(
+          //   this.#document.embedJpg
+          // );
+          const picture: PDFImage = await this.#document.embedJpg(asset.bytes);
+          if (picture === undefined) continue;
+          pictures.push({
+            picture,
+            type: 'image',
+          });
+        } else if (asset.type === 'png') {
+          const picture: PDFImage = await this.#document.embedPng(asset.bytes);
+          if (picture === undefined) continue;
+          pictures.push({
+            picture,
+            type: 'image',
+          });
+        } else if (asset.type === 'pdf') {
+          const srcPages: PDFPage[] = await this.#getPdfPages(asset.bytes);
+          if (srcPages === undefined) continue;
+          const embeddedPages: PDFEmbeddedPicture[] = await Promise.all(
+            srcPages.map(async (page) => {
+              return {
+                picture: await this.#document.embedPage(page),
+                type: 'page',
+              };
+            })
+          );
+          embeddedPages.forEach((page) => pictures.push(page));
+        } else console.error('Wrong Extension');
+      } catch (err) {
+        console.error(
+          `ERROR: Asset #${i} contains invalid ${asset.type} format.`
         );
-        if (picture === undefined) continue;
-        pictures.push({
-          picture,
-          type: 'image',
-        });
-      } else if (asset.type === 'png') {
-        const picture: PDFImage | undefined = await verify(
-          this.#document.embedPng.bind(undefined, asset.bytes)
-        );
-        if (picture === undefined) continue;
-        pictures.push({
-          picture,
-          type: 'image',
-        });
-      } else if (asset.type === 'pdf') {
-        const srcPages: PDFPage[] | undefined = await verify(
-          this.#getPdfPages.bind(undefined, asset.bytes)
-        );
-        if (srcPages === undefined) continue;
-        const embeddedPages: PDFEmbeddedPicture[] = await Promise.all(
-          srcPages.map(async (page) => {
-            return {
-              picture: await this.#document.embedPage(page),
-              type: 'page',
-            };
-          })
-        );
-        embeddedPages.forEach((page) => pictures.push(page));
-      } else console.error('Wrong Extension');
+      }
     }
     return pictures;
   }
