@@ -146,3 +146,6 @@ _Start of Journal_
 
 12/24/22
 - Only 2-3 todos left!
+
+1/12/22
+- I believe we are done with refactoring. Next is the documentation.
