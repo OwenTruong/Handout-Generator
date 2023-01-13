@@ -5,7 +5,6 @@ import fs from 'fs';
 /**
  * A curried function that checks if a file's extension is equal to one of the target extension.
  * @param targetExtensions An array of target extensions that we wish to check a fileName string against.
- * @returns An anonymous arrow function that receives a fileName string and returns a boolean.
  */
 function checkEquality(
   targetExtensions: string[]
@@ -18,6 +17,10 @@ function checkEquality(
   };
 }
 
+/**
+ * A function where given the path to a file, it will return the extension of that file.
+ * @param path The path to the file.
+ */
 function getExtension(path: string): string {
   const ext: RegExpMatchArray | null = path.match(/[^\.]*$/);
   if (ext === null) return '';
@@ -27,7 +30,6 @@ function getExtension(path: string): string {
 /**
  * A curried function, where given a path to a target folder, will return an array of file paths to the files inside the target folder.
  * @param path A file path string
- * @returns An anonymous arrow function that receives an array of extensions that we want to check the target folder string against, and returns an array of file paths to the files inside the target folder.
  */
 function getFilePaths(path: string): (extensions: string[]) => string[] {
   if (path[-1] != '/') path = path + '/';
@@ -49,7 +51,6 @@ function getFilePaths(path: string): (extensions: string[]) => string[] {
 /**
  * A function, where given an array of paths to files, will return an array of type Asset, or an object that stores the bytes of a file and the extension that follows that file.
  * @param paths An array of the assets' file path
- * @returns An array of type Asset
  */
 function getAssets(paths: string[]): PublicAsset[] {
   const assets: PublicAsset[] = [];
@@ -118,5 +119,3 @@ async function getHandout(
 
   getHandout(output, input, id, repo);
 })();
-
-// TODO: Modularize files, these big files with multiple functions are starting to feel cluttered
