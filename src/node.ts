@@ -1,5 +1,5 @@
 import { parseArguments } from './ParseArguments/parseArguments';
-import { Asset, TemplateRepo, Handout } from '@/Handout';
+import { PublicAsset, PublicTemplateRepo, Handout } from '@/Handout';
 import fs from 'fs';
 
 /**
@@ -51,8 +51,8 @@ function getFilePaths(path: string): (extensions: string[]) => string[] {
  * @param paths An array of the assets' file path
  * @returns An array of type Asset
  */
-function getAssets(paths: string[]): Asset[] {
-  const assets: Asset[] = [];
+function getAssets(paths: string[]): PublicAsset[] {
+  const assets: PublicAsset[] = [];
 
   for (const path of paths) {
     const ext = getExtension(path);
@@ -76,7 +76,7 @@ async function getHandout(
   handoutPath: string = './handout.pdf',
   picturePath: string = '.',
   id: string = 'ThreeTraitLine',
-  repo: TemplateRepo = 'default'
+  repo: PublicTemplateRepo = 'default'
 ): Promise<void> {
   const assets = getAssets(
     getFilePaths(picturePath)(['pdf', 'png', 'jpg', 'jpeg'])
@@ -110,7 +110,7 @@ async function getHandout(
     : data['-online']
     ? data['-online'][0]
     : undefined;
-  const repo: TemplateRepo | undefined = data['-default']
+  const repo: PublicTemplateRepo | undefined = data['-default']
     ? 'default'
     : data['-online']
     ? 'online'

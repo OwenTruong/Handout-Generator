@@ -72,26 +72,8 @@ export class Handout {
     for (let i = 0; i < assets.length; i++) {
       const asset = assets[i];
       try {
-        if (asset.type === 'jpg' || asset.type === 'jpeg') {
-          // const picture: PDFImage | undefined = await verify(
-          //   this.#document.embedJpg
-          // );
-          const picture: PDFImage = await this.#document.embedJpg(asset.bytes);
-          if (picture === undefined) continue;
-          pictures.push({
-            picture,
-            type: 'image',
-          });
-        } else if (asset.type === 'png') {
-          const picture: PDFImage = await this.#document.embedPng(asset.bytes);
-          if (picture === undefined) continue;
-          pictures.push({
-            picture,
-            type: 'image',
-          });
-        } else if (asset.type === 'pdf') {
+        if (asset.type === 'pdf') {
           const srcPages: PDFPage[] = await this.#getPdfPages(asset.bytes);
-          if (srcPages === undefined) continue;
           const embeddedPages: PDFEmbeddedPicture[] = await Promise.all(
             srcPages.map(async (page) => {
               return {
@@ -101,7 +83,16 @@ export class Handout {
             })
           );
           embeddedPages.forEach((page) => pictures.push(page));
-        } else console.error('Wrong Extension');
+        } else {
+          const isJpg = asset.type === 'jpg' || asset.type === 'jpeg';
+          const picture = await this.#document[isJpg ? 'embedJpg' : 'embedPng'](
+            asset.bytes
+          );
+          pictures.push({
+            picture,
+            type: 'image',
+          });
+        }
       } catch (err) {
         console.error(
           `ERROR: Asset #${i} contains invalid ${asset.type} format.`
@@ -211,5 +202,8 @@ export class Handout {
   }
 }
 
-export { TemplateRepo, Asset };
+type PublicTemplateRepo = TemplateRepo;
+type PublicAsset = Asset;
+
+export { PublicTemplateRepo, PublicAsset };
 // FIXME: Source Map does not work
