@@ -149,3 +149,6 @@ _Start of Journal_
 
 1/12/22
 - I believe we are done with refactoring. Next is the documentation.
+
+1/13/22
+- Actually, it might be best to separate Handout class and the nodejs part of the code first
