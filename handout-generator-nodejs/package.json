@@ -1,9 +1,12 @@
 {
   "name": "handout-generator",
   "version": "1.0.0",
-  "description": "Uses pdf-lib to generate a handout using the class Handout",
-  "main": "index.js",
-  "scripts": {},
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
