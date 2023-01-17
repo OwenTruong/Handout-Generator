@@ -87,42 +87,48 @@ _Start of Journal_
 
 - I believe each page should have their own dimensions. If it is not specified in template, we set a default one
 
-
 11/15/22
+
 - It has been a while since I have written a journal but progress is being made. I wish to finish the nodejs implementation by the end of Thanksgiving Friday night 11:59pm.
 - The remaining things to do is to get all of the templates working, add the ability to embed pdf (multi page pdf and multiple pdfs), and to refactor my code to make it more functional, and to adjust my codebase a little bit and then publish it as an npm library.
   - The question is if it would be possible to have both the nodejs interface and the npm library at the same time.
 
 11/24/22
+
 - Almost there, just OneImage and mess around with config
 
 11/25/22
+
 - Unfortunately, I ran out of time to work on it during thanksgiving
 
 12/3/22
+
 - I am currently working on another project so recent development has been a little bit sloppy. Tomorrow, work on piecing the OneImage template together.
 
 12/9/22
+
 - The plan was to create the nodejs version with all of the logics in place, and then work on the browser version, and then finally the backend side. However, after two months, I don't have enough drive for this project to brainstorm on how I can make my project special and be worthwhile for others to use. I will suspend the project after finishing up the nodejs implementation and after writing a documentation for this project.
 
-
 12/11/22
+
 - I should clean up on import rules and the default variables in the defaults folder.
 - Few things left to do again: have program accept pdf as input and try to refactor my code so that it is a bit more functional, and then write a documentation.
 - I want to implement server side features like aws lambda and dynamodb, but I can't think of anything right now.
 
 12/13/22
+
 - OOP JS is not fun...
   - I have trapped myself. It is really difficult to implement the ability to embed pdf inside pdf... I should not have refactored my createPDF method that early.
 
 12/14/22
+
 - Change of plans. I will see through this project until the end (node, web, backend). It would be lame to stop at node.
 - I really messed myself up by the tight coupling of classes huh. I think I should have followed either functional or oop.. and for js, definitely follow functional...
 
-
 12/15/22
+
 - Let'ssss go, I managed to get embedded pdf working for OneImage temp, let's see if it works in general.
-- Some more bug fix after my previous bullet point today, and now the program works. I just need to refactor a little bit. 
+- Some more bug fix after my previous bullet point today, and now the program works. I just need to refactor a little bit.
   - Change -t template argument to something else because the ids are confusing.
   - Check if all NodeJS specific codes are in Opaque.
   - Figure out the responsibilities of each class, and whether or not if this program really need a specific type/class/interface.
@@ -133,22 +139,27 @@ _Start of Journal_
   - Consider turning the CreatePDFModule folder into an NPM package.
   - Consider changing the name of PDF class to Handout instead.
 
-
 12/17/22
+
 - First thing to be changed tomorrow is to separate the responsibilities between the pdf(handout) class and the template classes. Should the template classes be in charge of type checking? Should the components in the template classes call each other and be tightly coupled?
 - Consider adding mediator and proxy patterns.
 
-
-
 12/18/22
+
 - I have realized that just because you split up a bunch of classes, it doesn't mean that it makes it easier to read or make finding bugs easier.......
 
-
 12/24/22
+
 - Only 2-3 todos left!
 
 1/12/22
+
 - I believe we are done with refactoring. Next is the documentation.
 
 1/13/22
+
 - Actually, it might be best to separate Handout class and the nodejs part of the code first
+
+1/16/22
+
+- Moving Handout class to a separate project for easy usability with npm. However, for the browser and nodejs implementation, they are going to be in this repo.
