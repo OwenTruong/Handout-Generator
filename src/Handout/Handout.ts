@@ -202,8 +202,5 @@ export class Handout {
   }
 }
 
-type PublicTemplateRepo = TemplateRepo;
-type PublicAsset = Asset;
-
-export { PublicTemplateRepo, PublicAsset };
+export { TemplateRepo, Asset };
 // FIXME: Source Map does not work

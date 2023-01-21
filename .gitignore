@@ -2,6 +2,8 @@
 node_modules
 package-lock.json
 dist
+lib
+bin
 documenting.md
 config.cjs
 test_assets

@@ -1,5 +1,7 @@
+#!/usr/bin/env node
+
 import { parseArguments } from './ParseArguments/parseArguments';
-import { PublicAsset, PublicTemplateRepo, Handout } from '@/Handout';
+import { Asset, TemplateRepo, Handout } from '@/Handout';
 import fs from 'fs';
 
 /**
@@ -52,8 +54,8 @@ function getFilePaths(path: string): (extensions: string[]) => string[] {
  * A function, where given an array of paths to files, will return an array of type Asset, or an object that stores the bytes of a file and the extension that follows that file.
  * @param paths An array of the assets' file path
  */
-function getAssets(paths: string[]): PublicAsset[] {
-  const assets: PublicAsset[] = [];
+function getAssets(paths: string[]): Asset[] {
+  const assets: Asset[] = [];
 
   for (const path of paths) {
     const ext = getExtension(path);
@@ -77,7 +79,7 @@ async function getHandout(
   handoutPath: string = './handout.pdf',
   picturePath: string = '.',
   id: string = 'ThreeTraitLine',
-  repo: PublicTemplateRepo = 'default'
+  repo: TemplateRepo = 'default'
 ): Promise<void> {
   const assets = getAssets(
     getFilePaths(picturePath)(['pdf', 'png', 'jpg', 'jpeg'])
@@ -111,7 +113,7 @@ async function getHandout(
     : data['-online']
     ? data['-online'][0]
     : undefined;
-  const repo: PublicTemplateRepo | undefined = data['-default']
+  const repo: TemplateRepo | undefined = data['-default']
     ? 'default'
     : data['-online']
     ? 'online'

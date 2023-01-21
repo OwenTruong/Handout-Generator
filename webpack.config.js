@@ -1,12 +1,13 @@
+const webpack = require('webpack');
 const path = require('path');
 
-const nodeConfig = {
-  name: 'Node',
-  mode: process.env.NODE_ENV || 'development',
+const config = {
+  name: 'noname',
+  mode: 'development',
   target: 'node',
   entry: './src/node.ts',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'lib'),
     filename: 'main.js',
   },
 
@@ -14,6 +15,13 @@ const nodeConfig = {
     rules: [
       {
         test: /\.ts$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'ts-loader',
+        },
+      },
+      {
+        test: /\.js$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -33,10 +41,17 @@ const nodeConfig = {
     extensions: ['.ts', '.js'],
   },
 
+  plugins: [
+    new webpack.BannerPlugin({
+      banner: '#!/usr/bin/env node',
+      raw: true,
+    }),
+  ],
+
   // yessss this works
   // externals: {
   //   fs: 'fs'
   // }
 };
 
-module.exports = nodeConfig;
+module.exports = config;

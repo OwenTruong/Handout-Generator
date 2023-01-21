@@ -149,3 +149,7 @@ _Start of Journal_
 
 1/12/22
 - I believe we are done with refactoring. Next is the documentation.
+
+1/20/22
+- Reverting the change to a couple days ago... I originally wanted to separate Handout class into its own separate package, but then I remembered... other packages have a global (-g) and a local package.json install... why can't I do it like that too instead?
+- Wish there were more documentation/tutorial on this. I am confused at what needs to be done... lib vs bin vs dist, and some other things.

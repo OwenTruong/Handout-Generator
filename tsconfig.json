@@ -13,6 +13,9 @@
     "sourceMap": true,
 
     "baseUrl": "src",
+    "declaration": true,
+    "declarationDir": "lib",
+    "declarationMap": true,
 
     "paths": {
       "@/*": ["Handout/*"],
