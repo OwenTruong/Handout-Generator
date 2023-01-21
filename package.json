@@ -2,9 +2,9 @@
   "name": "handout-generator",
   "version": "1.0.0",
   "description": "Handout Generator package that has a Handout class that exposes a createHandout method for generating handout pdfs from jpg, png and/or pdf.",
-  "main": "main.js",
+  "main": "./lib/main.js",
   "scripts": {
-    "build": "webpack && chmod +x bin/main.js"
+    "build": "webpack && chmod +x bin/main.mjs"
   },
   "keywords": [
     "Handout",
@@ -13,6 +13,7 @@
   ],
   "author": "Owen Truong",
   "license": "MIT",
+  "typings": "./lib/**/*.d.ts",
   "bin": {
     "handgen": "./bin/main.mjs"
   },

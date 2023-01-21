@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const path = require('path');
 
 const config = {
-  name: 'noname',
   mode: 'development',
   target: 'node',
   entry: './src/node.ts',
