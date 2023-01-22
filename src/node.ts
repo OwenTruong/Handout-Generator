@@ -98,13 +98,6 @@ async function getHandout(
     [k: string]: string[];
   } = parseArguments(process.argv);
 
-  // if (!('-o' in data) || typeof data['-o'][0] !== 'string')
-  //   data['-o'] = ['handout.pdf'];
-  // if (!('-i' in data) || typeof data['-i'][0] !== 'string')
-  //   throw new Error('input flag error');
-  // if (!('-t' in data) || typeof data['-t'][0] !== 'string')
-  //   throw new Error('Template id flag error');
-
   const output: string | undefined = data['-o'] ? data['-o'][0] : undefined;
   const input: string | undefined = data['-i'] ? data['-i'][0] : undefined;
   if (input === undefined)

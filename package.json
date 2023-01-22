@@ -2,9 +2,10 @@
   "name": "handout-generator",
   "version": "1.0.0",
   "description": "Handout Generator package that has a Handout class that exposes a createHandout method for generating handout pdfs from jpg, png and/or pdf.",
-  "main": "./lib/main.js",
+  "main": "./lib/Handout.js",
   "scripts": {
-    "build": "webpack && chmod +x bin/main.mjs"
+    "build": "webpack && chmod +x ./bin/main.mjs",
+    "prepare": "npm run build"
   },
   "keywords": [
     "Handout",
