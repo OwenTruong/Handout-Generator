@@ -1,3 +1,5 @@
 #!/usr/bin/env node
 
-import '../lib/main';
+import '../lib/node.js';
+// import
+console.log('I was here');
