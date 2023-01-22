@@ -4,7 +4,7 @@
   "description": "Handout Generator package that has a Handout class that exposes a createHandout method for generating handout pdfs from jpg, png and/or pdf.",
   "main": "./lib/Handout.js",
   "scripts": {
-    "build": "webpack && chmod +x ./bin/main.mjs",
+    "build": "webpack && chmod +x ./bin/index.mjs",
     "prepare": "npm run build"
   },
   "keywords": [
@@ -16,7 +16,7 @@
   "license": "MIT",
   "typings": "./lib/**/*.d.ts",
   "bin": {
-    "handgen": "./bin/main.mjs"
+    "handgen": "./bin/index.mjs"
   },
   "repository": {
     "type": "git",
