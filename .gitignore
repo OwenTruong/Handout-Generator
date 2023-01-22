@@ -1,11 +1,5 @@
 .DS_Store
 node_modules
-package-lock.json
-dist
-lib
-documenting.md
-config.cjs
-test_assets
-OOP.md
 
-todo.md
+lib
+test_assets
