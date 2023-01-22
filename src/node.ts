@@ -76,8 +76,8 @@ function getAssets(paths: string[]): Asset[] {
  * @param id The ID of a default template handout
  */
 async function getHandout(
+  picturePath: string,
   handoutPath: string = './handout.pdf',
-  picturePath: string = '.',
   id: string = 'ThreeTraitLine',
   repo: TemplateRepo = 'default'
 ): Promise<void> {
@@ -107,6 +107,8 @@ async function getHandout(
 
   const output: string | undefined = data['-o'] ? data['-o'][0] : undefined;
   const input: string | undefined = data['-i'] ? data['-i'][0] : undefined;
+  if (input === undefined)
+    throw new Error('Path of source image or pdf must be specified.');
 
   const id: string | undefined = data['-default']
     ? data['-default'][0]
@@ -119,5 +121,5 @@ async function getHandout(
     ? 'online'
     : undefined;
 
-  getHandout(output, input, id, repo);
+  getHandout(input, output, id, repo);
 })();

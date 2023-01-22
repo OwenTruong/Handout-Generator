@@ -4,10 +4,13 @@ const path = require('path');
 const config = {
   mode: 'development',
   target: 'node',
-  entry: './src/node.ts',
+  entry: {
+    node: './src/node.ts',
+    Handout: './src/Handout/Handout.ts',
+  },
   output: {
     path: path.resolve(__dirname, 'lib'),
-    filename: 'main.js',
+    filename: '[name].js',
   },
 
   module: {
@@ -19,13 +22,13 @@ const config = {
           loader: 'ts-loader',
         },
       },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        },
-      },
+      // {
+      //   test: /\.js$/,
+      //   exclude: /node_modules/,
+      //   use: {
+      //     loader: 'babel-loader',
+      //   },
+      // },
     ],
   },
 

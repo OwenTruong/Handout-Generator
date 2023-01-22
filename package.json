@@ -17,6 +17,14 @@
   "bin": {
     "handgen": "./bin/main.mjs"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OwenTruong/handout-generator-package.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OwenTruong/handout-generator-package/issues"
+  },
+  "homepage": "https://github.com/OwenTruong/handout-generator#readme",
   "devDependencies": {
     "@babel/cli": "^7.19.3",
     "@babel/core": "^7.19.3",
