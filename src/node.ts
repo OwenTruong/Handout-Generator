@@ -12,8 +12,10 @@ function checkEquality(
   targetExtensions: string[]
 ): (fileName: string) => boolean {
   return (fileName: string) => {
+    const matched: RegExpMatchArray | null = fileName.match(/\.[^\.]+$/);
+    if (matched === null) return false;
     for (let i = 0; i < targetExtensions.length; ++i) {
-      if (fileName.slice(-4) == targetExtensions[i]) return true;
+      if (matched[0].slice(1) == targetExtensions[i]) return true;
     }
     return false;
   };
