@@ -158,3 +158,6 @@ _Start of Journal_
 
 1/22/22
 - Did some testing and hopefully global and local installation via npm install should work now!
+
+1/23/22
+- Local and global package install successful, but when image is inserted, it gives a blank pdf... need to stop committing to master at every opportunity, can't have this frequent of a broken code in master branch.
