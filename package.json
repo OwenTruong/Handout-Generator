@@ -5,7 +5,7 @@
   "main": "./lib/Handout.js",
   "scripts": {
     "build": "webpack && chmod +x ./bin/index.mjs",
-    "preinstall": "npm run build"
+    "postinstall": "npm run build"
   },
   "keywords": [
     "Handout",
