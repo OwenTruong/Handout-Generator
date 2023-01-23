@@ -1,5 +1,5 @@
 {
-  "name": "handout-generator",
+  "name": "@owentruong/handgen",
   "version": "1.0.0",
   "description": "Handout Generator package that has a Handout class that exposes a createHandout method for generating handout pdfs from jpg, png and/or pdf.",
   "main": "./lib/Handout.js",
@@ -9,6 +9,7 @@
   },
   "keywords": [
     "Handout",
+    "Handout Generator",
     "PDF",
     "Notes"
   ],
