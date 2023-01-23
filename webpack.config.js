@@ -43,13 +43,6 @@ const config = {
     extensions: ['.ts', '.js'],
   },
 
-  plugins: [
-    new webpack.BannerPlugin({
-      banner: '#!/usr/bin/env node',
-      raw: true,
-    }),
-  ],
-
   // yessss this works
   // externals: {
   //   fs: 'fs'
