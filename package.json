@@ -1,6 +1,6 @@
 {
   "name": "handgen",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Handout Generator package that has a Handout class that exposes a createHandout method for generating handout pdfs from jpg, png and/or pdf.\n https://www.npmjs.com/package/handgen",
   "main": "./lib/Handout.js",
   "scripts": {
@@ -21,12 +21,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OwenTruong/handout-generator-package.git"
+    "url": "git+https://github.com/OwenTruong/Handout-Generator.git"
   },
   "bugs": {
-    "url": "https://github.com/OwenTruong/handout-generator-package/issues"
+    "url": "https://github.com/OwenTruong/Handout-Generator/issues"
   },
-  "homepage": "https://github.com/OwenTruong/handout-generator#readme",
+  "homepage": "https://github.com/OwenTruong/Handout-Generator#readme",
   "devDependencies": {
     "@babel/cli": "^7.19.3",
     "@babel/core": "^7.19.3",
