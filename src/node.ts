@@ -105,6 +105,7 @@ async function getHandout(
   if (input === undefined)
     throw new Error('Path of source image or pdf must be specified.');
 
+  // FIXME: hard to read id and repo, be more declarative
   const id: string | undefined = data['-default']
     ? data['-default'][0]
     : data['-online']
