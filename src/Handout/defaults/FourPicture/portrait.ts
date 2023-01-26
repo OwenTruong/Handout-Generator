@@ -10,7 +10,7 @@ const pic_y2 = 250;
 const pic_y1 = pHeight - pic_y2 / 3 - pic_height;
 
 export const d4_print_portrait: Template = {
-  id: 'FourTraitLine',
+  id: 'FourTraitNothing',
   name: 'Default 4 Print Portrait',
 
   pages: [

@@ -12,7 +12,7 @@ const pic_y2 = 40;
 const pic_y1 = lHeight - pic_y2 - pic_height_modified;
 
 export const d4_print_landscape: Template = {
-  id: 'FourScapeLine',
+  id: 'FourScapeNothing',
   name: 'Default 4 Print Landscape',
 
   pages: [

@@ -164,3 +164,6 @@ _Start of Journal_
 
 1/23/22
 - Local and global package install successful, but when image is inserted, it gives a blank pdf... need to stop committing to master at every opportunity, can't have this frequent of a broken code in master branch.
+
+1/25/22
+- First time writing a documentation. Not sure what to do but will do my best.

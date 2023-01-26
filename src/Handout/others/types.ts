@@ -35,20 +35,21 @@ export type Page = {
   dim: [number, number];
 };
 
-type Id = 
-  'OneTraitNothing' | 'OneTraitLine' | 'OneTraitField' |
-  'OneScapeNothing' |
-
-  'TwoTraitNothing' |
-  'TwoScapeLine' | 'TwoScapeField' | 
-
-  'ThreeTraitLine' | 'ThreeTraitField' |
-  'ThreeScapeLine' | 'ThreeScapeField' |
-
-  'FourTraitLine' |
-  'FourScapeLine' |
-  
-  string;
+type Id =
+  | 'OneTraitNothing'
+  | 'OneTraitLine'
+  | 'OneTraitField'
+  | 'OneScapeNothing'
+  | 'TwoTraitNothing'
+  | 'TwoScapeLine'
+  | 'TwoScapeField'
+  | 'ThreeTraitLine'
+  | 'ThreeTraitField'
+  | 'ThreeScapeLine'
+  | 'ThreeScapeField'
+  | 'FourTraitNothing'
+  | 'FourScapeNothing'
+  | string;
 
 export type Template = {
   id: Id;
@@ -70,5 +71,4 @@ export type PDFEmbeddedPicture = {
   type: 'page' | 'image';
 };
 
-
-export type TemplateRepo = 'default' | 'online'
+export type TemplateRepo = 'default' | 'online';

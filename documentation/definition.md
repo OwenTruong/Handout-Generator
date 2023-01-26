@@ -9,3 +9,9 @@ Assets
 
 Extensions
 * An extension just means the extension of a file - file extension. For example, suppose one of our asset is asset1.jpeg, then the extension is jpeg.
+
+Lines
+* A line... just a simple black line. May be horizontal, vertical, diagonal or whatever is specified in the template (default templates only have horizontal lines)
+
+TextFields
+* A text box (in the handout pdf) where you can type inside it.
