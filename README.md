@@ -1,9 +1,24 @@
+# Handout Generator
 
-Package on npm -> https://www.npmjs.com/package/handgen
+**(README WIP)**
 
-Will update readme for better documentation later (for library, executable and how the code works)
+Handout Generator was created to give more options to creating a handout like the ability to create a handout from the command line (TUI) and the ability to customize the template of the handout (ex. # of images, # of lines, # of textfields, their positions, their size and etc.). 
+
+However, as of now, only the TUI portion of the feature has been implemented. Customizability will be added after the frontend is finished.
 
 <br>
+
+**Major Goals**
+1. Create a website that will allow people to create custom templates and generate handouts using a GUI (also allow people to download the custom templates as JSON and allow the templates to be imported into the TUI version: handgen)
+   1. Reason for the focus on a GUI for creating a template is because the only way to create a custom template without a GUI is to create a JSON file from scratch and importing that into the program via a flag, but that can be really annoying and frustrating to debug for the end user if something goes wrong.
+2. Create the backend with user authentication & database for storing custom templates.
+
+
+
+
+<hr style="border: 2px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
+
+## Table Of Contents:
 
 <hr style="border: 2px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
 

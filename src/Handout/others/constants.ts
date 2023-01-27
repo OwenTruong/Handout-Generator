@@ -10,17 +10,20 @@ export const mainColor: RGB = rgb(0, 0, 0);
 export const defaultTempID: number = 30;
 
 export const defaultTemplateList = [
-  'OneTraitNothing', 'OneTraitLine', 'OneTraitField',
+  'OneTraitNothing',
+  'OneTraitLine',
+  'OneTraitField',
   'OneScapeNothing',
 
   'TwoTraitNothing',
-  'TwoScapeLine', 'TwoScapeField',
+  'TwoScapeLine',
+  'TwoScapeField',
 
-  'ThreeTraitLine', 'ThreeTraitField',
-  'ThreeScapeLine', 'ThreeScapeField',
+  'ThreeTraitLine',
+  'ThreeTraitField',
+  'ThreeScapeLine',
+  'ThreeScapeField',
 
-  'FourTraitLine',
-  'FourScapeLine'
+  'FourTraitNothing',
+  'FourScapeNothing',
 ];
-
-
