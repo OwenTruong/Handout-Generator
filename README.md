@@ -19,10 +19,12 @@ However, as of now, only the TUI portion of the feature has been implemented. Cu
 <hr style="border: 2px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
 
 ## Table Of Contents:
+- How To Install
+- Instructions on Executable
 
 <hr style="border: 2px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
 
-## How to install:
+## How To install:
 <ul>
   <li>Library: npm i handgen</li>
   <li>Executable: npm i -g handgen</li>
