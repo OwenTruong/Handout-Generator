@@ -19,8 +19,8 @@ However, as of now, only the TUI portion of the feature has been implemented. Cu
 <hr style="border: 2px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
 
 ## Table Of Contents:
-- How To Install
-- Instructions on Executable
+- [How To Install](#how-to-install)
+- [Instructions on Executable](#instructions-on-executable)
 
 <hr style="border: 2px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
 
