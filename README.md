@@ -19,8 +19,19 @@ However, as of now, only the TUI portion of the feature has been implemented. Cu
 <hr style="border: 2px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
 
 ## Table Of Contents:
-- [How To Install](#how-to-install)
-- [Instructions on Executable](#instructions-on-executable)
+- [Handout Generator](#handout-generator)
+  - [Table Of Contents:](#table-of-contents)
+  - [How To install:](#how-to-install)
+  - [Instructions for Global Installation:](#instructions-for-global-installation)
+    - [Default Template IDs:](#default-template-ids)
+      - [**One Image Per Page**](#one-image-per-page)
+      - [**Two Image Per Page**](#two-image-per-page)
+      - [**Three Image Per Page**](#three-image-per-page)
+      - [**Four Image Per Page**](#four-image-per-page)
+  - [Instructions for Local Installation](#instructions-for-local-installation)
+    - [Fundamentals](#fundamentals)
+    - [Input \& Output](#input--output)
+  - [Explanation for Handout Class](#explanation-for-handout-class)
 
 <hr style="border: 2px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
 
@@ -31,9 +42,9 @@ However, as of now, only the TUI portion of the feature has been implemented. Cu
 </ul>
 
 <br>
-<hr style="border: 1px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
+<hr style="border: 2px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
 
-## Instructions on Executable:
+## Instructions for Global Installation:
 
 - handgen uses 4 flags: -i, -o, -default, -online
   - -i (required)
@@ -88,3 +99,15 @@ However, as of now, only the TUI portion of the feature has been implemented. Cu
     - A landscape mode template with only four pictures evenly spaced.
 
 <br>
+<hr style="border: 2px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
+
+## Instructions for Local Installation
+
+### Fundamentals
+
+### Input & Output
+
+<br>
+<hr style="border: 2px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
+
+## Explanation for Handout Class
