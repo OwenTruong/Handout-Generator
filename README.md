@@ -104,6 +104,7 @@ However, as of now, only the TUI portion of the feature has been implemented. Cu
 ## Instructions for Local Installation
 
 ### Fundamentals
+Before we delve into how to use handgen in a JS project, we first have to go over the components and the structures that handgen uses to create a handout pdf. Those mainly being **page, picture, line, textfield, page number.**
 
 ### Input & Output
 
