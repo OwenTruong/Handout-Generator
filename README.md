@@ -30,6 +30,8 @@ However, as of now, only the TUI portion of the feature has been implemented. Cu
       - [**Four Image Per Page**](#four-image-per-page)
   - [Instructions for Local Installation](#instructions-for-local-installation)
     - [Fundamentals](#fundamentals)
+      - [What is a template?](#what-is-a-template)
+      - [Page Template](#page-template)
     - [Input \& Output](#input--output)
   - [Explanation for Handout Class](#explanation-for-handout-class)
 
@@ -104,7 +106,25 @@ However, as of now, only the TUI portion of the feature has been implemented. Cu
 ## Instructions for Local Installation
 
 ### Fundamentals
-Before we delve into how to use handgen in a JS project, we first have to go over the components and the structures that handgen uses to create a handout pdf. Those mainly being **page, picture, line, textfield, page number.**
+
+Before we delve into how to use handgen in a JS project, we first have to go over the components and the structures that a handout template use to create a handout pdf:
+- Page
+- Pictures
+- Lines
+- Textfields
+- Text
+
+#### What is a template?
+- A template is the building block used to build a component. 
+- A template specifies the attributes of of a component.
+  - For example, for a line component, you might specify the width and height of a picture component.
+- All templates comes from JSON objects.
+
+#### Page Template
+
+
+
+<br>
 
 ### Input & Output
 
