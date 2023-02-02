@@ -111,7 +111,7 @@ Before we delve into how to use handgen in a JS project, we first have to go ove
 - Page
 - Pictures
 - Lines
-- Textfields
+- Textfield
 - Text
 
 #### What is a template?
@@ -122,7 +122,8 @@ Before we delve into how to use handgen in a JS project, we first have to go ove
 
 #### Page Template
 
-
+- A page template contains templates of pictures, lines, textfield and text. 
+- There can be more than one page template in a handout template. For example, on one page, you might want three pictures, and on another page, you might want one picture instead.
 
 <br>
 
