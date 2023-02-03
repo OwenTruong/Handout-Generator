@@ -1,5 +1,10 @@
 # Handout Generator
 
+## Bugs:
+- Some pdf pages come out with the wrong orientation in the final handout.pdf
+
+<hr style="border: 2px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
+
 **(README WIP)**
 
 Handout Generator was created to give more options to creating a handout like the ability to create a handout from the command line (TUI) and the ability to customize the template of the handout (ex. # of images, # of lines, # of textfields, their positions, their size and etc.). 
@@ -20,6 +25,7 @@ However, as of now, only the TUI portion of the feature has been implemented. Cu
 
 ## Table Of Contents:
 - [Handout Generator](#handout-generator)
+  - [Bugs:](#bugs)
   - [Table Of Contents:](#table-of-contents)
   - [How To install:](#how-to-install)
   - [Instructions for Global Installation:](#instructions-for-global-installation)
@@ -133,3 +139,4 @@ Before we delve into how to use handgen in a JS project, we first have to go ove
 <hr style="border: 2px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
 
 ## Explanation for Handout Class
+
