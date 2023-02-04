@@ -38,6 +38,7 @@ However, as of now, only the TUI portion of the feature has been implemented. Cu
     - [Fundamentals](#fundamentals)
       - [What is a template?](#what-is-a-template)
       - [Page Template](#page-template)
+      - [Pictures](#pictures)
     - [Input \& Output](#input--output)
   - [Explanation for Handout Class](#explanation-for-handout-class)
 
@@ -128,8 +129,10 @@ Before we delve into how to use handgen in a JS project, we first have to go ove
 
 #### Page Template
 
-- A page template contains templates of pictures, lines, textfield and text. 
+- A page template contains the following components: pictures, lines, textfield and page number. It is also possible to tweak the width or height of a page template.
 - There can be more than one page template in a handout template. For example, on one page, you might want three pictures, and on another page, you might want one picture instead.
+
+#### Pictures
 
 <br>
 
