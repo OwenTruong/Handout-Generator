@@ -130,9 +130,11 @@ Before we delve into how to use handgen in a JS project, we first have to go ove
 #### Page Template
 
 - A page template contains the following components: pictures, lines, textfield and page number. It is also possible to tweak the width or height of a page template.
-- There can be more than one page template in a handout template. For example, on one page, you might want three pictures, and on another page, you might want one picture instead.
+- There can be more than one page template in a handout template. For example, on one page, you might want three pictures, and on another page, you might want one picture instead. 
 
 #### Pictures
+
+- A picture template can be an image (png, jpg, jpeg) or a pdf. The type for a picture contains the following properties: width, height, x and y coordinates.
 
 <br>
 
