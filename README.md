@@ -134,7 +134,10 @@ Before we delve into how to use handgen in a JS project, we first have to go ove
 
 #### Pictures
 
-- A picture template can be an image (png, jpg, jpeg) or a pdf. The type for a picture contains the following properties: width, height, x and y coordinates.
+- A picture template can be an image (png, jpg, jpeg) or a pdf. 
+  - This means that both images and pdf can be crammed (embedded and/or minified) into the handout pdf.
+- The type for a picture contains the following properties: width, height, x and y coordinates.
+- 
 
 <br>
 

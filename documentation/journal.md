@@ -147,23 +147,27 @@ _Start of Journal_
 12/24/22
 - Only 2-3 todos left!
 
-1/12/22
+1/12/23
 - I believe we are done with refactoring. Next is the documentation.
 
-1/16/22
+1/16/23
  - Moving Handout class to a separate project for easy usability with npm. However, for the browser and nodejs implementation, they are going to be in this repo.
 
-1/20/22
+1/20/23
 - Reverting the change to a couple days ago... I originally wanted to separate Handout class into its own separate package, but then I remembered... other packages have a global (-g) and a local package.json install... why can't I do it like that too instead?
 - Wish there were more documentation/tutorial on this. I am confused at what needs to be done... lib vs bin vs dist, and some other things.
 - Tomorrow will work on figuring out the difference between bin vs lib vs dist vs source, and will separate nodejs code from lib (maybe move into bin).
 
 
-1/22/22
+1/22/23
 - Did some testing and hopefully global and local installation via npm install should work now!
 
-1/23/22
+1/23/23
 - Local and global package install successful, but when image is inserted, it gives a blank pdf... need to stop committing to master at every opportunity, can't have this frequent of a broken code in master branch.
 
-1/25/22
+1/25/23
 - First time writing a documentation. Not sure what to do but will do my best.
+
+
+2/6/23
+- School has been busy so I have been unable to make fast progress...
