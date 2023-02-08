@@ -39,6 +39,7 @@ However, as of now, only the TUI portion of the feature has been implemented. Cu
       - [What is a template?](#what-is-a-template)
       - [Page Template](#page-template)
       - [Pictures](#pictures)
+      - [Lines](#lines)
     - [Input \& Output](#input--output)
   - [Explanation for Handout Class](#explanation-for-handout-class)
 
@@ -137,7 +138,13 @@ Before we delve into how to use handgen in a JS project, we first have to go ove
 - A picture template can be an image (png, jpg, jpeg) or a pdf. 
   - This means that both images and pdf can be crammed (embedded and/or minified) into the handout pdf.
 - The type for a picture contains the following properties: width, height, x and y coordinates.
-- 
+
+#### Lines
+
+- A line template is a straight line with the color black.
+- The type for a line contains the following properties: x1, y1, x2, y2 coordinates.
+
+
 
 <br>
 
