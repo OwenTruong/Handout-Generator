@@ -40,6 +40,7 @@ However, as of now, only the TUI portion of the feature has been implemented. Cu
       - [Page Template](#page-template)
       - [Pictures](#pictures)
       - [Lines](#lines)
+      - [Textfield](#textfield)
     - [Input \& Output](#input--output)
   - [Explanation for Handout Class](#explanation-for-handout-class)
 
@@ -143,6 +144,11 @@ Before we delve into how to use handgen in a JS project, we first have to go ove
 
 - A line template is a straight line with the color black.
 - The type for a line contains the following properties: x1, y1, x2, y2 coordinates.
+
+#### Textfield
+
+- A textfield template is a rectangular box where the inside of the box is writeable with a keyboard.
+- The type for a textfield contains the following properties: width, height, x and y coordinates.
 
 
 
