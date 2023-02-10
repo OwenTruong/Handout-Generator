@@ -41,6 +41,7 @@ However, as of now, only the TUI portion of the feature has been implemented. Cu
       - [Pictures](#pictures)
       - [Lines](#lines)
       - [Textfield](#textfield)
+      - [Page Number](#page-number)
     - [Input \& Output](#input--output)
   - [Explanation for Handout Class](#explanation-for-handout-class)
 
@@ -149,6 +150,11 @@ Before we delve into how to use handgen in a JS project, we first have to go ove
 
 - A textfield template is a rectangular box where the inside of the box is writeable with a keyboard.
 - The type for a textfield contains the following properties: width, height, x and y coordinates.
+
+#### Page Number
+- A page number template specifies the location where a page number is located on a page.
+- The type for a page number contains the following properties: size, x and y coordinates.
+- Planned on being optional
 
 
 
