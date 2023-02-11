@@ -153,7 +153,7 @@ Before we delve into how to use handgen in a JS project, we first have to go ove
 
 #### Page Number
 - A page number template specifies the location where a page number is located on a page.
-- The type for a page number contains the following properties: size, x and y coordinates.
+- The type for a page number is called a Label, and a Label contains the following properties: size, x and y coordinates.
 - Planned on being optional
 
 
