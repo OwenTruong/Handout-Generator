@@ -3,6 +3,11 @@
 ## Bugs:
 - Some pdf pages come out with the wrong orientation in the final handout.pdf
 
+## To Add:
+- Support for pptx
+- Add examples for all of the templates
+- Add an example picture highlighting the label, line, textfield, picture components.
+
 <hr style="border: 2px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
 
 **(README WIP)**
@@ -15,7 +20,7 @@ However, as of now, only the TUI portion of the feature has been implemented. Cu
 
 **Major Goals**
 1. Create a website that will allow people to create custom templates and generate handouts using a GUI (also allow people to download the custom templates as JSON and allow the templates to be imported into the TUI version: handgen)
-   1. Reason for the focus on a GUI for creating a template is because the only way to create a custom template without a GUI is to create a JSON file from scratch and importing that into the program via a flag, but that can be really annoying and frustrating to debug for the end user if something goes wrong.
+   1. Reason on the focus for a GUI to create templates is because the only way I can think of to create a custom template without a GUI is to create a JSON file from scratch and importing that into the program via a flag, but that can be really annoying and frustrating to debug for the end user if something goes wrong.
 2. Create the backend with user authentication & database for storing custom templates.
 
 
@@ -26,6 +31,7 @@ However, as of now, only the TUI portion of the feature has been implemented. Cu
 ## Table Of Contents:
 - [Handout Generator](#handout-generator)
   - [Bugs:](#bugs)
+  - [To Add:](#to-add)
   - [Table Of Contents:](#table-of-contents)
   - [How To install:](#how-to-install)
   - [Instructions for Global Installation:](#instructions-for-global-installation)

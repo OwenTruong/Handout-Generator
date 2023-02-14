@@ -1,0 +1,15 @@
+examples/example-src/example-slide.pdf filter=lfs diff=lfs merge=lfs -text
+examples/FourTraitNothing.pdf filter=lfs diff=lfs merge=lfs -text
+examples/ThreeScapeField.pdf filter=lfs diff=lfs merge=lfs -text
+examples/OneTraitNothing.pdf filter=lfs diff=lfs merge=lfs -text
+examples/ThreeTraitLine.pdf filter=lfs diff=lfs merge=lfs -text
+examples/TwoScapeField.pdf filter=lfs diff=lfs merge=lfs -text
+examples/OneScapeNothing.pdf filter=lfs diff=lfs merge=lfs -text
+examples/OneTraitField.pdf filter=lfs diff=lfs merge=lfs -text
+examples/FourScapeNothing.pdf filter=lfs diff=lfs merge=lfs -text
+examples/ThreeTraitField.pdf filter=lfs diff=lfs merge=lfs -text
+examples/TwoScapeLine.pdf filter=lfs diff=lfs merge=lfs -text
+examples/TwoTraitNothing.pdf filter=lfs diff=lfs merge=lfs -text
+examples/OneTraitLine.pdf filter=lfs diff=lfs merge=lfs -text
+examples/ThreeScapeLine.pdf filter=lfs diff=lfs merge=lfs -text
+examples/example-src/example-slide.pptx filter=lfs diff=lfs merge=lfs -text
