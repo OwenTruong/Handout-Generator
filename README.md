@@ -5,8 +5,6 @@
 
 ## To Add:
 - Support for pptx
-- Add examples for all of the templates
-- Add an example picture highlighting the label, line, textfield, picture components.
 
 <hr style="border: 2px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
 
@@ -81,37 +79,37 @@ However, as of now, only the TUI portion of the feature has been implemented. Cu
 ### Default Template IDs:
 
 #### **One Image Per Page**
-  - OneTraitNothing
+  - [OneTraitNothing](./examples/OneTraitNothing.pdf)
     - A portrait mode template with only one giant [picture](./documentation/definition.md) in the center.
-  - OneTraitLine
+  - [OneTraitLine](./examples/OneTraitLine.pdf)
     - A portrait mode template with one giant picture and some [lines](./documentation/definition.md).
-  - OneTraitField
+  - [OneTraitField](./examples/OneTraitField.pdf)
     - A portrait mode template with one giant picture and a [textfield](./documentation/definition.md).
-  - OneScapeNothing
+  - [OneScapeNothing](./examples/OneScapeNothing.pdf)
     - A landscape mode template with only one giant picture in the center. 
 
 #### **Two Image Per Page**
-  - TwoTraitNothing
+  - [TwoTraitNothing](./examples/TwoTraitNothing.pdf)
     - A portrait mode template with two pictures, one picture on top and one picture on bottom.
-  - TwoScapeLine
+  - [TwoScapeLine](./examples/TwoScapeLine.pdf)
     - A landscape mode template with two pictures, one picture to the left and one picture to the right, and contain lines below each picture.
-  - TwoScapeField
+  - [TwoScapeField](./examples/TwoScapeField.pdf)
     - A landscape mode template with two pictures, one picture to the left and one picture to the right, and contain a field below each picture.
 
 #### **Three Image Per Page**
-  - ThreeTraitLine **[DEFAULT]**
+  - [ThreeTraitLine](./examples/ThreeTraitLine.pdf) **[DEFAULT]**
     - A portrait mode template with three pictures to the left and lines to the right of each picture.
-  - ThreeTraitField
+  - [ThreeTraitField](./examples/ThreeTraitField.pdf)
     - A portrait mode template with three pictures to the left and a textfield to the right of each picture.
-  - ThreeScapeLine
+  - [ThreeScapeLine](./examples/ThreeScapeLine.pdf)
     - A landscape mode template with three pictures and lines below each picture.
-  - ThreeScapeField
+  - [ThreeScapeField](./examples/ThreeScapeField.pdf)
     - A landscape mode template with three pictures and a textfield below each picture.
 
 #### **Four Image Per Page**
-  - FourTraitNothing
+  - [FourTraitNothing](./examples/FourTraitNothing.pdf)
     - A portrait mode template with only four pictures evenly spaced.
-  - FourScapeNothing
+  - [FourScapeNothing](./examples/FourScapeNothing.pdf)
     - A landscape mode template with only four pictures evenly spaced.
 
 <br>

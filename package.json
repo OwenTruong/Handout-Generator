@@ -1,6 +1,6 @@
 {
   "name": "handgen",
-  "version": "1.0.12",
+  "version": "1.1.0",
   "description": "Handout Generator package that has a Handout class that exposes a createHandout method for generating handout pdfs from jpg, png and/or pdf.\n https://www.npmjs.com/package/handgen",
   "main": "./lib/Handout.js",
   "scripts": {
