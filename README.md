@@ -40,15 +40,13 @@ However, as of now, only the TUI portion of the feature has been implemented. Cu
       - [**Two Image Per Page**](#two-image-per-page)
       - [**Three Image Per Page**](#three-image-per-page)
       - [**Four Image Per Page**](#four-image-per-page)
-  - [Instructions for Local Installation](#instructions-for-local-installation)
-    - [Fundamentals](#fundamentals)
-      - [What is a template?](#what-is-a-template)
-      - [Page Template](#page-template)
-      - [Pictures](#pictures)
-      - [Lines](#lines)
-      - [Textfield](#textfield)
-      - [Page Number](#page-number)
-    - [Input \& Output](#input--output)
+  - [Fundamentals - How It Works](#fundamentals---how-it-works)
+    - [What is a template?](#what-is-a-template)
+    - [Page Template](#page-template)
+    - [Pictures](#pictures)
+    - [Lines](#lines)
+    - [Textfield](#textfield)
+    - [Page Number](#page-number)
   - [Explanation for Handout Class](#explanation-for-handout-class)
 
 <hr style="border: 2px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
@@ -119,9 +117,8 @@ However, as of now, only the TUI portion of the feature has been implemented. Cu
 <br>
 <hr style="border: 2px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
 
-## Instructions for Local Installation
 
-### Fundamentals
+## Fundamentals - How It Works
 
 Before we delve into how to use handgen in a JS project, we first have to go over the components and the structures that a handout template use to create a handout pdf:
 - Page
@@ -130,43 +127,40 @@ Before we delve into how to use handgen in a JS project, we first have to go ove
 - Textfield
 - Text
 
-#### What is a template?
+### What is a template?
 - A template is the building block used to build a component (the actual page/picture/line/etc.)
 - A template specifies the attributes of of a component.
   - For example, for a line component, you might specify the width and height of a picture component.
 - All templates comes from JSON objects.
 
-#### Page Template
+### Page Template
 
 - A page template contains the following components: pictures, lines, textfield and page number. It is also possible to tweak the width or height of a page template.
 - There can be more than one page template in a handout template. For example, on one page, you might want three pictures, and on another page, you might want one picture instead. 
 
-#### Pictures
+### Pictures
 
 - A picture template can be an image (png, jpg, jpeg) or a pdf. 
   - This means that both images and pdf can be crammed (embedded and/or minified) into the handout pdf.
 - The type for a picture contains the following properties (or attributes): width, height, x and y coordinates.
 
-#### Lines
+### Lines
 
 - A line template is a straight line with the color black.
 - The type for a line contains the following properties: x1, y1, x2, y2 coordinates.
 
-#### Textfield
+### Textfield
 
 - A textfield template is a rectangular box where the inside of the box is writeable with a keyboard.
 - The type for a textfield contains the following properties: width, height, x and y coordinates.
 
-#### Page Number
+### Page Number
 - A page number template specifies the location where a page number is located on a page.
 - The type for a page number is called a Label, and a Label contains the following properties: size, x and y coordinates.
 - Planned on being optional
 
 
 
-<br>
-
-### Input & Output
 
 <br>
 <hr style="border: 2px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
@@ -180,11 +174,11 @@ import { Asset, TemplateRepo, Handout } from 'handgen';
 const handout = new Handout();
 ```
 
-There is only 1 method exposed from Handout, and that is createHandout(assets, templateID, repo)
-- assets: Asset[] -> contains an array of assets.
+There is only 1 method exposed from Handout, and that is createHandout(assets, templateID, repo).
+- `assets: Asset[]` -> Contains an array of assets, which are the images, pdf and/or pptx that you would like to insert into the resulting handout pdf.
   - Type Asset is a type that specifies that an object must contain two properties: "type" and "bytes".
     - type is a string property that holds the extension of the asset that got turned into a byte.
     - bytes is the buffer of the asset (image or pdf file).
-- templateID: string -> current only supports default provided template ID.
-- repo: TemplateRepo -> specifies if the template is coming from local (default templates) or from remote (online templates)
+- `templateID: string` -> Currently only supports default provided template ID.
+- `repo: TemplateRepo` -> Specifies if the template is coming from local (default templates) or from remote (online templates)
   - Type TemplateRepo is a string of either "default" or "online";
