@@ -131,7 +131,7 @@ Before we delve into how to use handgen in a JS project, we first have to go ove
 - Text
 
 #### What is a template?
-- A template is the building block used to build a component. 
+- A template is the building block used to build a component (the actual page/picture/line/etc.)
 - A template specifies the attributes of of a component.
   - For example, for a line component, you might specify the width and height of a picture component.
 - All templates comes from JSON objects.
@@ -145,7 +145,7 @@ Before we delve into how to use handgen in a JS project, we first have to go ove
 
 - A picture template can be an image (png, jpg, jpeg) or a pdf. 
   - This means that both images and pdf can be crammed (embedded and/or minified) into the handout pdf.
-- The type for a picture contains the following properties: width, height, x and y coordinates.
+- The type for a picture contains the following properties (or attributes): width, height, x and y coordinates.
 
 #### Lines
 
@@ -173,3 +173,18 @@ Before we delve into how to use handgen in a JS project, we first have to go ove
 
 ## Explanation for Handout Class
 
+To use the Handout class. First, you need to instantiate a handout
+``` Typescript
+import { Asset, TemplateRepo, Handout } from 'handgen';
+
+const handout = new Handout();
+```
+
+There is only 1 method exposed from Handout, and that is createHandout(assets, templateID, repo)
+- assets: Asset[] -> contains an array of assets.
+  - Type Asset is a type that specifies that an object must contain two properties: "type" and "bytes".
+    - type is a string property that holds the extension of the asset that got turned into a byte.
+    - bytes is the buffer of the asset (image or pdf file).
+- templateID: string -> current only supports default provided template ID.
+- repo: TemplateRepo -> specifies if the template is coming from local (default templates) or from remote (online templates)
+  - Type TemplateRepo is a string of either "default" or "online";
