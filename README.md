@@ -2,6 +2,7 @@
 
 ## Bugs:
 - Some pdf pages come out with the wrong orientation in the final handout.pdf
+  - Update: Apparently, there is some kind of bug with either the pdf itself (because only 1 pdf out of my 4 test pdfs were oriented wrong) or pdf-lib. Will add fix by allowing manual specification of rotation of image/pdf (if it is feasable)
 
 ## To Add:
 - Support for pptx
