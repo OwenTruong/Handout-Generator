@@ -2,7 +2,7 @@
 
 ## Bugs:
 - Some pdf pages come out with the wrong orientation in the final handout.pdf
-  - Update: Apparently, there is some kind of bug with either the pdf itself (because only 1 pdf out of my 4 test pdfs were oriented wrong) or pdf-lib. Will add fix by allowing manual specification of rotation of image/pdf (if it is feasable)
+  - I am unable to find a smooth solution. The pdf-lib library I use has not been maintained for 2 years. If a slide is in the wrong rotation, only way is to rotate every single slide/page of the powerpoint/pdf manually or by using a program.
 
 ## To Add:
 - Support for pptx
