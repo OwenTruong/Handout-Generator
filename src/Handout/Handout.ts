@@ -73,7 +73,6 @@ export class Handout {
       const asset = assets[i];
       try {
         if (asset.type === 'pdf') {
-          // FIXME: Is this fixable by me? Why do SOME pdf change their orientation...
           const srcPages: PDFPage[] = await this.#getPdfPages(asset.bytes);
           const embeddedPages: PDFEmbeddedPicture[] = await Promise.all(
             srcPages.map(async (page) => {

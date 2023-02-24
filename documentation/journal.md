@@ -175,3 +175,5 @@ _Start of Journal_
 2/17/23
 - I am satisfied with the readme for now... even though it is not the best. Next try to diagnose the bug and add support for slides as assets, but because pdf-lib does not accept pptx or any of the other slide formats to be embedded, I will need to install a pptx -> pdf converter, and then embed the converted pdf into the handout pdf.
 
+2/23/23
+- I don't like the solution out there for adding the ability to convert other formats like docx, pptx, odt and etc... either you need to install libreoffice or use a web api...
