@@ -177,3 +177,8 @@ _Start of Journal_
 
 2/23/23
 - I don't like the solution out there for adding the ability to convert other formats like docx, pptx, odt and etc... either you need to install libreoffice or use a web api...
+
+
+2/24/23
+- Plan: use libre-convert npm library. On the web-side, use gcloud compute instance w/ libre-convert. On the NodeJS side, ask users to download libre office, if they don't, just use my ec2 instance...
+  - I believe it will be a good idea to postpone the solution on what to do until I finish the browser version, then figure out a smooth way to allow support for a variety of file types on both the browser & the nodejs version.
