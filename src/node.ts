@@ -3,53 +3,19 @@
 import { parseArguments } from './ParseArguments/parseArguments';
 import { Asset, TemplateRepo, Handout } from '@/Handout';
 import fs from 'fs';
+import { join, extname } from 'path';
+
+const ACCEPTED_EXT = ['pdf', 'png', 'jpg', 'jpeg'];
 
 /**
- * A curried function that checks if a file's extension is equal to one of the target extension.
- * @param targetExtensions An array of target extensions that we wish to check a fileName string against.
- */
-function checkEquality(
-  targetExtensions: string[]
-): (fileName: string) => boolean {
-  return (fileName: string) => {
-    const matched: RegExpMatchArray | null = fileName.match(/\.[^\.]+$/);
-    if (matched === null) return false;
-    for (let i = 0; i < targetExtensions.length; ++i) {
-      if (matched[0].slice(1) == targetExtensions[i]) return true;
-    }
-    return false;
-  };
-}
-
-/**
- * A function where given the path to a file, it will return the extension of that file.
- * @param path The path to the file.
- */
-function getExtension(path: string): string {
-  const ext: RegExpMatchArray | null = path.match(/[^\.]*$/);
-  if (ext === null) return '';
-  return ext[0];
-}
-
-/**
- * A curried function, where given a path to a target folder, will return an array of file paths to the files inside the target folder.
+ * A  function, where given the path to a target folder, will return an array of file paths with the accepted extensions
  * @param path A file path string
  */
-function getFilePaths(path: string): (extensions: string[]) => string[] {
-  if (path[-1] != '/') path = path + '/';
-
-  return (extensions: string[]): string[] => {
-    if (typeof window === 'undefined') {
-      const result: string[] = fs
-        .readdirSync(path)
-        .filter(checkEquality(extensions))
-        .map((name: string) => path + name);
-
-      return result;
-    }
-
-    return [];
-  };
+function getFilePaths(path: string): string[] {
+  return fs
+    .readdirSync(path)
+    .filter((filename) => ACCEPTED_EXT.includes(extname(filename).slice(1)))
+    .map((name: string) => join(path, name));
 }
 
 /**
@@ -57,18 +23,17 @@ function getFilePaths(path: string): (extensions: string[]) => string[] {
  * @param paths An array of the assets' file path
  */
 function getAssets(paths: string[]): Asset[] {
-  const assets: Asset[] = [];
-
-  for (const path of paths) {
-    const ext = getExtension(path);
+  return paths.map((path): Asset => {
+    const ext = extname(path).slice(1);
     const buffer: Buffer = fs.readFileSync(path);
 
     if (ext == 'pdf' || ext == 'png' || ext == 'jpg' || ext == 'jpeg')
-      assets.push({ type: ext, bytes: buffer });
+      return {
+        type: ext,
+        bytes: buffer,
+      };
     else throw new Error('Wrong File in getAssets(paths: string[])');
-  }
-
-  return assets;
+  });
 }
 
 /**
@@ -83,19 +48,20 @@ async function getHandout(
   id: string = 'ThreeTraitLine',
   repo: TemplateRepo = 'default'
 ): Promise<void> {
-  const assets = getAssets(
-    getFilePaths(picturePath)(['pdf', 'png', 'jpg', 'jpeg'])
-  );
+  const assets = getAssets(getFilePaths(picturePath));
   const handout = new Handout();
 
   const handoutBytes = await handout.createHandout(assets, id, repo);
   fs.writeFileSync(handoutPath, handoutBytes);
 }
 
-// Wait... how about we assign each template a specific human-readable code name instead? Because we planned on allowing users to import their templates from cloud and we could have them assign specific code names to their templates too! Something like this: node main.js -default ThreeTom and node main.js -online Favorite1
-// full example: node main.js -i src_path -o dst_path -default ThreeTom -online Favorite1 (can't have default and online at the same time)
+/* 
+Note: Wait... how about we assign each template a specific human-readable code name instead? Because we planned on allowing users to import their templates from cloud and we could have them assign specific code names to their templates too! Something like this: node main.js -default ThreeTom and node main.js -online Favorite1
+
+Example: node main.js -i src_path -o dst_path -default ThreeTom -online Favorite1 (can't have default and online at the same time)
+*/
+
 (() => {
-  // properties: -d (string) -i (string) -t (+number)
   const data: {
     [k: string]: string[];
   } = parseArguments(process.argv);
