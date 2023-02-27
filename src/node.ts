@@ -8,24 +8,24 @@ import { join, extname } from 'path';
 const ACCEPTED_EXT = ['pdf', 'png', 'jpg', 'jpeg'];
 
 /**
- * A  function, where given the path to a target folder, will return an array of file paths with the accepted extensions
- * @param path A file path string
+ * A  function, where given the path to a directory, will return an array of file paths with the accepted extensions
+ * @param dirPath A file path string
  */
-function getFilePaths(path: string): string[] {
+function getFilePaths(dirPath: string): string[] {
   return fs
-    .readdirSync(path)
+    .readdirSync(dirPath)
     .filter((filename) => ACCEPTED_EXT.includes(extname(filename).slice(1)))
-    .map((name: string) => join(path, name));
+    .map((filename: string) => join(dirPath, filename));
 }
 
 /**
  * A function, where given an array of paths to files, will return an array of type Asset, or an object that stores the bytes of a file and the extension that follows that file.
- * @param paths An array of the assets' file path
+ * @param filePaths An array of the assets' file path
  */
-function getAssets(paths: string[]): Asset[] {
-  return paths.map((path): Asset => {
-    const ext = extname(path).slice(1);
-    const buffer: Buffer = fs.readFileSync(path);
+function getAssets(filePaths: string[]): Asset[] {
+  return filePaths.map((filePath): Asset => {
+    const ext = extname(filePath).slice(1);
+    const buffer: Buffer = fs.readFileSync(filePath);
 
     if (ext == 'pdf' || ext == 'png' || ext == 'jpg' || ext == 'jpeg')
       return {
@@ -49,9 +49,7 @@ async function getHandout(
   repo: TemplateRepo = 'default'
 ): Promise<void> {
   const assets = getAssets(getFilePaths(picturePath));
-  const handout = new Handout();
-
-  const handoutBytes = await handout.createHandout(assets, id, repo);
+  const handoutBytes = await new Handout().createHandout(assets, id, repo);
   fs.writeFileSync(handoutPath, handoutBytes);
 }
 
@@ -62,26 +60,24 @@ Example: node main.js -i src_path -o dst_path -default ThreeTom -online Favorite
 */
 
 (() => {
-  const data: {
-    [k: string]: string[];
-  } = parseArguments(process.argv);
+  const args: Record<string, string[]> = parseArguments(process.argv);
 
-  const output: string | undefined = data['-o'] ? data['-o'][0] : undefined;
-  const input: string | undefined = data['-i'] ? data['-i'][0] : undefined;
-  if (input === undefined)
-    throw new Error('Path of source image or pdf must be specified.');
-
-  // FIXME: hard to read id and repo, be more declarative
-  const id: string | undefined = data['-default']
-    ? data['-default'][0]
-    : data['-online']
-    ? data['-online'][0]
-    : undefined;
-  const repo: TemplateRepo | undefined = data['-default']
+  const outputPath: string | undefined = args['-o']?.[0];
+  const inputPath: string | undefined = args['-i']?.[0];
+  const templateCode: string | undefined =
+    args['-default']?.[0] || args['-online']?.[0];
+  const repo: TemplateRepo | undefined = args['-default']
     ? 'default'
-    : data['-online']
+    : args['-online']
     ? 'online'
     : undefined;
 
-  getHandout(input, output, id, repo);
+  if (inputPath === undefined)
+    throw new Error('Path of source image or pdf must be specified.');
+
+  if (repo === undefined || templateCode === undefined) {
+    throw new Error('Template repository and code name must be specified.');
+  }
+
+  getHandout(inputPath, outputPath ?? './handout.pdf', templateCode, repo);
 })();
