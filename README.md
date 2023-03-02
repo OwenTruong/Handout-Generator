@@ -1,36 +1,35 @@
 # Handout Generator
 
-## Bugs:
+**Bugs:**
+
 - Some pdf pages come out with the wrong orientation in the final handout.pdf
   - I am unable to find a smooth solution. The pdf-lib library I use has not been maintained for 2 years. If a slide is in the wrong rotation, only way is to rotate every single slide/page of the powerpoint/pdf manually or by using a program.
 
-## To Add:
+**To Add:**
+
 - Support for pptx
 
 <hr style="border: 2px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
 
-**(README WIP)**
-
-Handout Generator was created to give more options to creating a handout like the ability to create a handout from the command line (TUI) and the ability to customize the template of the handout (ex. # of images, # of lines, # of textfields, their positions, their size and etc.). 
+Handout Generator was created to give more options to creating a handout like the ability to create a handout from the command line (TUI) and the ability to customize the template of the handout (ex. # of images, # of lines, # of textfields, their positions, their size and etc.).
 
 However, as of now, only the TUI portion of the feature has been implemented. Customizability will be added after the frontend is finished.
+
+[Website Github Repo](https://github.com/OwenTruong/Handout-Generator-Frontend)
 
 <br>
 
 **Major Goals**
+
 1. Create a website that will allow people to create custom templates and generate handouts using a GUI (also allow people to download the custom templates as JSON and allow the templates to be imported into the TUI version: handgen)
    1. Reason on the focus for a GUI to create templates is because the only way I can think of to create a custom template without a GUI is to create a JSON file from scratch and importing that into the program via a flag, but that can be really annoying and frustrating to debug for the end user if something goes wrong.
 2. Create the backend with user authentication & database for storing custom templates.
 
-
-
-
 <hr style="border: 2px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
 
 ## Table Of Contents:
+
 - [Handout Generator](#handout-generator)
-  - [Bugs:](#bugs)
-  - [To Add:](#to-add)
   - [Table Of Contents:](#table-of-contents)
   - [How To install:](#how-to-install)
   - [Instructions for Global Installation:](#instructions-for-global-installation)
@@ -51,6 +50,7 @@ However, as of now, only the TUI portion of the feature has been implemented. Cu
 <hr style="border: 2px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
 
 ## How To install:
+
 <ul>
   <li>Library: npm i handgen</li>
   <li>Executable: npm i -g handgen</li>
@@ -80,46 +80,50 @@ However, as of now, only the TUI portion of the feature has been implemented. Cu
 ### Default Template IDs:
 
 #### **One Image Per Page**
-  - [OneTraitNothing](./examples/OneTraitNothing.pdf)
-    - A portrait mode template with only one giant [picture](./documentation/definition.md) in the center.
-  - [OneTraitLine](./examples/OneTraitLine.pdf)
-    - A portrait mode template with one giant picture and some [lines](./documentation/definition.md).
-  - [OneTraitField](./examples/OneTraitField.pdf)
-    - A portrait mode template with one giant picture and a [textfield](./documentation/definition.md).
-  - [OneScapeNothing](./examples/OneScapeNothing.pdf)
-    - A landscape mode template with only one giant picture in the center. 
+
+- [OneTraitNothing](./examples/OneTraitNothing.pdf)
+  - A portrait mode template with only one giant [picture](./documentation/definition.md) in the center.
+- [OneTraitLine](./examples/OneTraitLine.pdf)
+  - A portrait mode template with one giant picture and some [lines](./documentation/definition.md).
+- [OneTraitField](./examples/OneTraitField.pdf)
+  - A portrait mode template with one giant picture and a [textfield](./documentation/definition.md).
+- [OneScapeNothing](./examples/OneScapeNothing.pdf)
+  - A landscape mode template with only one giant picture in the center.
 
 #### **Two Image Per Page**
-  - [TwoTraitNothing](./examples/TwoTraitNothing.pdf)
-    - A portrait mode template with two pictures, one picture on top and one picture on bottom.
-  - [TwoScapeLine](./examples/TwoScapeLine.pdf)
-    - A landscape mode template with two pictures, one picture to the left and one picture to the right, and contain lines below each picture.
-  - [TwoScapeField](./examples/TwoScapeField.pdf)
-    - A landscape mode template with two pictures, one picture to the left and one picture to the right, and contain a field below each picture.
+
+- [TwoTraitNothing](./examples/TwoTraitNothing.pdf)
+  - A portrait mode template with two pictures, one picture on top and one picture on bottom.
+- [TwoScapeLine](./examples/TwoScapeLine.pdf)
+  - A landscape mode template with two pictures, one picture to the left and one picture to the right, and contain lines below each picture.
+- [TwoScapeField](./examples/TwoScapeField.pdf)
+  - A landscape mode template with two pictures, one picture to the left and one picture to the right, and contain a field below each picture.
 
 #### **Three Image Per Page**
-  - [ThreeTraitLine](./examples/ThreeTraitLine.pdf) **[DEFAULT]**
-    - A portrait mode template with three pictures to the left and lines to the right of each picture.
-  - [ThreeTraitField](./examples/ThreeTraitField.pdf)
-    - A portrait mode template with three pictures to the left and a textfield to the right of each picture.
-  - [ThreeScapeLine](./examples/ThreeScapeLine.pdf)
-    - A landscape mode template with three pictures and lines below each picture.
-  - [ThreeScapeField](./examples/ThreeScapeField.pdf)
-    - A landscape mode template with three pictures and a textfield below each picture.
+
+- [ThreeTraitLine](./examples/ThreeTraitLine.pdf) **[DEFAULT]**
+  - A portrait mode template with three pictures to the left and lines to the right of each picture.
+- [ThreeTraitField](./examples/ThreeTraitField.pdf)
+  - A portrait mode template with three pictures to the left and a textfield to the right of each picture.
+- [ThreeScapeLine](./examples/ThreeScapeLine.pdf)
+  - A landscape mode template with three pictures and lines below each picture.
+- [ThreeScapeField](./examples/ThreeScapeField.pdf)
+  - A landscape mode template with three pictures and a textfield below each picture.
 
 #### **Four Image Per Page**
-  - [FourTraitNothing](./examples/FourTraitNothing.pdf)
-    - A portrait mode template with only four pictures evenly spaced.
-  - [FourScapeNothing](./examples/FourScapeNothing.pdf)
-    - A landscape mode template with only four pictures evenly spaced.
+
+- [FourTraitNothing](./examples/FourTraitNothing.pdf)
+  - A portrait mode template with only four pictures evenly spaced.
+- [FourScapeNothing](./examples/FourScapeNothing.pdf)
+  - A landscape mode template with only four pictures evenly spaced.
 
 <br>
 <hr style="border: 2px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
 
-
 ## Fundamentals - How It Works
 
 Before we delve into how to use handgen in a JS project, we first have to go over the components and the structures that a handout template use to create a handout pdf:
+
 - Page
 - Pictures
 - Lines
@@ -127,6 +131,7 @@ Before we delve into how to use handgen in a JS project, we first have to go ove
 - Text
 
 ### What is a template?
+
 - A template is the building block used to build a component (the actual page/picture/line/etc.)
 - A template specifies the attributes of of a component.
   - For example, for a line component, you might specify the width and height of a picture component.
@@ -135,11 +140,11 @@ Before we delve into how to use handgen in a JS project, we first have to go ove
 ### Page Template
 
 - A page template contains the following components: pictures, lines, textfield and page number. It is also possible to tweak the width or height of a page template.
-- There can be more than one page template in a handout template. For example, on one page, you might want three pictures, and on another page, you might want one picture instead. 
+- There can be more than one page template in a handout template. For example, on one page, you might want three pictures, and on another page, you might want one picture instead.
 
 ### Pictures
 
-- A picture template can be an image (png, jpg, jpeg) or a pdf. 
+- A picture template can be an image (png, jpg, jpeg) or a pdf.
   - This means that both images and pdf can be crammed (embedded and/or minified) into the handout pdf.
 - The type for a picture contains the following properties (or attributes): width, height, x and y coordinates.
 
@@ -154,12 +159,10 @@ Before we delve into how to use handgen in a JS project, we first have to go ove
 - The type for a textfield contains the following properties: width, height, x and y coordinates.
 
 ### Page Number
+
 - A page number template specifies the location where a page number is located on a page.
 - The type for a page number is called a Label, and a Label contains the following properties: size, x and y coordinates.
 - Planned on being optional
-
-
-
 
 <br>
 <hr style="border: 2px solid hsla(0, 0%, 25%, 1); background-color: hsla(0, 0%, 25%, 1)">
@@ -167,13 +170,15 @@ Before we delve into how to use handgen in a JS project, we first have to go ove
 ## Explanation for Handout Class
 
 To use the Handout class. First, you need to instantiate a handout
-``` Typescript
+
+```Typescript
 import { Asset, TemplateRepo, Handout } from 'handgen';
 
 const handout = new Handout();
 ```
 
 There is only 1 method exposed from Handout, and that is createHandout(assets, templateID, repo).
+
 - `assets: Asset[]` -> Contains an array of assets, which are the images, pdf and/or pptx that you would like to insert into the resulting handout pdf.
   - Type Asset is a type that specifies that an object must contain two properties: "type" and "bytes".
     - type is a string property that holds the extension of the asset that got turned into a byte.
