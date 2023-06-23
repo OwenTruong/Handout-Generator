@@ -13,10 +13,6 @@
 
 Handout Generator was created to give more options to creating a handout like the ability to create a handout from the command line (TUI) and the ability to customize the template of the handout (ex. # of images, # of lines, # of textfields, their positions, their size and etc.).
 
-However, as of now, only the TUI portion of the feature has been implemented. Customizability will be added after the frontend is finished.
-
-[Website Github Repo](https://github.com/OwenTruong/Handout-Generator-Frontend)
-
 <br>
 
 **Major Goals**
